@@ -1,0 +1,30 @@
+.park-activities-grid {
+    /* border: 1px solid #bbb8b8; */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .park-activities-grid li {
+    /* border: 1px solid #bbb8b8; */
+    padding: 2px;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .activities-container{
+    border: 1px solid #bbb8b8;
+
+  }
+
+  .submit-button {
+    background-color: #1976D2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }

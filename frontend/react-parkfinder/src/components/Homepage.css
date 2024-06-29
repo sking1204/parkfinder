@@ -1,0 +1,13 @@
+.homepage {
+    background-image: url('../assets/background2.jpg');
+    margin: 50px;
+    padding: 50px;
+    background-size: cover; /* Adjust as needed */
+    background-position: center; /* Adjust as needed */
+    height: 100vh; /* Adjust as needed */
+    width: 100%; /* Adjust as needed */
+}
+
+.homepage-header{
+    margin: 5px;
+}

@@ -1,0 +1,13 @@
+.nativeselect{
+    background-color: white;
+    color:black;
+    /* border: 3px solid rgb(163, 89, 19); */
+    border: 3px solid #353535;
+    border-radius:5px;
+}
+
+
+
+/* old
+  border: 3px solid rgb(202, 111, 26);
+   */

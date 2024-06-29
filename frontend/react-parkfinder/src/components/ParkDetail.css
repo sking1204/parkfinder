@@ -1,0 +1,26 @@
+.parkdetail-tab{
+    color: white;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px; /* optional: space between buttons */
+  }
+
+  .park-description-container{ 
+    /* border: 5px solid #eee; */
+    /* border: 3px solid rgb(163, 89, 19);  */
+    border: 3px solid #353535;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+
+  /* 
+  
+  style={{ border: '1px solid white', padding: '10px' 
+  */
