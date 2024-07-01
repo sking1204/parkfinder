@@ -127,7 +127,13 @@ class ParkfinderApi {
 
   static async saveActivities(username,parkCode, data) {
 
-    let res = await this.request(`users/${username}/saved-activities/${parkCode}`, {activities:data}, "post");
+    let res = await this.request(`users/${username}/saved-activities/${parkCode}`, data, "post");
+    return res;
+  }
+
+  static async saveEntranceFees(username,parkCode, data) {
+
+    let res = await this.request(`users/${username}/saved-fees/${parkCode}`, data, "post");
     return res;
   }
 

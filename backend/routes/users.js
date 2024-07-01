@@ -103,22 +103,51 @@ router.post("/:username/reviews/:parkCode",  async function (req, res, next) {
 
 });
 
-router.post("/:username/saved-activities/:parkCode",  async function (req, res, next) {
-  try {
-      const username = req.params.username;
-      const parkCode = req.params.parkCode;  
-      const { nps_activity_id, activity_name } = req.body;  // Assuming review data and rating are sent in the request body
+// router.post("/:username/saved-activities/:parkCode",  async function (req, res, next) {
+//   try {
+//       const username = req.params.username;
+//       const parkCode = req.params.parkCode;  
+//       const { nps_activity_id } = req.body;  // Assuming review data and rating are sent in the request body
 
    
 
-      const activity = await User.saveActivity(username, parkCode, { nps_activity_id, activity_name });
+//       const activity = await User.saveActivity(username, parkCode, { nps_activity_id});
 
-      return res.json({ savedActivity: activity });
+//       return res.json({ activity });
+//   } catch (err) {
+//       return next(err);
+//   }  
+
+// });
+
+router.post("/:username/saved-activities/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+    const { nps_activity_ids } = req.body;  // Note the plural "nps_activity_ids"
+
+    const activities = await User.saveActivities(username, parkCode, nps_activity_ids);
+
+    return res.json({ activities });
   } catch (err) {
-      return next(err);
+    return next(err);
   }  
-
 });
+
+router.post("/:username/saved-fees/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+    const { titles } = req.body;  // Note the plural "nps_activity_ids"
+
+    const fees = await User.saveFees(username, parkCode, titles);
+
+    return res.json({ fees });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
 
 //INCORRECT ROUTE DOESN"T BELONG WITH USERS ROUTES:
 

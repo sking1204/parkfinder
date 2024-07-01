@@ -94,9 +94,9 @@ function ParkDetail() {
           </div>
         )}
         {showMap && <GetMap park={park[0]} />}
-        {showActivities && <ActivitiesList park={park[0]}  />}
-        {showFees && <ParkFees park={park[0]}  />}
-        {showEvents && <ParkEvents parkCode={parkCode} park={park[0]}  />}
+        {showActivities && <ActivitiesList park={park[0]} user={user.username}  />}
+        {showFees && <ParkFees park={park[0]} user={user.username}  />}
+        {showEvents && <ParkEvents parkCode={parkCode} park={park[0]} user={user.username}  />}
         {showThingsToDo && <ThingsToDo parkCode={parkCode} park={park[0]}  />}
       </Stack>
     </>

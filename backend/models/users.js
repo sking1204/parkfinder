@@ -293,29 +293,109 @@ static async getReviewByUsername(username) {
 
   //NEW 6.28.24
 
-  static async saveActivity(username, parkCode, { nps_activity_id, activity_name }) {
+  // static async saveActivity(username, parkCode, { nps_activity_id }) {
+  //   // Find the user by username
+  //   const userResult = await db.query(
+  //       "SELECT id FROM users WHERE username = $1",
+  //       [username]
+  //   );
+
+  //   const user = userResult.rows[0];
+
+  //   if (!user) {
+  //       throw new Error("User not found");
+  //   }
+
+  //   // Insert the review into the reviews table
+  //   const result = await db.query(
+  //       `INSERT INTO saved_activities (user_id,username, park_code, nps_activity_id)
+  //        VALUES ($1, $2, $3, $4)
+  //        RETURNING id, user_id, username, park_code, nps_activity_id`,
+  //       [user.id, username, parkCode, nps_activity_id]
+  //   );
+
+  //   return result.rows[0];
+
+  static async saveActivities(username, parkCode, nps_activity_ids) {
     // Find the user by username
     const userResult = await db.query(
-        "SELECT id FROM users WHERE username = $1",
-        [username]
+      "SELECT id FROM users WHERE username = $1",
+      [username]
     );
-
-    const user = userResult.rows[0];
-
-    if (!user) {
-        throw new Error("User not found");
-    }
-
-    // Insert the review into the reviews table
-    const result = await db.query(
-        `INSERT INTO saved_activities (user_id,username, park_code, nps_activity_id, activity_name)
-         VALUES ($1, $2, $3, $4, $5)
-         RETURNING id, user_id, username, park_code, nps_activity_id, activity_name`,
-        [user.id, username, parkCode, nps_activity_id, activity_name]
-    );
-
-    return result.rows[0];
-}
   
+    const user = userResult.rows[0];
+  
+    if (!user) {
+      throw new Error("User not found");
+    }
+  
+    // Prepare the data to insert multiple rows for each activity ID
+    const insertPromises = nps_activity_ids.map(async (nps_activity_id) => {
+      const result = await db.query(
+        `INSERT INTO saved_activities (user_id, username, park_code, nps_activity_id)
+         VALUES ($1, $2, $3, $4)
+         RETURNING id, user_id, username, park_code, nps_activity_id`,
+        [user.id, username, parkCode, nps_activity_id]
+      );
+  
+      return result.rows[0];
+    });
+  
+    // Execute all insert operations concurrently
+    const activities = await Promise.all(insertPromises);
+  
+    return activities;
+  }
+
+  static async saveFees(username, parkCode, titles) {
+    // Find the user by username
+    const userResult = await db.query(
+      "SELECT id FROM users WHERE username = $1",
+      [username]
+    );
+  
+    const user = userResult.rows[0];
+  
+    if (!user) {
+      throw new Error("User not found");
+    }
+  
+    // Prepare the data to insert multiple rows for each fee 
+    const insertPromises = titles.map(async (title) => {
+      const result = await db.query(
+        `INSERT INTO saved_fees (user_id, username,park_code, title)
+         VALUES ($1, $2, $3, $4)
+         RETURNING id, user_id, username,park_code, title`,
+        [user.id, username, parkCode, title]
+      );
+  
+      return result.rows[0];
+    });
+  
+    // Execute all insert operations concurrently
+    const fees = await Promise.all(insertPromises);
+  
+    return fees;
+  }
 }
+
+
+
+
+
+
+
+
+//     // Insert the review into the reviews table
+//     const result = await db.query(
+//         `INSERT INTO saved_activities (user_id,username, park_code, nps_activity_id, activity_name)
+//          VALUES ($1, $2, $3, $4, $5)
+//          RETURNING id, user_id, username, park_code, nps_activity_id, activity_name`,
+//         [user.id, username, parkCode, nps_activity_id, activity_name]
+//     );
+
+//     return result.rows[0];
+// }
+  
+
 module.exports = User;

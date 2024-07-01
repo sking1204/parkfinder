@@ -5,3 +5,20 @@
     list-style: none;
     margin: 0;
   }
+
+  /* ParkFees.css */
+
+.park-fees ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0;
+}
+
+.park-fees li {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  margin-bottom: 10px; /* Space between list items */
+}
+
+.park-fees label {
+  margin-right: 10px; /* Space between checkbox and text */
+}

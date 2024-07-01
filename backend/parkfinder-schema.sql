@@ -60,8 +60,36 @@ CREATE TABLE saved_activities (
     REFERENCES users(id) ON DELETE CASCADE,
   username TEXT NOT NULL,
   nps_activity_id TEXT,
-  activity_name TEXT,
-  park_code TEXT
+  -- activity_name TEXT,
+  park_code TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ 
+);
+
+/* Added 6/28 */
+CREATE TABLE saved_fees (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL
+    REFERENCES users(id) ON DELETE CASCADE,
+  username TEXT NOT NULL,
+  title TEXT,
+  -- activity_name TEXT,
+  park_code TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ 
+);
+
+CREATE TABLE saved_events (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL
+    REFERENCES users(id) ON DELETE CASCADE,
+  username TEXT NOT NULL,
+  cost TEXT,
+  description TEXT,
+  title TEXT,
+  -- activity_name TEXT,
+  park_code TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
  
 );
 
