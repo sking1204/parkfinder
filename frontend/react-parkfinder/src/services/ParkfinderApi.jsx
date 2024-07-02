@@ -145,6 +145,12 @@ class ParkfinderApi {
 
     let res = await this.request(`users/${username}/saved-activities/${parkCode}`);
     return res;
+
+  }
+  static async getSavedFees(username,parkCode) {
+
+    let res = await this.request(`users/${username}/saved-fees/${parkCode}`);
+    return res;
   }
 
 

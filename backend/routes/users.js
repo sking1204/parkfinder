@@ -134,6 +134,26 @@ router.post("/:username/saved-activities/:parkCode", async function (req, res, n
   }  
 });
 
+
+/* HOW CAN I PASS THE ENTIRE EVENT OBJECT TO THIS ROUTE (SIMILAR TO THE PARK EVENTS COMPONENT?) */
+
+
+router.post("/:username/saved-events/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+    const { event_ids } = req.body;  
+
+    const events = await User.saveEvents(username, parkCode, event_ids);
+
+    return res.json({ events });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+
+
 router.post("/:username/saved-fees/:parkCode", async function (req, res, next) {
   try {
     const username = req.params.username;
@@ -177,22 +197,7 @@ router.get("/:username/saved-activities/:parkCode", async function (req, res, ne
 });
 
 
-/* HOW CAN I PASS THE ENTIRE EVENT OBJECT TO THIS ROUTE (SIMILAR TO THE PARK EVENTS COMPONENT?) */
 
-
-router.post("/:username/saved-events/:parkCode", async function (req, res, next) {
-  try {
-    const username = req.params.username;
-    const parkCode = req.params.parkCode;  
-    const { event_ids } = req.body;  // Note the plural "nps_activity_ids"
-
-    const events = await User.saveEvents(username, parkCode, event_ids);
-
-    return res.json({ events });
-  } catch (err) {
-    return next(err);
-  }  
-});
 
 router.get("/:username/park-details/:parkCode", async function (req, res, next) {
   try {
