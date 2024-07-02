@@ -78,7 +78,7 @@ export default function ParksByName() {
         </FormControl>
       </Box>
 
-      <ParkReviewForm selectedName={selectedName} selectedCode={selectedCode}  />
+      {/* <ParkReviewForm selectedName={selectedName} selectedCode={selectedCode}  /> */}
     </>
   );
 }

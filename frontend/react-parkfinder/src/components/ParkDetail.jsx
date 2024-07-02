@@ -27,7 +27,7 @@ function ParkDetail() {
   const [showFees, setShowFees] = useState(false);
   const [showEvents, setShowEvents] = useState(false);
   const [showThingsToDo, setShowThingsToDo] = useState(false);
-  const [showDescription, setShowDescription] = useState(true);
+  // const [showDescription, setShowDescription] = useState(true);
   const { user } = useContext(UserContext); 
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function ParkDetail() {
   }, [parkCode]);
 
   const handleButtonClick = (setShowFunction) =>{
-    setShowDescription(false);
+    // setShowDescription(false);
     setShowFunction(cur => ! cur)
   }
 
@@ -86,13 +86,16 @@ function ParkDetail() {
           <Button  onClick={() => handleButtonClick(setShowThingsToDo)}>Things to Do!</Button>
           <Link className="review" to={`/users/${user.username}/reviews/${parkCode}`} onClick={() => setShowDescription(false)} >Leave a Review!</Link>
         </Stack>
-        {showDescription && (
+        {/* {showDescription && ( */}
           <div className="park-description-container">
           {/* <div className="park-description-container" style={{ border: '1px solid white', padding: '10px' }}> */}
             <p>{park[0].description}</p>
             <img src={park[0].images[0].url} width="400px" alt={park.fullName} />
+            <div>
+            <Button>Save to Favorites!</Button>
+            </div>
           </div>
-        )}
+        {/* )} */}
         {showMap && <GetMap park={park[0]} />}
         {showActivities && <ActivitiesList park={park[0]} user={user.username}  />}
         {showFees && <ParkFees park={park[0]} user={user.username}  />}

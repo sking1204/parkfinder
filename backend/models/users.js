@@ -333,7 +333,7 @@ static async getReviewByUsername(username) {
     const insertPromises = nps_activity_ids.map(async (nps_activity_id) => {
       const result = await db.query(
         `INSERT INTO saved_activities (user_id, username, park_code, nps_activity_id)
-         VALUES ($1, $2, $3, $4)
+         VALUES ($1, $2, $3, $4, $5)
          RETURNING id, user_id, username, park_code, nps_activity_id`,
         [user.id, username, parkCode, nps_activity_id]
       );
@@ -345,6 +345,37 @@ static async getReviewByUsername(username) {
     const activities = await Promise.all(insertPromises);
   
     return activities;
+  }
+
+  static async saveEvents(username, parkCode, event_ids) {
+    // Find the user by username
+    const userResult = await db.query(
+      "SELECT id FROM users WHERE username = $1",
+      [username]
+    );
+  
+    const user = userResult.rows[0];
+  
+    if (!user) {
+      throw new Error("User not found");
+    }
+  
+    // Prepare the data to insert multiple rows for each activity ID
+    const insertPromises = event_ids.map(async (event_id) => {
+      const result = await db.query(
+        `INSERT INTO saved_events (user_id, username, park_code, event_id)
+         VALUES ($1, $2, $3, $4)
+         RETURNING id, user_id, username, park_code, event_id`,
+        [user.id, username, parkCode, event_id]
+      );
+  
+      return result.rows[0];
+    });
+  
+    // Execute all insert operations concurrently
+    const events = await Promise.all(insertPromises);
+  
+    return events;
   }
 
   static async saveFees(username, parkCode, titles) {
@@ -377,6 +408,107 @@ static async getReviewByUsername(username) {
   
     return fees;
   }
+
+  static async getSavedFees(username, parkCode = null) {
+    // Find the user by username
+    const userResult = await db.query(
+      "SELECT id FROM users WHERE username = $1",
+      [username]
+    );
+  
+    const user = userResult.rows[0];
+  
+    if (!user) {
+      throw new Error("User not found");
+    }
+  
+    // Prepare the query and parameters
+    let query = `SELECT id, user_id, username, park_code, title 
+                 FROM saved_fees 
+                 WHERE user_id = $1`;
+    const params = [user.id];
+  
+    // Add park code filter if provided
+    if (parkCode) {
+      query += " AND park_code = $2";
+      params.push(parkCode);
+    }
+  
+    // Execute the query
+    const feesResult = await db.query(query, params);
+    const fees = feesResult.rows;
+  
+    return fees;
+  }
+
+  static async getSavedActivities(username, parkCode = null) {
+    // Find the user by username
+    const userResult = await db.query(
+      "SELECT id FROM users WHERE username = $1",
+      [username]
+    );
+  
+    const user = userResult.rows[0];
+  
+    if (!user) {
+      throw new Error("User not found");
+    }
+  
+    // Prepare the query and parameters
+    let query = `SELECT id, user_id, username, nps_activity_id,park_code
+                 FROM saved_activities
+                 WHERE user_id = $1`;
+    const params = [user.id];
+  
+    // Add park code filter if provided
+    if (parkCode) {
+      query += " AND park_code = $2";
+      params.push(parkCode);
+    }
+  
+    // Execute the query
+    const activitiesResult = await db.query(query, params);
+    const activities = activitiesResult.rows;
+  
+    return activities;
+  }
+
+  /* WORKING ON THIS STILL>>>> NOT SURE IF NEEDED */
+
+  static async getDetailsByParkCode(username, parkCode = null) {
+    // Find the user by username
+    const userResult = await db.query(
+      "SELECT id FROM users WHERE username = $1",
+      [username]
+    );
+  
+    const user = userResult.rows[0];
+  
+    if (!user) {
+      throw new Error("User not found");
+    }
+  
+    // Prepare the query and parameters
+    let query = `SELECT id, user_id, username, park_code, title 
+                 FROM saved_fees 
+                 WHERE user_id = $1`;
+    const params = [user.id];
+  
+    // Add park code filter if provided
+    if (parkCode) {
+      query += " AND park_code = $2";
+      params.push(parkCode);
+    }
+  
+    // Execute the query
+    const feesResult = await db.query(query, params);
+    const fees = feesResult.rows;
+  
+    return fees;
+  }
+
+
+
 }
 
 

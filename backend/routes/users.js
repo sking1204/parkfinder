@@ -148,6 +148,85 @@ router.post("/:username/saved-fees/:parkCode", async function (req, res, next) {
   }  
 });
 
+router.get("/:username/saved-fees/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+   
+
+    const savedFees = await User.getSavedFees(username, parkCode);
+
+    return res.json({ savedFees });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+router.get("/:username/saved-activities/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+   
+
+    const savedActivities = await User.getSavedActivities(username, parkCode);
+
+    return res.json({ savedActivities });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+
+/* HOW CAN I PASS THE ENTIRE EVENT OBJECT TO THIS ROUTE (SIMILAR TO THE PARK EVENTS COMPONENT?) */
+
+
+router.post("/:username/saved-events/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+    const { event_ids } = req.body;  // Note the plural "nps_activity_ids"
+
+    const events = await User.saveEvents(username, parkCode, event_ids);
+
+    return res.json({ events });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+router.get("/:username/park-details/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+
+    // Make both requests in parallel
+    const [savedActivities, savedFees] = await Promise.all([
+      User.getSavedActivities(username, parkCode),
+      User.getSavedFees(username, parkCode)
+    ]);
+
+    return res.json({ savedActivities, savedFees });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+// router.get("/:username/park-details/:parkCode", async function (req, res, next) {
+//   try {
+//     const username = req.params.username;
+//     const parkCode = req.params.parkCode;  
+   
+
+//     const savedActivities = await User.getSavedActivities(username, parkCode);
+
+//     return res.json({ savedActivities });
+//   } catch (err) {
+//     return next(err);
+//   } 
+
+  
+// });
+
 
 //INCORRECT ROUTE DOESN"T BELONG WITH USERS ROUTES:
 

@@ -43,6 +43,10 @@ class ParkfinderApi {
       let res = await this.request(`parks/`);
       return res;
     }
+    static async getAllParksForForm() {
+      let res = await this.request(`parks/`);
+      return res.parks.parks;
+    }
 
     static async getParksStateList() {
       let res = await ParkfinderApi.request(`parks/stateCodes`);
@@ -134,6 +138,12 @@ class ParkfinderApi {
   static async saveEntranceFees(username,parkCode, data) {
 
     let res = await this.request(`users/${username}/saved-fees/${parkCode}`, data, "post");
+    return res;
+  }
+
+  static async getSavedActivities(username,parkCode) {
+
+    let res = await this.request(`users/${username}/saved-activities/${parkCode}`);
     return res;
   }
 
