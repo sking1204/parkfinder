@@ -10,7 +10,7 @@ import ParkfinderApi from '../services/ParkfinderApi';
 import ParkReviewForm from './ParkReviewForm';
 
 
-export default function ParksByName() {
+export default function ParksByName({onParkSelect}) {
   const [parks, setParks] = useState([]);
   const [parkNames, setParkNames] = useState([]);
   const [selectedName, setSelectedName] = useState("");
@@ -49,6 +49,9 @@ export default function ParksByName() {
     const selectedName = parkNames[selectedIndex];
     setSelectedName(selectedName);
     setSelectedCode(selectedCode);
+    console.log("Selected name:", selectedName)
+    console.log("Selected code:", selectedCode)
+    onParkSelect(selectedName, selectedCode)
     // navigate(`/reviews`)
   }
 

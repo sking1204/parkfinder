@@ -561,21 +561,21 @@ class Park {
 //GET ALL EVENTS 
      //This route won't work because events is not part of the park response data
 
-    // static async getAllEvents(){
-    //     const apiKey = key;
-    //     try{
-    //         let res = await axios.get(`https://developer.nps.gov/api/v1/parks?limit=5`,
-    //         {headers:{
-    //             'X-Api-Key': apiKey
-    //         }
-    //     });
-    //     console.log(res.data.data[0].events);
-    //     return res.data.data[0].events;
+    static async getAllEvents(){
+        const apiKey = key;
+        try{
+            let res = await axios.get(`https://developer.nps.gov/api/v1/events`,
+            {headers:{
+                'X-Api-Key': apiKey
+            }
+        });
+        console.log(res.data.data[0].events);
+        return res.data.data[0].events;
 
-    //     }catch(error){
-    //     console.error('Error fetching data:', error);
-    //     }
-    // }
+        }catch(error){
+        console.error('Error fetching data:', error);
+        }
+    }
    
  
       

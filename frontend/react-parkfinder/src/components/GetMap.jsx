@@ -13,27 +13,42 @@ const GetMap = ({ park }) => {
                 const longitude = parseFloat(longPart);
 
                 var greenIcon = L.icon({
-                    iconUrl: 'https://cdn-icons-png.freepik.com/256/149/149059.png?semt=ais_hybrid', // Adjust the path to your images
+                    iconUrl: 'https://cdn-icons-png.freepik.com/256/149/149059.png?ga=GA1.1.1500839574.1718835439&semt=ais_hybrid', // Adjust the path to your images
+                    // iconUrl: 'https://cdn-icons-png.freepik.com/256/149/149059.png?semt=ais_hybrid', // Adjust the path to your images
                     // shadowUrl: 'path/to/leaf-shadow.png', // Adjust the path to your images
                 
-                    iconSize:     [38, 95], // size of the icon
+                    iconSize:     [20, 45], // size of the icon
                     shadowSize:   [50, 64], // size of the shadow
                     iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
                     shadowAnchor: [4, 62],  // the same for the shadow
                     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
                 });
-
+                
                 // Check if latitude and longitude are valid numbers
                 if (!isNaN(latitude) && !isNaN(longitude)) {
                     // Initialize the map with the extracted coordinates
                     const map = L.map('map').setView([latitude, longitude], 10);
+
+                
+
+            
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     }).addTo(map);
 
+                    // L.marker([latitude, longitude]).addTo(map);
                     L.marker([latitude, longitude], {icon: greenIcon}).addTo(map);
+
+                 // Add the circle
+                //  L.circle([latitude, longitude], {
+                //     color: 'red',
+                //     fillColor: '#f03',
+                //     fillOpacity: 0.5,
+                //     radius: 500
+                // }).addTo(map);
+                    
 
                     return () => {
                         // Clean up the map instance on component unmount

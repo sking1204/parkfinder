@@ -142,9 +142,10 @@ router.post("/:username/saved-events/:parkCode", async function (req, res, next)
   try {
     const username = req.params.username;
     const parkCode = req.params.parkCode;  
-    const { event_ids } = req.body;  
+    const eventData = req.body;  
+    // const { event_ids } = req.body;  
 
-    const events = await User.saveEvents(username, parkCode, event_ids);
+    const events = await User.saveEvents(username, parkCode, eventData);
 
     return res.json({ events });
   } catch (err) {
@@ -163,6 +164,20 @@ router.post("/:username/saved-fees/:parkCode", async function (req, res, next) {
     const fees = await User.saveFees(username, parkCode, titles);
 
     return res.json({ fees });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+router.post("/:username/saved-things-to-do/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+    const todoData = req.body;  
+
+    const todos = await User.saveThingsToDo(username, parkCode, todoData);
+
+    return res.json({ todos });
   } catch (err) {
     return next(err);
   }  

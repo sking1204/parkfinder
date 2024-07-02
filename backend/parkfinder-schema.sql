@@ -85,7 +85,7 @@ CREATE TABLE saved_events (
     REFERENCES users(id) ON DELETE CASCADE,
   username TEXT NOT NULL,
   event_id TEXT,
-  cost TEXT,
+  -- cost TEXT,
   description TEXT,
   title TEXT,
   -- activity_name TEXT,
@@ -93,6 +93,23 @@ CREATE TABLE saved_events (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
  
 );
+
+CREATE TABLE saved_todo_things (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL
+    REFERENCES users(id) ON DELETE CASCADE,
+  username TEXT NOT NULL,
+  todo_id TEXT,
+  title TEXT,
+  short_description TEXT,
+  location_description TEXT,
+  -- activity_name TEXT,
+  park_code TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ 
+);
+
+
 
 
 

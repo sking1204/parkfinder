@@ -30,6 +30,9 @@ import Placeholder from "./Placeholder";
 import FormTextArea from "./FormTextArea";
 import ReviewsList from "./ReviewsList";
 import SavedEvents from "./SavedEvents";
+import ParkForm from "./ParkForm";
+
+
 
 
 const ParkfinderRoutes = () => {
@@ -75,9 +78,12 @@ const ParkfinderRoutes = () => {
           <Route path="/parks/parkCode/:parkCode/review" element={<ParkReviewForm />} />
           <Route path="/users/:username/reviews/:parkCode" element={<ParkReviewForm />} />
           <Route path="/users/:username/leave-review" element={<ParksByName  />} />
-          <Route path="/plan-trip" element={<TripPlannerForm />} />
+          {/* <Route path="/plan-trip" element={<TripPlannerForm />} /> */}
+          <Route path="/plan-trip" element={<PlanTrip />} />
+          <Route path="/park-form" element={<ParkForm />} />
           <Route path="/login" element={<LoginForm setToken={setToken} setUser={setUser}/>} />
-          <Route path="/saved-trips" element={<SavedTrips />} />
+          {/* <Route path="/saved-trips" element={<SavedTrips />} /> */}
+          <Route path="/saved-trips" element={<PlanTrip />} />
           {/* <Route path="/reviews" element={<ParkReviewForm user={user} />} /> */}
            <Route path="/reviews" element={<ReviewsList />} />
           <Route path="/review-park" element={<ParksByName/>} />

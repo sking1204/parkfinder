@@ -100,7 +100,7 @@ function ParkDetail() {
         {showActivities && <ActivitiesList park={park[0]} user={user.username}  />}
         {showFees && <ParkFees park={park[0]} user={user.username}  />}
         {showEvents && <ParkEvents parkCode={parkCode} park={park[0]} user={user.username}  />}
-        {showThingsToDo && <ThingsToDo parkCode={parkCode} park={park[0]}  />}
+        {showThingsToDo && <ThingsToDo parkCode={parkCode} park={park[0]} user={user.username}  />}
       </Stack>
     </>
   );

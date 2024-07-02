@@ -1,9 +1,31 @@
-const PlanTrip = () =>{
-    return(
-        <div>
-            <h1>This is the Plan A Trip placeholder page!</h1>
-        </div>
-    )
-}
+import React, { useState, useContext } from 'react';
+import ParksByName from './ParksByName';
+import ParkForm from './ParkForm';
+import SavedEvents from './SavedEvents';
+import UserContext from '../contexts/UserContext';
+
+
+const PlanTrip = () => {
+  const [selectedPark, setSelectedPark] = useState({ name: "", code: "" });
+  const { user } = useContext(UserContext); 
+
+  const handleParkSelect = (name, code) => {
+    setSelectedPark({ name, code });
+  };
+
+  return (
+    <>
+    <div>
+      <ParksByName onParkSelect={handleParkSelect} />
+      {selectedPark.name && selectedPark.code && (
+        <ParkForm selectedName={selectedPark.name} selectedCode={selectedPark.code} />
+      )}
+    </div>
+    <div>
+      <SavedEvents user={user} />
+    </div>
+    </>
+  );
+};
 
 export default PlanTrip;

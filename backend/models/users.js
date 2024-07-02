@@ -333,7 +333,7 @@ static async getReviewByUsername(username) {
     const insertPromises = nps_activity_ids.map(async (nps_activity_id) => {
       const result = await db.query(
         `INSERT INTO saved_activities (user_id, username, park_code, nps_activity_id)
-         VALUES ($1, $2, $3, $4, $5)
+         VALUES ($1, $2, $3, $4)
          RETURNING id, user_id, username, park_code, nps_activity_id`,
         [user.id, username, parkCode, nps_activity_id]
       );
@@ -347,7 +347,7 @@ static async getReviewByUsername(username) {
     return activities;
   }
 
-  static async saveEvents(username, parkCode, event_ids) {
+  static async saveEvents(username, parkCode, eventData) {
     // Find the user by username
     const userResult = await db.query(
       "SELECT id FROM users WHERE username = $1",
@@ -359,23 +359,72 @@ static async getReviewByUsername(username) {
     if (!user) {
       throw new Error("User not found");
     }
+    const result = await db.query(
+      `INSERT INTO saved_events (user_id, username, park_code, event_id, title, description)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       RETURNING id, user_id, username, park_code, event_id,title,description`,
+      [user.id, username, parkCode, eventData.event_id, eventData.title, eventData.description]
+    );
+  
+    return result.rows[0]; // Assuming you want to return the saved event data
+  
   
     // Prepare the data to insert multiple rows for each activity ID
-    const insertPromises = event_ids.map(async (event_id) => {
-      const result = await db.query(
-        `INSERT INTO saved_events (user_id, username, park_code, event_id)
-         VALUES ($1, $2, $3, $4)
-         RETURNING id, user_id, username, park_code, event_id`,
-        [user.id, username, parkCode, event_id]
-      );
+    // const insertPromises = event_ids.map(async (event_id) => {
+    //   const result = await db.query(
+    //     `INSERT INTO saved_events (user_id, username, park_code, event_id)
+    //      VALUES ($1, $2, $3, $4)
+    //      RETURNING id, user_id, username, park_code, event_id`,
+    //     [user.id, username, parkCode, event_id]
+    //   );
   
-      return result.rows[0];
-    });
+    //   return result.rows[0];
+    // });
   
-    // Execute all insert operations concurrently
-    const events = await Promise.all(insertPromises);
+    // // Execute all insert operations concurrently
+    // const events = await Promise.all(insertPromises);
   
-    return events;
+    // return events;
+  }
+
+  static async saveThingsToDo(username, parkCode, todoData) {
+    // Find the user by username
+    const userResult = await db.query(
+      "SELECT id FROM users WHERE username = $1",
+      [username]
+    );
+  
+    const user = userResult.rows[0];
+  
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const result = await db.query(
+      `INSERT INTO saved_todo_things (user_id, username, todo_id, title, short_description, location_description, park_code)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
+       RETURNING id, user_id, username, todo_id, title, short_description, location_description,park_code`,
+      [user.id, username, todoData.todo_id, todoData.title, todoData.short_description, todoData.location_description, parkCode]
+    );
+  
+    return result.rows[0]; // Assuming you want to return the saved event data
+  
+  
+    // Prepare the data to insert multiple rows for each activity ID
+    // const insertPromises = event_ids.map(async (event_id) => {
+    //   const result = await db.query(
+    //     `INSERT INTO saved_events (user_id, username, park_code, event_id)
+    //      VALUES ($1, $2, $3, $4)
+    //      RETURNING id, user_id, username, park_code, event_id`,
+    //     [user.id, username, parkCode, event_id]
+    //   );
+  
+    //   return result.rows[0];
+    // });
+  
+    // // Execute all insert operations concurrently
+    // const events = await Promise.all(insertPromises);
+  
+    // return events;
   }
 
   static async saveFees(username, parkCode, titles) {
