@@ -22,10 +22,15 @@ CREATE TABLE users (
 );
 
 CREATE TABLE maps (
-  id SERIAL PRIMARY KEY,   
+  id SERIAL PRIMARY KEY, 
+  user_id INTEGER NOT NULL
+    REFERENCES users(id) ON DELETE CASCADE,
+  username TEXT NOT NULL,  
   name TEXT,
-  description TEXT,
-  latLong TEXT NOT NULL    
+  description TEXT,  
+  latitude TEXT,
+  longitude TEXT,
+  park_code TEXT   
     
 );
 

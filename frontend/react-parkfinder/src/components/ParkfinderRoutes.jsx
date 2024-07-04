@@ -31,6 +31,7 @@ import FormTextArea from "./FormTextArea";
 import ReviewsList from "./ReviewsList";
 import SavedEvents from "./SavedEvents";
 import ParkForm from "./ParkForm";
+import SavedItems from "./SavedItems";
 
 
 
@@ -67,6 +68,7 @@ const ParkfinderRoutes = () => {
         <UserContext.Provider 
         value={{user, setUser}}> 
         <Routes>
+          {/* <Route path="/" element={<Homepage user={user} />} /> */}
           <Route path="/" element={<Homepage user={user} />} />
           <Route path="/parks" element={<FindParks />} />
           {/* <Route path="/parks" element={<ParksList />} /> */}
@@ -78,6 +80,7 @@ const ParkfinderRoutes = () => {
           <Route path="/parks/parkCode/:parkCode/review" element={<ParkReviewForm />} />
           <Route path="/users/:username/reviews/:parkCode" element={<ParkReviewForm />} />
           <Route path="/users/:username/leave-review" element={<ParksByName  />} />
+          <Route path="/users/:username/saved-items" element={<SavedItems user ={user}  />} />
           {/* <Route path="/plan-trip" element={<TripPlannerForm />} /> */}
           <Route path="/plan-trip" element={<PlanTrip />} />
           <Route path="/park-form" element={<ParkForm />} />

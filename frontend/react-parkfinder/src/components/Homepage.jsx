@@ -3,6 +3,7 @@ import ParksByState from "./ParksByState";
 import ParksByParkCode from "./ParksByParkCode";
 import FormTextArea from "./FormTextArea";
 
+
 const Homepage = () =>{
     return(
         <>
@@ -12,8 +13,11 @@ const Homepage = () =>{
         <div className="homepage">
             <h1 className="homepage-header">This is the homepage placeholder!</h1>
         </div>
-        <div>
+        {/* <div>
             <FormTextArea />
+        </div> */}
+        <div>
+            {/* <SavedItemsCard user={user}  /> */}
         </div>
         </>
     )

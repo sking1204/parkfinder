@@ -1,8 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import './GetMap.css';
+import ParkfinderApi from '../services/ParkfinderApi';
 
 
+const GetMap = ({ park, user, parkCode }) => {
 
-const GetMap = ({ park }) => {
+    const [savedMap, setSavedMap] = useState([]);
+    const [latitude, setLatitude] = useState([]);
+    const [longitude, setLongitude] = useState([]);
+
     useEffect(() => {
         if (park.latLong) {
             try {
@@ -11,6 +18,8 @@ const GetMap = ({ park }) => {
                 const [latPart, longPart] = latLongString.split(',').map(coord => coord.split(':')[1].trim());
                 const latitude = parseFloat(latPart);
                 const longitude = parseFloat(longPart);
+                setLatitude(latitude);
+                setLongitude(longitude);
 
                 var greenIcon = L.icon({
                     iconUrl: 'https://cdn-icons-png.freepik.com/256/149/149059.png?ga=GA1.1.1500839574.1718835439&semt=ais_hybrid', // Adjust the path to your images
@@ -47,8 +56,7 @@ const GetMap = ({ park }) => {
                 //     fillColor: '#f03',
                 //     fillOpacity: 0.5,
                 //     radius: 500
-                // }).addTo(map);
-                    
+                // }).addTo(map);                             
 
                     return () => {
                         // Clean up the map instance on component unmount
@@ -65,11 +73,36 @@ const GetMap = ({ park }) => {
         }
     }, [park]);
 
+    const handleSaveMap = async (event) => {
+        const mapData = {
+          latitude: latitude,
+          longitude: longitude
+         
+         
+          // cost: event.cost
+          // date: event.selectedDate // Assuming you capture and pass the selected date
+        };
+      
+        try {
+          await ParkfinderApi.saveMap(user, parkCode, mapData);
+          console.log("Event saved to database:", mapData);
+          setSavedMap([...savedMap, map]);
+        } catch (err) {
+          console.error("Error saving event to database:", err);
+        }
+      };
+    
+
     return (
         // <div id="map" >
+        <>
         <div id="map" style={{ height: '100vh', width: '100%', border: '3px solid #bbb8b8' }}>
             {/* This is the mapholder component placeholder! */}
         </div>
+        <div>
+        <Button className="submit-button"onClick={handleSaveMap}> Save Map !</Button>
+        </div>
+        </>
     );
 };
 

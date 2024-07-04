@@ -155,6 +155,8 @@ router.post("/:username/saved-events/:parkCode", async function (req, res, next)
 
 
 
+
+
 router.post("/:username/saved-fees/:parkCode", async function (req, res, next) {
   try {
     const username = req.params.username;
@@ -183,6 +185,20 @@ router.post("/:username/saved-things-to-do/:parkCode", async function (req, res,
   }  
 });
 
+router.post("/:username/saved-map/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+    const mapData = req.body;  
+
+    const coords = await User.saveMap(username, parkCode, mapData);
+
+    return res.json({ coords });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
 router.get("/:username/saved-fees/:parkCode", async function (req, res, next) {
   try {
     const username = req.params.username;
@@ -190,6 +206,20 @@ router.get("/:username/saved-fees/:parkCode", async function (req, res, next) {
    
 
     const savedFees = await User.getSavedFees(username, parkCode);
+
+    return res.json({ savedFees });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+router.get("/:username/all-saved-fees", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    
+   
+
+    const savedFees = await User.getSavedFees(username);
 
     return res.json({ savedFees });
   } catch (err) {
@@ -210,6 +240,74 @@ router.get("/:username/saved-activities/:parkCode", async function (req, res, ne
     return next(err);
   }  
 });
+
+router.get("/:username/all-saved-activities", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    // const parkCode = req.params.parkCode;  
+   
+
+    const savedActivities = await User.getAllSavedActivities(username);
+
+    return res.json({ savedActivities });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+router.get("/:username/saved-events/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+   
+
+    const savedEvents = await User.getSavedEvents(username, parkCode);
+
+    return res.json({ savedEvents });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+router.get("/:username/all-saved-events", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    // const parkCode = req.params.parkCode;  
+   
+
+    const savedEvents = await User.getAllSavedEvents(username);
+
+    return res.json({ savedEvents });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+//SETTING UP ROUTE TO GET ALL SAVED INFO
+
+
+
+router.get("/:username/saved-items", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    // const parkCode = req.params.parkCode;  
+   
+
+    // Make both requests in parallel
+    const [savedActivities,savedEvents, savedFees, savedMap, savedTodo] = await Promise.all([
+      User.getAllSavedActivities(username),      
+      User.getAllSavedEvents(username),
+      User.getAllSavedFees(username),
+      User.getMap(username),
+      User.getSavedThingsToDo(username)
+    ]);
+
+    return res.json({ savedActivities, savedEvents, savedFees, savedMap, savedTodo });
+  } catch (err) {
+    return next(err);
+  }
+});
+
 
 
 
