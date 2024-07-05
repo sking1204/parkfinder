@@ -32,6 +32,8 @@ import ReviewsList from "./ReviewsList";
 import SavedEvents from "./SavedEvents";
 import ParkForm from "./ParkForm";
 import SavedItems from "./SavedItems";
+import FavoritedParks from "./FavoritedParks"
+import FavoritedParksWrapper from "./FavoritedParksWrapper";
 
 
 
@@ -81,6 +83,9 @@ const ParkfinderRoutes = () => {
           <Route path="/users/:username/reviews/:parkCode" element={<ParkReviewForm />} />
           <Route path="/users/:username/leave-review" element={<ParksByName  />} />
           <Route path="/users/:username/saved-items" element={<SavedItems user ={user}  />} />
+          <Route path="/users/:username/all-saved-favorites" element={<FavoritedParks user ={user}  />} />           
+          <Route path="/users/:username/favorites" element={<FavoritedParksWrapper user={user}  />} />           
+                     
           {/* <Route path="/plan-trip" element={<TripPlannerForm />} /> */}
           <Route path="/plan-trip" element={<PlanTrip />} />
           <Route path="/park-form" element={<ParkForm />} />

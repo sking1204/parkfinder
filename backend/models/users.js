@@ -752,10 +752,141 @@ static async getReviewByUsername(username) {
     }
   
     // Execute the query
-    const feesResult = await db.query(query, params);
-    const fees = feesResult.rows;
+    const detailsResult = await db.query(query, params);
+    const details = detailsResult.rows;
   
-    return fees;
+    return details;
+  }
+
+  //new 7/5
+  static async saveFavorite(username, parkCode, favoriteData) {
+    // Find the user by username
+    const userResult = await db.query(
+      "SELECT id FROM users WHERE username = $1",
+      [username]
+    );
+  
+    const user = userResult.rows[0];
+  
+    if (!user) {
+      throw new Error("User not found");
+    }
+  
+    // Log favoriteData to debug
+    console.log('Favorite Data in saveFavorite:', favoriteData);
+  
+    const result = await db.query(
+      `INSERT INTO favorited_parks (user_id, username, park_id, park_code, park_description, park_full_name, park_image_url)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
+       RETURNING id, user_id, username, park_id, park_code, park_description, park_full_name, park_image_url`,
+      [
+        user.id,
+        username,
+        favoriteData.park_id,
+        parkCode,
+        favoriteData.park_description,
+        favoriteData.park_full_name,
+        favoriteData.park_image_url
+      ]
+    );
+  
+    return result.rows[0]; // return saved event data
+  }
+
+// WORKING 7/5
+  // static async saveFavorite(username, parkCode, favoriteData) {
+  //   // Find the user by username
+  //   const userResult = await db.query(
+  //     "SELECT id FROM users WHERE username = $1",
+  //     [username]
+  //   );
+  
+  //   const user = userResult.rows[0];
+  
+  //   if (!user) {
+  //     throw new Error("User not found");
+  //   }
+
+  //     // Log favoriteData to debug
+  // console.log('Favorite Data in saveFavorite:', favoriteData);
+
+  //   const result = await db.query(
+  //     `INSERT INTO favorited_parks (user_id, username, park_id, park_code)
+  //      VALUES ($1, $2, $3, $4)
+  //      RETURNING id, user_id, username, park_id, park_code`,
+  //     [user.id, username, favoriteData.park_id, parkCode]
+  //   );
+  
+  //   return result.rows[0]; // return saved event data  
+  
+  // }
+
+  static async getSavedFavorites(username, parkCode = null) {
+    // Find the user by username
+    const userResult = await db.query(
+      "SELECT id FROM users WHERE username = $1",
+      [username]
+    );
+  
+    const user = userResult.rows[0];
+  
+    if (!user) {
+      throw new Error("User not found");
+    }
+  
+    // Prepare the query and parameters
+    let query = `SELECT id, user_id, username, park_id,park_code,park_description, park_full_name, park_image_url, created_at
+                 FROM favorited_parks
+                 WHERE user_id = $1`;
+    const params = [user.id];
+  
+    // Add park code filter if provided
+    // if (parkCode) {
+    //   query += " AND park_code = $2";
+    //   params.push(parkCode);
+    // }
+  
+    // Execute the query
+    const favoritesResult = await db.query(query, params);
+    const favorites = favoritesResult.rows;
+  
+    return favorites;
+
+    //////////////////  GET ALL ///////////////////////////
+  }
+
+  //working on this.... 7/5
+
+  static async getAllSavedFavorites(username) {
+    // Find the user by username
+    const userResult = await db.query(
+      "SELECT id FROM users WHERE username = $1",
+      [username]
+    );
+  
+    const user = userResult.rows[0];
+  
+    if (!user) {
+      throw new Error("User not found");
+    }
+  
+    // Prepare the query and parameters
+    let query = `SELECT id, user_id, username, park_id,park_code, created_at
+                 FROM favorited_parks
+                 WHERE user_id = $1`;
+    const params = [user.id];
+  
+    // Add park code filter if provided
+    // if (parkCode) {
+    //   query += " AND park_code = $2";
+    //   params.push(parkCode);
+    // }
+  
+    // Execute the query
+    const favoritesResult = await db.query(query, params);
+    const favorites = favoritesResult.rows;
+  
+    return favorites;
   }
 
 

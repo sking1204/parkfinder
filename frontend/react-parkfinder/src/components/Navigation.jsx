@@ -41,6 +41,11 @@ import { Link,NavLink, useNavigate } from "react-router-dom";
                   </NavLink>
                 </li>                 
                 <li className="nav-right">
+                  <NavLink className="nav-link" to={`/users/${user.username}/favorites`}>
+                    Favorites
+                  </NavLink>
+                </li>                 
+                {/* <li className="nav-right">
                   <NavLink className="nav-link" to="/plan-trip">
                     Plan A Trip
                   </NavLink>
@@ -49,7 +54,7 @@ import { Link,NavLink, useNavigate } from "react-router-dom";
                   <NavLink className="nav-link" to="/saved-trips">
                     Saved Trips
                   </NavLink>
-                </li>                 
+                </li>                  */}
                 {/* <li className="nav-right">
                   <NavLink className="nav-link" to="/reviews">
                     Leave a Review

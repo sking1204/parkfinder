@@ -9,7 +9,7 @@ const SavedEvents = ({ user, parkCode }) => {
     const fetchSavedEvents = async () => {
       try {
         if (user) {
-          const userEvents = await ParkfinderApi.getUserEvents(user.username);
+          const userEvents = await ParkfinderApi.getSavedEvents(user.username);
           const filteredEvents = userEvents.filter(event => event.parkCode === parkCode);
           setEvents(filteredEvents);
         }

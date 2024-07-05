@@ -170,6 +170,52 @@ router.post("/:username/saved-fees/:parkCode", async function (req, res, next) {
     return next(err);
   }  
 });
+router.post("/:username/saved-favorites/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+    const favoriteData  = req.body;  // Note the plural "nps_activity_ids"
+
+    // Log the request body to debug
+    console.log('Request body:', req.body);
+    console.log('Favorite Data:', favoriteData);
+
+    const favorites = await User.saveFavorite(username, parkCode, favoriteData);
+
+    return res.json({ favorites });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+router.get("/:username/saved-favorites/:parkCode", async function (req, res, next) {
+  try {
+    const username = req.params.username;
+    const parkCode = req.params.parkCode;  
+   
+
+    const savedFavorites = await User.getSavedFavorites(username, parkCode);
+
+    return res.json({ savedFavorites });
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+// router.get("/:username/all-saved-favorites", async function (req, res, next) {
+//   try {
+//     const username = req.params.username;
+//     // const parkCode = req.params.parkCode;  
+   
+
+//     const savedFavorites = await User.getAllSavedFavorites(username);
+
+//     return res.json({ savedFavorites });
+//   } catch (err) {
+//     return next(err);
+//   }  
+// });
+
 
 router.post("/:username/saved-things-to-do/:parkCode", async function (req, res, next) {
   try {

@@ -138,10 +138,14 @@ CREATE TABLE favorited_parks (
   id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL
     REFERENCES users(id) ON DELETE CASCADE,
-  park_id INTEGER NOT NULL
-    REFERENCES parks(id) ON DELETE CASCADE,
+  username TEXT NOT NULL, 
+  park_id TEXT,    
+  park_code TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE(user_id, park_id)
+  -- UNIQUE(user_id, park_id)
+  park_description TEXT,
+  park_full_name TEXT,
+  park_image_url TEXT
 );
 
 

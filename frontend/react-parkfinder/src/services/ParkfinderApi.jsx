@@ -175,6 +175,29 @@ class ParkfinderApi {
     let res = await this.request(`users/${username}/saved-items`);
     return res;
   }
+  static async getSavedEvents(username) {
+
+    let res = await this.request(`users/${username}/saved-events/${parkCode}`);
+    return res;
+  }
+
+  static async saveFavorites(username,parkCode, data) {
+
+    let res = await this.request(`users/${username}/saved-favorites/${parkCode}`, data, "post");
+    return res;
+  }
+
+  static async getSavedFavorites(username,parkCode) {
+
+    let res = await this.request(`users/${username}/saved-favorites/${parkCode}`);
+    return res;
+  }
+
+  // static async getAllSavedFavorites(username) {
+
+  //   let res = await this.request(`users/${username}/all-saved-favorites`);
+  //   return res;
+  // }
 
 
   //   static async newLeaveReview(username, reviewData) {     
