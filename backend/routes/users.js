@@ -62,6 +62,16 @@ router.get("/reviews", async function(req,res, next){
     }
 })
 
+router.get("/:username/favorites",  async function (req, res, next) {
+  try{
+    const userFavorite = await User.getFavoritesByUsername(req.params.username);
+    return res.json({userFavorite});
+  }catch(err){
+    return next(err);
+  }
+    // return res.send("Placeholder for reviews by username...review form")
+  });
+
 router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
     try {
       const user = await User.get(req.params.username);

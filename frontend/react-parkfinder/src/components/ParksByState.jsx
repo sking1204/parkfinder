@@ -13,9 +13,11 @@ export default function ParksByState() {
 
 const [stateCodes, setStateCodes] = useState([]);
 const [selectedState, setSelectedState] = useState("");
+const [loading, setLoading] = useState(false);
 
 useEffect(() => {
   async function fetchParksByStateList() {
+    setLoading(true);
       try{
       const fetchedParks = await ParkfinderApi.getParksStateList();
       console.log("Fetched Parks By State:", fetchedParks.StateCodes)
@@ -23,6 +25,7 @@ useEffect(() => {
   } catch (err){
       console.error("Error fetching parks: err");
   }
+  setLoading(false);
   }
 
   fetchParksByStateList();
@@ -38,6 +41,10 @@ const handleStateChange = (evt) =>{
 return (
   <>
     <h1>Find Park By State:</h1>
+    {loading ? (
+      <p>Loading...</p>
+    ): (
+    
     <Box className="nativeselect" sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
         <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -60,6 +67,7 @@ return (
         </NativeSelect>
       </FormControl>
     </Box>
+    )}
     <SelectParks selectedState={selectedState} />    
   </>
 );

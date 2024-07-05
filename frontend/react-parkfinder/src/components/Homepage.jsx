@@ -4,20 +4,27 @@ import ParksByParkCode from "./ParksByParkCode";
 import FormTextArea from "./FormTextArea";
 
 
-const Homepage = () =>{
+const Homepage = ({user}) =>{
     return(
         <>
 
         {/* <ParksByState />
         <ParksByParkCode /> */}
+
+
+
         <div className="homepage">
-            <h1 className="homepage-header">This is the homepage placeholder!</h1>
+            <h1 className="homepage-header">Welcome to Parkfinder!</h1>            
+            {!user && <h4>Login or signup to find a park!</h4>}
         </div>
         {/* <div>
             <FormTextArea />
         </div> */}
         <div>
-            {/* <SavedItemsCard user={user}  /> */}
+        <img className="homepage-img" src='../src/assets/background3.jpg' alt="Park image" />
+        <div>
+        Photo by <a href="https://unsplash.com/@eberhardgross?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">eberhard 🖐 grossgasteiger</a> on <a href="https://unsplash.com/photos/a-mountain-is-reflected-in-the-still-water-of-a-lake-l4xUUnampgU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+        </div>
         </div>
         </>
     )

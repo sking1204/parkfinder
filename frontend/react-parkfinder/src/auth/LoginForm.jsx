@@ -30,7 +30,7 @@ const LoginForm = ({setToken, setUser}) =>{
                 setToken(token);
                 setFormData(initialState);
                 
-                navigate("/");
+                navigate("/parks");
             }
 
         } catch(error) {

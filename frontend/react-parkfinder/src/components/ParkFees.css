@@ -22,3 +22,13 @@
 .park-fees label {
   margin-right: 10px; /* Space between checkbox and text */
 }
+
+.submit-button.submitted {
+  background-color: lightgrey;
+  cursor: not-allowed;
+}
+
+.check-box.submitted{
+  background-color: lightgrey;
+  cursor: not-allowed;
+}

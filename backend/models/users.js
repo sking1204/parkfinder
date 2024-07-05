@@ -291,6 +291,36 @@ static async getReviewByUsername(username) {
     return result.rows;
   }
 
+  static async getFavoritesByUsername(username) {
+
+    // Find the user by username
+    const userResult = await db.query(
+      "SELECT id FROM users WHERE username = $1",
+      [username]
+  );
+
+  const user = userResult.rows[0];
+
+  if (!user) {
+      throw new Error("User not found");
+  }
+
+    const result = await db.query(
+      `SELECT
+              fp.park_code,
+              fp.park_description,
+              fp.park_full_name,
+              fp.park_image_url,
+              fp.created_at,               
+              u.username                  
+       FROM favorited_parks fp
+       JOIN users u ON fp.user_id = u.id
+       ORDER BY fp.park_full_name`,
+    );
+  
+    return result.rows;
+  }
+
   //NEW 6.28.24
 
   // static async saveActivity(username, parkCode, { nps_activity_id }) {

@@ -30,16 +30,21 @@ import { Link,NavLink, useNavigate } from "react-router-dom";
          function loggedInNav(){
           return(             
               <ul className="navbar-nav ml-auto">
-                <li className="nav-right">
+                {/* <li className="nav-right">
                   <NavLink className="nav-link" to="/">
                     Parkfinder
                   </NavLink>
-                </li>
+                </li> */}
                 <li className="nav-right">
                   <NavLink className="nav-link" to="/parks">
                     Parks
                   </NavLink>
                 </li>                 
+                {/* <li className="nav-right">
+                  <NavLink className="nav-link" to={`/users/${user.username}/favorites`}>
+                    Favorites
+                  </NavLink>
+                </li>                  */}
                 <li className="nav-right">
                   <NavLink className="nav-link" to={`/users/${user.username}/favorites`}>
                     Favorites
@@ -70,11 +75,11 @@ import { Link,NavLink, useNavigate } from "react-router-dom";
                     Profile
                   </NavLink>
                 </li>
-                <li className="nav-right">
+                {/* <li className="nav-right">
                   <NavLink className="nav-link" to="/login">
                     Login
                   </NavLink>
-                </li>                
+                </li>                 */}
                 <li className="nav-right">
                   <NavLink className="nav-link" to="/signup">
                     Signup

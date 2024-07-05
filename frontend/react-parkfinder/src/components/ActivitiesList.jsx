@@ -1,11 +1,17 @@
 /* Version 6/30 */
 
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+// import { useNavigate } from 'react-router-dom';
 import './ActivitiesList.css';
 import ParkfinderApi from '../services/ParkfinderApi';
 
-const ParkActivities = ({ park,user }) => {
+const ActivitiesList = ({ park,user}) => {
   const [checkedActivities, setCheckedActivities] = useState(new Set());
+  // const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleCheckboxChange = (evt) => {
     const { value, checked } = evt.target;
@@ -44,23 +50,46 @@ const ParkActivities = ({ park,user }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Clear any previous messages
+    setSuccessMessage('');
+    setErrorMessage('');
+
+    // Check if any activities are selected
+    if (checkedActivities.size === 0 ) {
+      setErrorMessage('Please select at least one activity.');
+      return;
+    }
   
     // Convert checkedActivities to an array of IDs
     const nps_activity_ids = Array.from(checkedActivities);
   
     console.log('Selected activities:', nps_activity_ids);
+    
   
     try {
       const response = await ParkfinderApi.saveActivities(user, park.parkCode, { nps_activity_ids });
       console.log('Activities saved successfully:', response);
+      setSuccessMessage('Activities saved successfully!');
+      setIsSubmitted(true); // Set submission status to true
+      
     } catch (error) {
       console.error('Error saving activities:', error);
+      setSuccessMessage('Failed to save activities. Please try again.');
     }
+    // navigate(`/parks/parkCode/${park.parkCode}`);
   };
+
+  const handleBackClick = () => {
+    setShowActivities(false);
+  };
+  
 
   return (
     <div className="activities-container">
       <h2>Activities</h2>
+      {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
+      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}
       <form onSubmit={handleSubmit}>
         <div className="multiselect">
           <label>
@@ -68,6 +97,8 @@ const ParkActivities = ({ park,user }) => {
               type="checkbox"
               checked={isAllChecked}
               onChange={handleSelectAllChange}
+              className={`check-box ${isSubmitted ? 'submitted' : ''}`}
+              disabled={isSubmitted} // Disable checkbox if submitted
             />
             Select All
           </label>
@@ -80,16 +111,29 @@ const ParkActivities = ({ park,user }) => {
                     value={activity.id}
                     checked={checkedActivities.has(activity.id)}
                     onChange={handleCheckboxChange}
+                    className={`check-box ${isSubmitted ? 'submitted' : ''}`}
+                    disabled={isSubmitted} // Disable checkbox if submitted
                   />
                   <strong>{activity.name}</strong>
                 </label>
               </li>
             ))}
           </ul>
-          <button type="submit" className="submit-button">Submit</button>
+          <button
+                type="submit"
+                className={`submit-button ${isSubmitted ? 'submitted' : ''}`}
+                disabled={isSubmitted} // Disable button if submitted
+              >
+                Submit
+              </button>
+          {/* <button type="submit" className="submit-button">Submit</button> */}
         </div>
       </form>
+      <div>
+      <Link className="back" to={`/parks/parkCode/${park.parkCode}`} onClick={handleBackClick}>Back to Park Details!</Link>
+      </div>
     </div>
+   
 
 
 
@@ -98,7 +142,7 @@ const ParkActivities = ({ park,user }) => {
   );
 };
 
-export default ParkActivities;
+export default ActivitiesList;
 
 
 

@@ -187,9 +187,15 @@ class ParkfinderApi {
     return res;
   }
 
-  static async getSavedFavorites(username,parkCode) {
+  static async getSavedFavoritesByParkCode(username,parkCode) {
 
     let res = await this.request(`users/${username}/saved-favorites/${parkCode}`);
+    return res;
+  }
+
+  static async getFavoritesByUsername(username) {
+
+    let res = await this.request(`users/${username}/favorites`);
     return res;
   }
 

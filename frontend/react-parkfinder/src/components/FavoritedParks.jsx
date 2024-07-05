@@ -17,7 +17,7 @@ const FavoritedParks = () => {
     if (user && user.username) {
       async function fetchSavedFavorites() {
         try {
-          const fetchedSavedFavorites = await ParkfinderApi.getSavedFavorites(user.username, parkCode);
+          const fetchedSavedFavorites = await ParkfinderApi.getSavedFavoritesByParkCode(user.username, parkCode);
           setSavedFavorites(fetchedSavedFavorites.savedFavorites); 
           console.log("Fetched Saved Items:", fetchedSavedFavorites.savedFavorites);
         } catch (err) {

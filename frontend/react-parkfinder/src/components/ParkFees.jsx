@@ -1,9 +1,13 @@
 import {useState} from 'react';
+import { Link } from "react-router-dom";
 import ParkfinderApi from '../services/ParkfinderApi';
 import './ParkFees.css';
 
 const ParkFees = ({ park, user }) => {
   const [checkedFees, setCheckedFees] = useState(new Set());
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
 
   const handleCheckboxChange = (evt) => {
@@ -22,6 +26,16 @@ const ParkFees = ({ park, user }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Clear any previous messages
+    setSuccessMessage('');
+    setErrorMessage('');
+
+     // Check if any fees are selected
+     if (checkedFees.size === 0 ) {
+      setErrorMessage('Please make at least one selection.');
+      return;
+    }
   
     // Convert checkedFees to an array of IDs
     const titles = Array.from(checkedFees);
@@ -31,12 +45,20 @@ const ParkFees = ({ park, user }) => {
     try {
       const response = await ParkfinderApi.saveEntranceFees(user, park.parkCode, { titles });
       console.log('Activities saved successfully:', response);
+      setSuccessMessage('Activities saved successfully!');
+      setIsSubmitted(true); // Set submission status to true
     } catch (error) {
       console.error('Error saving activities:', error);
+      setSuccessMessage('Failed to save activities. Please try again.');
     }
   };
 
+  const handleBackClick = () => {
+    setShowActivities(false);
+  };
+
   return (
+    <>
     <div className="park-fees">
       <h2>Entrance Fees</h2>       
       {park.entranceFees.length > 0 ? (
@@ -57,9 +79,33 @@ const ParkFees = ({ park, user }) => {
         <button type="submit" className="submit-button">Submit</button>
         </form>
       ) : (
-        <p>{park.fullName} is FREE, no entrance pass required!</p>
+        <form onSubmit={handleSubmit}>
+            <p>{park.fullName} is FREE, no entrance pass required!</p>
+            <label>
+              <input
+                type="checkbox"
+                value="Free"
+                onChange={handleCheckboxChange}
+                className={`check-box ${isSubmitted ? 'submitted' : ''}`}
+                disabled={isSubmitted} // Disable checkbox if submitted
+              />
+              This park is free
+            </label>
+            <button
+                type="submit"
+                className={`submit-button ${isSubmitted ? 'submitted' : ''}`}
+                disabled={isSubmitted} // Disable button if submitted
+              >
+                Submit
+              </button>
+            {/* <button type="submit" className="submit-button">Submit</button> */}
+          </form>
       )}
     </div>
+    <div>
+    <Link className="back" to={`/parks/parkCode/${park.parkCode}`} onClick={handleBackClick}>Back to Park Details!</Link>
+    </div>
+    </>
   );
 };
 

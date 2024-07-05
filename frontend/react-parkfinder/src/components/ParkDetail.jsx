@@ -68,6 +68,10 @@ function ParkDetail() {
     setShowFunction(cur => !cur);
   };
 
+  // const hideActivitiesList = () => {
+  //   setShowActivities(false);
+  // };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading park details: {error.message}</p>;
 
@@ -91,7 +95,7 @@ function ParkDetail() {
           </div>
         </div>
         {showMap && <GetMap park={park} user={user.username} parkCode={parkCode} />}
-        {showActivities && <ActivitiesList park={park} user={user.username} />}
+        {showActivities && <ActivitiesList park={park} user={user.username}  />}
         {showFees && <ParkFees park={park} user={user.username} />}
         {showEvents && <ParkEvents parkCode={parkCode} park={park} user={user.username} />}
         {showThingsToDo && <ThingsToDo parkCode={parkCode} park={park} user={user.username} />}

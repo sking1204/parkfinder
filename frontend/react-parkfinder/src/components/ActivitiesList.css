@@ -28,3 +28,13 @@
     cursor: pointer;
     font-size: 16px;
   }
+
+  .submit-button.submitted {
+    background-color: lightgrey;
+    cursor: not-allowed;
+  }
+
+  .check-box.submitted{
+    background-color: lightgrey;
+    cursor: not-allowed;
+  }
