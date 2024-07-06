@@ -48,7 +48,7 @@ return (
     <Box className="nativeselect" sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
         <InputLabel variant="standard" htmlFor="uncontrolled-native">
-          Select State by State Code
+          Select Park by State Code
         </InputLabel>
         <NativeSelect
           value={selectedState}
@@ -58,7 +58,8 @@ return (
             id: 'uncontrolled-native',
           }}
         >
-          <option value="" disabled>Select State by State Code</option>
+          {/* <option value="" disabled>Select State by State Code</option> */}
+          <option value="" ></option>
           {stateCodes.map((stateCode) => (
             <option key={stateCode} value={stateCode}>
               {stateCode}

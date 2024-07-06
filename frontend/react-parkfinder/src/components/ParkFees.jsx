@@ -60,7 +60,8 @@ const ParkFees = ({ park, user }) => {
   return (
     <>
     <div className="park-fees">
-      <h2>Entrance Fees</h2>       
+      <h2>Entrance Fees</h2>
+      <h5>Select fees/passes to add to your saved items!</h5>       
       {park.entranceFees.length > 0 ? (
         <form onSubmit={handleSubmit}>
         <ul>

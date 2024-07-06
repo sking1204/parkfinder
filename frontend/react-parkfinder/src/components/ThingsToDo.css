@@ -7,3 +7,7 @@
     margin: 0;
       
 }
+
+.submit-button.submitted {
+    background-color: #ccc;
+  }

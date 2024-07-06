@@ -390,13 +390,13 @@ static async getReviewByUsername(username) {
       throw new Error("User not found");
     }
     const result = await db.query(
-      `INSERT INTO saved_events (user_id, username, park_code, event_id, title, description)
-       VALUES ($1, $2, $3, $4, $5, $6)
-       RETURNING id, user_id, username, park_code, event_id,title,description`,
-      [user.id, username, parkCode, eventData.event_id, eventData.title, eventData.description]
+      `INSERT INTO saved_events (user_id, username, park_code, event_id, title, description, selected_date)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
+       RETURNING id, user_id, username, park_code, event_id,title,description, selected_date`,
+      [user.id, username, parkCode, eventData.event_id, eventData.title, eventData.description, eventData.date]
     );
   
-    return result.rows[0]; // Assuming you want to return the saved event data
+    return result.rows[0]; // return the saved event data
   
   
     // Prepare the data to insert multiple rows for each activity ID

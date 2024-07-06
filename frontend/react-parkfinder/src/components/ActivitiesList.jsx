@@ -88,6 +88,7 @@ const ActivitiesList = ({ park,user}) => {
   return (
     <div className="activities-container">
       <h2>Activities</h2>
+      <h5>Select activities to add to your saved items!</h5>
       {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
       {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}
       <form onSubmit={handleSubmit}>

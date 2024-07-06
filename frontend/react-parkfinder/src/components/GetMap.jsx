@@ -9,6 +9,10 @@ const GetMap = ({ park, user, parkCode }) => {
     const [savedMap, setSavedMap] = useState([]);
     const [latitude, setLatitude] = useState([]);
     const [longitude, setLongitude] = useState([]);
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    
 
     useEffect(() => {
         if (park.latLong) {
@@ -86,9 +90,22 @@ const GetMap = ({ park, user, parkCode }) => {
         try {
           await ParkfinderApi.saveMap(user, parkCode, mapData);
           console.log("Event saved to database:", mapData);
+
+          
           setSavedMap([...savedMap, map]);
+          setSuccessMessage('Map saved successfully!');
+          setIsSubmitted(true); // Set submission status to true
+          const successTimeout = setTimeout(() => {
+            setSuccessMessage('');
+        }, 3000); // Clear message after 3 seconds
+
         } catch (err) {
-          console.error("Error saving event to database:", err);
+          console.error("Error saving map to database:", err);
+          setSuccessMessage('Failed to save map. Please try again.');
+          const successTimeout = setTimeout(() => {
+            setSuccessMessage('');
+        }, 3000); // Clear message after 3 seconds
+
         }
       };
     
@@ -96,12 +113,21 @@ const GetMap = ({ park, user, parkCode }) => {
     return (
         // <div id="map" >
         <>
-        <div id="map" style={{ height: '100vh', width: '100%', border: '3px solid #bbb8b8' }}>
-            {/* This is the mapholder component placeholder! */}
+        <div>
+            <h3>Map - {park.fullName}</h3>
+        </div>               
+        <div>
+            {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
+            {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}
         </div>
         <div>
         <Button className="submit-button"onClick={handleSaveMap}> Save Map !</Button>
+        </div>         
+      
+        <div id="map" style={{ height: '100vh', width: '100%', border: '3px solid #bbb8b8' }}>
+            {/* This is the mapholder component placeholder! */}
         </div>
+     
         </>
     );
 };

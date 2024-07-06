@@ -38,7 +38,8 @@ export default function SelectCodes({ selectedCode }) {
 
   return (
     <>
-    <div>       
+    <div>
+    <h5>Select park to view more details!</h5>       
 
       <div className="park-list">
           {parks.map((park) => (

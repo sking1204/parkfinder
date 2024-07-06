@@ -57,7 +57,8 @@ return (
             id: 'uncontrolled-native',
           }}
         >
-          <option value="" disabled>Select Park by Park Code</option>
+          {/* <option value="" disabled>Select Park by Park Code</option> */}
+          <option value="" ></option>
           {parkCodes.map((parkCode) => (
             <option key={parkCode} value={parkCode}>
               {parkCode}

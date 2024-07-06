@@ -1,4 +1,66 @@
-.park-events{
+.park-events {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .event-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    width: 80%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .event-card h3 {
+    margin-top: 0;
+  }
+  
+  .event-card p {
+    margin: 5px 0;
+  }
+  
+  .event-card select {
+    margin-bottom: 10px;
+  }
+  
+  .event-card .submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .event-card .submit-button.submitted {
+    background-color: #ccc;
+  }
+  
+  .event-card .success-message,
+  .event-card .error-message {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .event-card .success-message {
+    color: green;
+    background-color: #f0fff0;
+    border: 1px solid green;
+  }
+  
+  .event-card .error-message {
+    color: red;
+    background-color: #fff0f0;
+    border: 1px solid red;
+  }
+  
+
+
+/* .park-events{
    
     border: 3px solid #bbb8b8;
     padding: 16px;
@@ -17,3 +79,28 @@
     cursor: pointer;
     font-size: 16px;
   }
+
+  .submit-button.submitted {
+    background-color: lightgrey;
+    cursor: not-allowed;
+  }
+
+  .success-message {
+    color: green;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid green;
+    border-radius: 5px;
+    background-color: #f0fff0;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 5px;
+    background-color: #fff0f0;
+  } */

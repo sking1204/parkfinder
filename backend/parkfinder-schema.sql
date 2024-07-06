@@ -90,6 +90,7 @@ CREATE TABLE saved_events (
     REFERENCES users(id) ON DELETE CASCADE,
   username TEXT NOT NULL,
   event_id TEXT,
+  selected_date TEXT,
   -- cost TEXT,
   description TEXT,
   title TEXT,

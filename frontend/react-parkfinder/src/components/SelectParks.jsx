@@ -46,6 +46,7 @@ export default function SelectParks({ selectedState }) {
      
     <div>
       <h1>Parks in {selectedState}:</h1>
+      <h5>Select park to view more details!</h5>
 
       <div className="park-list">
           {parks.map((park) => (

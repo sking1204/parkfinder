@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import ParkfinderRoutes from './ParkfinderRoutes';
+import './SelectParkResultsCard.css'
 
 function SelectParkResultsCard({ park, onClick }) {
     return (

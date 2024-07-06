@@ -77,15 +77,19 @@ function ParkDetail() {
 
   return (
     <>
-      <Stack direction="column" spacing={2}>
+     <div className="park-detail-headers">
         <h2>{park.fullName}</h2>
+        <h5>Click the links below to hide/show details!</h5>
+        </div>
+
+      <Stack direction="column" spacing={2}>        
         <Stack direction="row" spacing={2} className="button-container">
           <Button onClick={() => handleButtonClick(setShowActivities)}>See Activities!</Button>
           <Button onClick={() => handleButtonClick(setShowFees)}>Fees & Passes!</Button>
           <Button onClick={() => handleButtonClick(setShowEvents)}>See Events!</Button>
           <Button onClick={() => handleButtonClick(setShowMap)}>Get a map!</Button>
           <Button onClick={() => handleButtonClick(setShowThingsToDo)}>Things to Do!</Button>
-          <Link className="review" to={`/users/${user.username}/reviews/${parkCode}`}>Leave a Review!</Link>
+          <Link className="review" to={`/users/${user.username}/reviews/${parkCode}`}>LEAVE A REVIEW!</Link>
         </Stack>
         <div className="park-description-container">
           <p>{park.description}</p>
