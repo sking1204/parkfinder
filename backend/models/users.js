@@ -885,39 +885,41 @@ static async getReviewByUsername(username) {
     //////////////////  GET ALL ///////////////////////////
   }
 
+
+  /* NOT BEING USED.... not working yet */
   //working on this.... 7/5
 
-  static async getAllSavedFavorites(username) {
-    // Find the user by username
-    const userResult = await db.query(
-      "SELECT id FROM users WHERE username = $1",
-      [username]
-    );
+  // static async getAllSavedFavorites(username) {
+  //   // Find the user by username
+  //   const userResult = await db.query(
+  //     "SELECT id FROM users WHERE username = $1",
+  //     [username]
+  //   );
   
-    const user = userResult.rows[0];
+  //   const user = userResult.rows[0];
   
-    if (!user) {
-      throw new Error("User not found");
-    }
+  //   if (!user) {
+  //     throw new Error("User not found");
+  //   }
   
-    // Prepare the query and parameters
-    let query = `SELECT id, user_id, username, park_id,park_code, created_at
-                 FROM favorited_parks
-                 WHERE user_id = $1`;
-    const params = [user.id];
+  //   // Prepare the query and parameters
+  //   let query = `SELECT id, user_id, username, park_id,park_code, created_at
+  //                FROM favorited_parks
+  //                WHERE user_id = $1`;
+  //   const params = [user.id];
   
-    // Add park code filter if provided
-    // if (parkCode) {
-    //   query += " AND park_code = $2";
-    //   params.push(parkCode);
-    // }
+  //   // Add park code filter if provided
+  //   // if (parkCode) {
+  //   //   query += " AND park_code = $2";
+  //   //   params.push(parkCode);
+  //   // }
   
-    // Execute the query
-    const favoritesResult = await db.query(query, params);
-    const favorites = favoritesResult.rows;
+  //   // Execute the query
+  //   const favoritesResult = await db.query(query, params);
+  //   const favorites = favoritesResult.rows;
   
-    return favorites;
-  }
+  //   return favorites;
+  // }
 
 
 

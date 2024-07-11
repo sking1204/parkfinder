@@ -212,6 +212,7 @@ router.get("/:username/saved-favorites/:parkCode", async function (req, res, nex
   }  
 });
 
+/*  all-saved-favorites not working/ being used */
 // router.get("/:username/all-saved-favorites", async function (req, res, next) {
 //   try {
 //     const username = req.params.username;

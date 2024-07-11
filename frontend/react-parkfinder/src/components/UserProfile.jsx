@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import ParkfinderApi from '../services/ParkfinderApi';
 import TokenContext from '../contexts/TokenContext';
 
-function UserProfile({user, setUser}) {
+function UserProfile({user, setUser, setToken}) {
 
   const INITIAL_STATE = user;
   const token = useContext(TokenContext);

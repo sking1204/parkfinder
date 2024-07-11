@@ -12,9 +12,9 @@ import UserContext from "../contexts/UserContext";
 
 
 import UserProfile from "./UserProfile";
-import SavedTrips from "./SavedTrips";
+
 import Navigation from "./Navigation";
-import PlanTrip from "./PlanTrip";
+import PlanTrip from "../Old-UnusedComponents/PlanTrip";
 import ParksByState from "./ParksByState";
 import SelectParkResultsCard from "./SelectParkResultsCard";
 import SelectParks from "./SelectParks";
@@ -35,6 +35,7 @@ import SavedItems from "./SavedItems";
 import FavoritedParks from "./FavoritedParks"
 import FavoritedParksWrapper from "./FavoritedParksWrapper";
 import FavoritesList from "./FavoritesList"
+import ParksByParkCode from "./ParksByParkCode";
 
 
 
@@ -73,18 +74,21 @@ const ParkfinderRoutes = () => {
         <Routes>
           {/* <Route path="/" element={<Homepage user={user} />} /> */}
           <Route path="/" element={<Homepage user={user} />} />
-          <Route path="/parks" element={<FindParks />} />
+          {/* <Route path="/parks" element={<FindParks token={token} user={user} setUser={setUser} />} /> */}
+          <Route path="/parks" element={<FindParks user={user}/>} />
           {/* <Route path="/parks" element={<ParksList />} /> */}
           {/* HARDCODING THIS TO FL PARKS FOR NOW... */}
-          <Route path="/parks/FL-parks" element={<ParksList />} />
+          {/* <Route path="/parks/FL-parks" element={<ParksList />} /> */}
           <Route path="/parks/stateCode" element={<ParksByState user={user} />} />
+          <Route path="/parks/parkCode" element={<ParksByParkCode user={user} />} />
           <Route path="/parks/stateCode/:stateCode" element={<SelectParks user={user} />} />
           <Route path="/parks/parkCode/:parkCode" element={<ParkDetail  />} />
           <Route path="/parks/parkCode/:parkCode/review" element={<ParkReviewForm />} />
           <Route path="/users/:username/reviews/:parkCode" element={<ParkReviewForm />} />
           <Route path="/users/:username/leave-review" element={<ParksByName  />} />
           <Route path="/users/:username/saved-items" element={<SavedItems user ={user}  />} />
-          <Route path="/users/:username/all-saved-favorites" element={<FavoritedParks user ={user}  />} />           
+          {/* all-saved-favorites route not working */}
+          {/* <Route path="/users/:username/all-saved-favorites" element={<FavoritedParks user ={user}  />} />            */}
           {/* <Route path="/users/:username/favorites" element={<FavoritedParksWrapper user={user}  />} />            */}
                      
           {/* <Route path="/plan-trip" element={<TripPlannerForm />} /> */}
@@ -92,13 +96,16 @@ const ParkfinderRoutes = () => {
           <Route path="/park-form" element={<ParkForm />} />
           <Route path="/login" element={<LoginForm setToken={setToken} setUser={setUser}/>} />
           {/* <Route path="/saved-trips" element={<SavedTrips />} /> */}
-          <Route path="/saved-trips" element={<PlanTrip />} />
+          {/* <Route path="/saved-trips" element={<PlanTrip />} /> */}
           {/* <Route path="/reviews" element={<ParkReviewForm user={user} />} /> */}
            <Route path="/reviews" element={<ReviewsList />} />
-           <Route path="/users/:username/favorites" element={<FavoritesList />} />
+           {/* OLD */}
+           {/* <Route path="/users/:username/favorites" element={<FavoritesList />} /> */}
+           {/* NEW */}
+            <Route path="/users/:username/favorites" element={<FavoritesList user={user} />} />
           <Route path="/review-park" element={<ParksByName/>} />
           <Route path="/signup" element={<SignUpForm />} />
-          <Route path="/profile" element={<UserProfile user={user} setUser={setUser} />} />
+          <Route path="/profile" element={<UserProfile user={user} setUser={setUser} setToken={setToken} />} />
         </Routes>
         </UserContext.Provider>
         </TokenContext.Provider>

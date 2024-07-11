@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import UserContext from '../contexts/UserContext';
+// import UserContext from '../contexts/UserContext';
 import ParkfinderApi from '../services/ParkfinderApi';
 import FavoriteCard from './FavoriteCard';
 
-function FavoritesList() {
+function FavoritesList({user}) {
     const [favorites, setFavorites] = useState([]);
-    const { user } = useContext(UserContext); 
+    // const { user } = useContext(UserContext); 
 
 
     
