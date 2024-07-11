@@ -8,11 +8,11 @@ import GetMap from './GetMap';
 import ActivitiesList from './ActivitiesList';
 import ParkFees from './ParkFees';
 import ParkEvents from './ParkEvents';
-import UserContext from '../contexts/UserContext';
+// import UserContext from '../contexts/UserContext';
 import ThingsToDo from './ThingsToDo';
 import './ParkDetail.css';
 
-function ParkDetail() {
+function ParkDetail({user}) {
   const { parkCode } = useParams();
   const [park, setPark] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,7 +22,7 @@ function ParkDetail() {
   const [showFees, setShowFees] = useState(false);
   const [showEvents, setShowEvents] = useState(false);
   const [showThingsToDo, setShowThingsToDo] = useState(false);
-  const { user } = useContext(UserContext); 
+  // const { user } = useContext(UserContext); 
   const navigate = useNavigate();
 
   const handleNavigate = async () => {

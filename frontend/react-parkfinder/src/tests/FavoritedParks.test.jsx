@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react' 
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
-import ParksByName from '../components/ParksByName'
+import FavoritedParks from '../components/FavoritedParks';
 // import { describe, it, expect } from 'vitest'
 import matchers from '@testing-library/jest-dom'
 import { expect, it } from 'vitest'
 // expect.extend(matchers)
 
-describe('ParksByName', () => {
-  it('renders the ParksByName component', () => {
+describe('FavoritedParks', () => {
+  it('renders the FavoritedParks component', () => {
     render(
     <MemoryRouter>
-        <ParksByName  />
+        <FavoritedParks  />
     </MemoryRouter>
     )
     

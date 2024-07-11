@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import ParkfinderApi from '../services/ParkfinderApi';
 import UserContext from '../contexts/UserContext';
 
-const FormTextArea = ({ selectedName }) => {
+const ReviewForm = ({ user,selectedName }) => {
   const INITIAL_STATE = {
     review_title: '',
     review_data: '',
@@ -17,7 +17,7 @@ const FormTextArea = ({ selectedName }) => {
   const [isSubmitted, setIsSubmitted] = useState(false); // New state for submission status
   const navigate = useNavigate();
   const { parkCode } = useParams(); // Assuming username is in the URL parameters
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
 
   // Debugging: check the extracted parkCode
   console.log('Extracted parkCode:', parkCode);
@@ -119,7 +119,7 @@ const FormTextArea = ({ selectedName }) => {
   );
 }
 
-export default FormTextArea;
+export default ReviewForm;
 
 
 

@@ -7,6 +7,17 @@ import { expect, it } from 'vitest'
 // expect.extend(matchers)
 
 describe('Navigation Component', () => {
+  it('renders the Navigation component', () => {
+    render(
+    <MemoryRouter >
+      <Navigation />
+    </MemoryRouter>
+    )
+    
+    screen.debug(); // prints out the jsx in the App component unto the command line
+  })
+
+
     it('renders the NavLink component', () => {
       render(
         <MemoryRouter >

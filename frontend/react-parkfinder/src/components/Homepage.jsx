@@ -1,7 +1,7 @@
 import "./Homepage.css"
 import ParksByState from "./ParksByState";
 import ParksByParkCode from "./ParksByParkCode";
-import FormTextArea from "./FormTextArea";
+import FormTextArea from "./ReviewForm";
 
 
 const Homepage = ({user}) =>{

@@ -5,16 +5,16 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect'; 
 import ParkfinderApi from '../services/ParkfinderApi';
-import FormTextArea from './FormTextArea';
+import ReviewForm from './ReviewForm';
 import Button from '@mui/material/Button';
 import BasicRating from './BasicRating'
 import ParksByName from './ParksByName';
-import NewFormTextArea from './NewFormTextArea';
+import NewFormTextArea from '../Old-UnusedComponents/NewFormTextArea';
 
 
 
 
-const ParkReviewForm = ({selectedName, selectedCode}) =>{
+const ParkReview = ({user,selectedName, selectedCode}) =>{
   const {parkCode} =useParams();
   return(
     
@@ -31,7 +31,7 @@ const ParkReviewForm = ({selectedName, selectedCode}) =>{
           <FormTextArea selectedName ={selectedName} user={user} selecedCode={selectedCode}/>
         </div> */}
         <div>
-          <FormTextArea selectedName ={selectedName}  selecedCode={selectedCode} parkCode={parkCode}/>
+          <ReviewForm selectedName ={selectedName}  selecedCode={selectedCode} parkCode={parkCode} user={user}/>
         </div>
        
 
@@ -48,4 +48,4 @@ const ParkReviewForm = ({selectedName, selectedCode}) =>{
     // </div>
   
 
-export default ParkReviewForm;
+export default ParkReview;

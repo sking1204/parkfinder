@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import App from '../App'
 import FindParks from '../components/FindParks'
 import ParksByState from '../components/ParksByState'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, redirect } from 'react-router-dom'
 import TokenContext from '../contexts/TokenContext'
 import UserContext from '../contexts/UserContext'
 // import { describe, it, expect } from 'vitest'
@@ -15,7 +15,12 @@ const user = { name: 'John Doe' };
 const setUser = vi.fn();
 
 describe('FindParks', () => {
-  it('renders the FindParks component', () => {
+  it('renders the FindParks component', () =>{
+    render(<FindParks />)
+  })
+
+
+  it('renders the FindParks header', () => {
     render(
       <h1>Find Park By State:</h1>
   );

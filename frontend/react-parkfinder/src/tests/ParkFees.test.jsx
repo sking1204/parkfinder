@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react' 
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
-import ParksByName from '../components/ParksByName'
+import ParkFees from '../components/ParkFees';
 // import { describe, it, expect } from 'vitest'
 import matchers from '@testing-library/jest-dom'
 import { expect, it } from 'vitest'
@@ -10,7 +10,7 @@ describe('ParksByName', () => {
   it('renders the ParksByName component', () => {
     render(
     <MemoryRouter>
-        <ParksByName  />
+        <ParkFees  />
     </MemoryRouter>
     )
     

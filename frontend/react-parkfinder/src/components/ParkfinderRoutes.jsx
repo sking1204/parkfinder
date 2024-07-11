@@ -25,9 +25,8 @@ import ParkfinderApi from "../services/ParkfinderApi";
 import useLocalStorage from "../hooks/useLocalStorage";
 import TripPlannerForm from "./TripPlannerForm";
 import ParksByName from "./ParksByName";
-import ParkReviewForm from "./ParkReviewForm";
-import Placeholder from "./Placeholder";
-import FormTextArea from "./FormTextArea";
+import ParkReview from "./ParkReview"; 
+import FormTextArea from "./ReviewForm";
 import ReviewsList from "./ReviewsList";
 import SavedEvents from "./SavedEvents";
 import ParkForm from "./ParkForm";
@@ -79,12 +78,12 @@ const ParkfinderRoutes = () => {
           {/* <Route path="/parks" element={<ParksList />} /> */}
           {/* HARDCODING THIS TO FL PARKS FOR NOW... */}
           {/* <Route path="/parks/FL-parks" element={<ParksList />} /> */}
-          <Route path="/parks/stateCode" element={<ParksByState user={user} />} />
+          <Route path="/parks/stateCode" element={<ParksByState  />} />
           <Route path="/parks/parkCode" element={<ParksByParkCode user={user} />} />
           <Route path="/parks/stateCode/:stateCode" element={<SelectParks user={user} />} />
-          <Route path="/parks/parkCode/:parkCode" element={<ParkDetail  />} />
-          <Route path="/parks/parkCode/:parkCode/review" element={<ParkReviewForm />} />
-          <Route path="/users/:username/reviews/:parkCode" element={<ParkReviewForm />} />
+          <Route path="/parks/parkCode/:parkCode" element={<ParkDetail user={user}  />} />
+          <Route path="/parks/parkCode/:parkCode/review" element={<ParkReview />} />
+          <Route path="/users/:username/reviews/:parkCode" element={<ParkReview user={user} />} />
           <Route path="/users/:username/leave-review" element={<ParksByName  />} />
           <Route path="/users/:username/saved-items" element={<SavedItems user ={user}  />} />
           {/* all-saved-favorites route not working */}

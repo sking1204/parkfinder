@@ -7,7 +7,7 @@ import NativeSelect from '@mui/material/NativeSelect';
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import ParkfinderApi from '../services/ParkfinderApi';
-import ParkReviewForm from './ParkReviewForm';
+import ParkReviewForm from './ParkReview';
 
 
 export default function ParksByName({onParkSelect}) {

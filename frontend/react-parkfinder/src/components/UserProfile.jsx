@@ -1,18 +1,18 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import ParkfinderApi from '../services/ParkfinderApi';
-import TokenContext from '../contexts/TokenContext';
 
-function UserProfile({user, setUser, setToken}) {
+
+function UserProfile({user, setUser, setToken, token}) {
 
   const INITIAL_STATE = user;
-  const token = useContext(TokenContext);
+
 
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  //const navigate = useNavigate();
+ 
 
   const handleChange = (evt) => {
       const {value, name} = evt.target;
@@ -47,6 +47,7 @@ function UserProfile({user, setUser, setToken}) {
         component="form"
         onSubmit={handleSubmit}
         className="form-style"  // Apply the CSS class
+        data-testid ="form-component"
     >
         <TextField
             label="Username"
@@ -58,6 +59,7 @@ function UserProfile({user, setUser, setToken}) {
             value={formData.username}
             onChange={handleChange}
             className="formField"  // Apply the CSS class
+            data-testid= "username-input" 
         />
  
         <TextField
@@ -70,6 +72,7 @@ function UserProfile({user, setUser, setToken}) {
             value={formData.firstName}
             onChange={handleChange}
             className="formField"  // Apply the CSS class
+            data-testid = "first-name-input" 
         />
         <TextField
             label="Last Name"
@@ -81,6 +84,7 @@ function UserProfile({user, setUser, setToken}) {
             value={formData.lastName}
             onChange={handleChange}
             className="formField"  // Apply the CSS class
+            data-testid="last-name-input" 
         />
         <TextField
             label="Email"
@@ -93,6 +97,7 @@ function UserProfile({user, setUser, setToken}) {
             value={formData.email}
             onChange={handleChange}
             className="formField"  // Apply the CSS class
+            data-testid="email-input"
         />
         <Button
             variant="contained"
@@ -100,6 +105,7 @@ function UserProfile({user, setUser, setToken}) {
             type="submit"
             fullWidth
             className="submitButton"  // Apply the CSS class
+            data-testid="submit-button"
         >
             Save Changes
         </Button>
