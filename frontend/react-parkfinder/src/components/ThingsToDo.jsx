@@ -96,6 +96,7 @@ const ThingsToDo =({ parkCode, park, user }) => {
           <ul>
             {fetchedParks.map((todo, index) => (
               <li key={index}>
+                <div className="todo-container">
                 <p><strong> {todo.title} </strong></p>
                 <p> {todo.shortDescription} </p>
                 <p> {todo.locationDescription}</p>
@@ -113,6 +114,7 @@ const ThingsToDo =({ parkCode, park, user }) => {
                 <button className={`submit-button ${savedTodos[todo.id] ? 'submitted' : ''}`} 
                 disabled={savedTodos[todo.id]} 
                 onClick={() => handleSavedThingToDo(todo)} >Save Event</button>
+              </div>
               </div>
               </div>
                 

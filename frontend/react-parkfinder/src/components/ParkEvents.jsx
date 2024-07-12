@@ -97,10 +97,12 @@ const ParkEvents = ({ parkCode, park, user }) => {
           
           {fetchedParks.map((event, index) => (
             <li key={index} className="event-card">
+              <div className="park-event-container">
               <p><strong>Event Title:</strong> {event.title}</p>
               <p><strong>Event Type:</strong> {event.types}</p>
               <p><strong>Description:</strong> {stripHtmlTags(event.description)}</p>
               <p><strong>Dates:</strong></p>
+              
               {Array.isArray(event.dates) && (
                 <select onChange={(e) => handleDateChange(e, event.id)}>
                   <option value="">Select a date</option>
@@ -130,6 +132,7 @@ const ParkEvents = ({ parkCode, park, user }) => {
               </div>
               {/* {successMessage && <div className="success-message">{successMessage}</div>}
                 {errorMessage && <div className="error-message">{errorMessage}</div>} */}
+                </div>
             </li>
           ))}
         </ul>

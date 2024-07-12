@@ -5,14 +5,19 @@ const User = require("../models/users");
 const { createToken } = require("../helpers/tokens"); 
 
 
+
 async function commonBeforeAll() {
+  // Start a transaction
+  await db.query("BEGIN");
+
   // noinspection SqlWithoutWhere
   await db.query("DELETE FROM users");
+}
 
+  
 
-
-
-
+async function commonBeforeEach() {
+  await db.query("BEGIN");
   await User.register({
     username: "u1",
     firstName: "U1F",
@@ -39,32 +44,29 @@ async function commonBeforeAll() {
   });
 
 
+  // Commit the transaction
+  await db.query("COMMIT");
 }
 
-async function commonBeforeEach() {
-  await db.query("BEGIN");
-}
 
 async function commonAfterEach() {
-  await db.query("ROLLBACK");
+  await db.query("DELETE FROM users");
 }
 
 async function commonAfterAll() {
   await db.end();
 }
 
-
 const u1Token = createToken({ username: "u1", isAdmin: false });
 const u2Token = createToken({ username: "u2", isAdmin: false });
 const adminToken = createToken({ username: "admin", isAdmin: true });
-
 
 module.exports = {
   commonBeforeAll,
   commonBeforeEach,
   commonAfterEach,
-  commonAfterAll,   
+  commonAfterAll,
   u1Token,
   u2Token,
-  adminToken,
+  adminToken,  
 };

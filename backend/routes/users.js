@@ -130,19 +130,20 @@ router.post("/:username/reviews/:parkCode",  async function (req, res, next) {
 
 // });
 
-router.post("/:username/saved-activities/:parkCode", async function (req, res, next) {
-  try {
-    const username = req.params.username;
-    const parkCode = req.params.parkCode;  
-    const { nps_activity_ids } = req.body;  // Note the plural "nps_activity_ids"
+//old 7/17
+// router.post("/:username/saved-activities/:parkCode", async function (req, res, next) {
+//   try {
+//     const username = req.params.username;
+//     const parkCode = req.params.parkCode;  
+//     const { nps_activity_ids } = req.body;  // Note the plural "nps_activity_ids"
 
-    const activities = await User.saveActivities(username, parkCode, nps_activity_ids);
+//     const activities = await User.saveActivities(username, parkCode, nps_activity_ids);
 
-    return res.json({ activities });
-  } catch (err) {
-    return next(err);
-  }  
-});
+//     return res.json({ activities });
+//   } catch (err) {
+//     return next(err);
+//   }  
+// });
 
 
 /* HOW CAN I PASS THE ENTIRE EVENT OBJECT TO THIS ROUTE (SIMILAR TO THE PARK EVENTS COMPONENT?) */
@@ -284,19 +285,43 @@ router.get("/:username/all-saved-fees", async function (req, res, next) {
   }  
 });
 
-router.get("/:username/saved-activities/:parkCode", async function (req, res, next) {
+//NEW 7/18 - WORKING !!!!
+router.post("/:username/saved-activities/:parkCode", async function (req, res, next) {
   try {
     const username = req.params.username;
-    const parkCode = req.params.parkCode;  
-   
+    const parkCode = req.params.parkCode;
+    const activities = req.body; // Expecting an array of activity objects
 
-    const savedActivities = await User.getSavedActivities(username, parkCode);
+    if (!activities || !Array.isArray(activities) || activities.length === 0) {
+      throw new Error("Invalid activities data");
+    }
+
+    const savedActivities = await User.saveActivities(username, parkCode, activities);
 
     return res.json({ savedActivities });
   } catch (err) {
+    console.error('Error saving activities:', err);
     return next(err);
-  }  
+  }
 });
+
+
+
+//OLD - WORKING
+
+// router.get("/:username/saved-activities/:parkCode", async function (req, res, next) {
+//   try {
+//     const username = req.params.username;
+//     const parkCode = req.params.parkCode;  
+   
+
+//     const savedActivities = await User.getSavedActivities(username, parkCode);
+
+//     return res.json({ savedActivities });
+//   } catch (err) {
+//     return next(err);
+//   }  
+// });
 
 router.get("/:username/all-saved-activities", async function (req, res, next) {
   try {
@@ -340,7 +365,35 @@ router.get("/:username/all-saved-events", async function (req, res, next) {
   }  
 });
 
-//SETTING UP ROUTE TO GET ALL SAVED INFO
+//NEW 7/17
+// router.patch("/:username", async function (req, res, next) {
+//   try {
+//     const username = req.params.username;
+//     const data = req.body;  
+//     const savedDetails = await User.update(username, data);
+
+//     return res.json({ savedDetails });
+//   } catch (err) {
+//     return next(err);
+//   }  
+// });
+
+//7/17 TRYING TO ADD LOGIC TO UPDATE USERNAME:
+router.patch("/:username", async function (req, res, next) {
+  try {
+    const oldUsername = req.params.username;
+    const data = req.body; // Extract data from the request body
+
+    const updatedUser = await User.update(oldUsername, data);
+
+    return res.json({ user: updatedUser }); // Match the front end response handling
+  } catch (err) {
+    return next(err);
+  }  
+});
+
+
+
 
 
 

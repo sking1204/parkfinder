@@ -165,58 +165,100 @@ class User {
    * Callers of this function must be certain they have validated inputs to this
    * or a serious security risks are opened.
    */
+// WORKING 7/17
+  // static async update(username, data) {
+  //   if (data.password) {
+  //     data.password = await bcrypt.hash(data.password, BCRYPT_WORK_FACTOR);
+  //   }
 
-  static async update(username, data) {
-    if (data.password) {
-      data.password = await bcrypt.hash(data.password, BCRYPT_WORK_FACTOR);
+  //   const { setCols, values } = sqlForPartialUpdate(
+  //       data,
+  //       {
+  //         // username: "username",
+  //         firstName: "first_name",
+  //         lastName: "last_name",
+  //         isAdmin: "is_admin"           
+  //       });
+  //   const usernameVarIdx = "$" + (values.length + 1);
+
+  //   const querySql = `UPDATE users 
+  //                     SET ${setCols} 
+  //                     WHERE username = ${usernameVarIdx} 
+  //                     RETURNING username,
+  //                               first_name AS "firstName",
+  //                               last_name AS "lastName",
+  //                               email,
+  //                               is_admin AS "isAdmin"`;
+  //   const result = await db.query(querySql, [...values, username]);
+  //   const user = result.rows[0];
+
+  //   if (!user) throw new NotFoundError(`No user: ${username}`);
+
+  //   delete user.password; //deleting password from response for security purposes
+  //   return user;
+  // }
+
+  // /** Delete given user from database; returns undefined. */
+
+  // static async remove(username) {
+  //   let result = await db.query(
+  //         `DELETE
+  //          FROM users
+  //          WHERE username = $1
+  //          RETURNING username`,
+  //       [username],
+  //   );
+  //   const user = result.rows[0];
+
+  //   if (!user) throw new NotFoundError(`No user: ${username}`);
+  // }
+
+// 7/17 TRYING TO ADD LOGIC TO UPDATE USERNAME:
+static async update(username, data) {
+  // If a new username is provided, check for conflicts
+  if (data.username && data.username !== username) {
+    const duplicateCheck = await db.query(
+      `SELECT username
+       FROM users
+       WHERE username = $1`,
+      [data.username]);
+
+    if (duplicateCheck.rows[0]) {
+      throw new BadRequestError(`Duplicate username: ${data.username}`);
     }
-
-    const { setCols, values } = sqlForPartialUpdate(
-        data,
-        {
-          firstName: "first_name",
-          lastName: "last_name",
-          isAdmin: "is_admin"           
-        });
-    const usernameVarIdx = "$" + (values.length + 1);
-
-    const querySql = `UPDATE users 
-                      SET ${setCols} 
-                      WHERE username = ${usernameVarIdx} 
-                      RETURNING username,
-                                first_name AS "firstName",
-                                last_name AS "lastName",
-                                email,
-                                is_admin AS "isAdmin"`;
-    const result = await db.query(querySql, [...values, username]);
-    const user = result.rows[0];
-
-    if (!user) throw new NotFoundError(`No user: ${username}`);
-
-    delete user.password; //deleting password from response for security purposes
-    return user;
   }
 
-  /** Delete given user from database; returns undefined. */
-
-  static async remove(username) {
-    let result = await db.query(
-          `DELETE
-           FROM users
-           WHERE username = $1
-           RETURNING username`,
-        [username],
-    );
-    const user = result.rows[0];
-
-    if (!user) throw new NotFoundError(`No user: ${username}`);
+  // Hash the password if it's being changed
+  if (data.password) {
+    data.password = await bcrypt.hash(data.password, BCRYPT_WORK_FACTOR);
   }
 
-//   /** Apply for job: update db, returns undefined.
-//    *
-//    * - username: username applying for job
-//    * - jobId: job id
-//    **/
+  const { setCols, values } = sqlForPartialUpdate(
+      data,
+      {
+        firstName: "first_name",
+        lastName: "last_name",
+        isAdmin: "is_admin",
+        username: "username" // Add mapping for username
+      });
+  const usernameVarIdx = "$" + (values.length + 1);
+
+  const querySql = `UPDATE users 
+                    SET ${setCols} 
+                    WHERE username = ${usernameVarIdx} 
+                    RETURNING username,
+                              first_name AS "firstName",
+                              last_name AS "lastName",
+                              email,
+                              is_admin AS "isAdmin"`;
+  const result = await db.query(querySql, [...values, username]);
+  const user = result.rows[0];
+
+  if (!user) throw new NotFoundError(`No user: ${username}`);
+
+  delete user.password; // Delete password from response for security purposes
+  return user;
+}
 
 //OLD - WORKING
 
@@ -346,36 +388,121 @@ static async getReviewByUsername(username) {
 
   //   return result.rows[0];
 
-  static async saveActivities(username, parkCode, nps_activity_ids) {
-    // Find the user by username
+//NEW 7/18
+
+static async saveActivities(username, parkCode, activities) {
+  try {
+    if (!activities || !Array.isArray(activities) || activities.length === 0) {
+      throw new Error("Invalid activities data");
+    }
+
     const userResult = await db.query(
       "SELECT id FROM users WHERE username = $1",
       [username]
     );
-  
+
     const user = userResult.rows[0];
-  
+
     if (!user) {
       throw new Error("User not found");
     }
-  
-    // Prepare the data to insert multiple rows for each activity ID
-    const insertPromises = nps_activity_ids.map(async (nps_activity_id) => {
-      const result = await db.query(
-        `INSERT INTO saved_activities (user_id, username, park_code, nps_activity_id)
-         VALUES ($1, $2, $3, $4)
-         RETURNING id, user_id, username, park_code, nps_activity_id`,
-        [user.id, username, parkCode, nps_activity_id]
-      );
-  
-      return result.rows[0];
+
+    const insertPromises = activities.map(async (activity) => {
+      try {
+        const result = await db.query(
+          `INSERT INTO saved_activities (user_id, username, park_code, nps_activity_id, name)
+           VALUES ($1, $2, $3, $4, $5)
+           RETURNING id, user_id, username, park_code, nps_activity_id, name`,
+          [user.id, username, parkCode, activity.id, activity.name]
+        );
+
+        return result.rows[0];
+      } catch (err) {
+        console.error(`Error inserting activity ${activity.id}:`, err);
+        throw err;
+      }
     });
-  
-    // Execute all insert operations concurrently
-    const activities = await Promise.all(insertPromises);
-  
-    return activities;
+
+    const savedActivities = await Promise.all(insertPromises);
+
+    return savedActivities;
+  } catch (err) {
+    console.error('Error saving activities:', err);
+    throw new Error('Failed to save activities');
   }
+}
+
+
+
+//OLD - WORKING
+
+
+// static async saveActivities(username, parkCode, activities) {
+//   // Find the user by username
+//   const userResult = await db.query(
+//     "SELECT id FROM users WHERE username = $1",
+//     [username]
+//   );
+
+//   const user = userResult.rows[0];
+
+//   if (!user) {
+//     throw new Error("User not found");
+//   }
+
+//   // Prepare the data to insert multiple rows for each activity
+//   const insertPromises = activities.map(async (activity) => {
+//     const result = await db.query(
+//       `INSERT INTO saved_activities (user_id, username, park_code, nps_activity_id, name)
+//        VALUES ($1, $2, $3, $4, $5)
+//        RETURNING id, user_id, username, park_code, nps_activity_id, name`,
+//       [user.id, username, parkCode, activity.id, activity.name]
+//     );
+
+//     return result.rows[0];
+//   });
+
+//   // Execute all insert operations concurrently
+//   const savedActivities = await Promise.all(insertPromises);
+
+//   return savedActivities;
+// }
+
+
+
+
+
+  //OLD
+  // static async saveActivities(username, parkCode, nps_activity_ids) {
+  //   // Find the user by username
+  //   const userResult = await db.query(
+  //     "SELECT id FROM users WHERE username = $1",
+  //     [username]
+  //   );
+  
+  //   const user = userResult.rows[0];
+  
+  //   if (!user) {
+  //     throw new Error("User not found");
+  //   }
+  
+  //   // Prepare the data to insert multiple rows for each activity ID
+  //   const insertPromises = nps_activity_ids.map(async (nps_activity_id) => {
+  //     const result = await db.query(
+  //       `INSERT INTO saved_activities (user_id, username, park_code, nps_activity_id)
+  //        VALUES ($1, $2, $3, $4)
+  //        RETURNING id, user_id, username, park_code, nps_activity_id`,
+  //       [user.id, username, parkCode, nps_activity_id]
+  //     );
+  
+  //     return result.rows[0];
+  //   });
+  
+  //   // Execute all insert operations concurrently
+  //   const activities = await Promise.all(insertPromises);
+  
+  //   return activities;
+  // }
 
   static async saveEvents(username, parkCode, eventData) {
     // Find the user by username
@@ -606,7 +733,7 @@ static async getReviewByUsername(username) {
     }
   
     // Prepare the query and parameters
-    let query = `SELECT id, user_id, username, nps_activity_id,park_code
+    let query = `SELECT id, user_id, username, nps_activity_id,park_code,
                  FROM saved_activities
                  WHERE user_id = $1`;
     const params = [user.id];
@@ -639,7 +766,7 @@ static async getReviewByUsername(username) {
     }
   
     // Prepare the query and parameters
-    let query = `SELECT id, user_id, username, nps_activity_id,park_code
+    let query = `SELECT id, user_id, username, nps_activity_id,park_code, name
                  FROM saved_activities
                  WHERE user_id = $1`;
     const params = [user.id];

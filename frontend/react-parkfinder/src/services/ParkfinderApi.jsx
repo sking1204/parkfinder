@@ -99,6 +99,7 @@ class ParkfinderApi {
 
     static async patchUser(username, data) {
       let res = await this.request(`users/${username}`, data, "patch");
+      ParkfinderApi.token = res.token;
       console.log("API RESPONSE", res);
       return res;
     }

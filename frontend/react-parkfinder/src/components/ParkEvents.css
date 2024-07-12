@@ -4,7 +4,16 @@
     align-items: center;
   }
   
-  .event-card {
+  ul {
+    list-style: none; /* Removes default bullet points or numbering */
+    padding: 0; /* Removes default padding */
+    margin: 0; /* Removes default margin */
+  }
+  
+  li {
+    margin-bottom: 40px; /* Optional: Adds space between list items */
+  }
+  /* .event-card {
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
@@ -12,7 +21,25 @@
     width: 80%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+  } */
+
+  /* .park-event-container{ 
+    /* border: 5px solid #eee; */
+    /* border: 3px solid rgb(163, 89, 19);  */
+    /* border: 3px solid #353535;
+    padding: 20px; */
+    /* border-radius: 5px;
+  } */ 
+
+  .park-event-container { 
+    border: 3px solid #353535;
+    /* border: 3px solid #aca8a8; */
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 15px; /* Optional: Adds space between items */
+    background-color: #DDDDDD;
   }
+
   
   .event-card h3 {
     margin-top: 0;

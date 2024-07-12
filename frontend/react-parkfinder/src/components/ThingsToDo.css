@@ -11,3 +11,12 @@
 .submit-button.submitted {
     background-color: #ccc;
   }
+
+  .todo-container { 
+    border: 3px solid #353535;
+    /* border: 3px solid #aca8a8; */
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 15px; /* Optional: Adds space between items */
+    background-color: #DDDDDD;
+  }

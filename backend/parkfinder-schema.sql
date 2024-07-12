@@ -65,7 +65,7 @@ CREATE TABLE saved_activities (
     REFERENCES users(id) ON DELETE CASCADE,
   username TEXT NOT NULL,
   nps_activity_id TEXT,
-  -- activity_name TEXT,
+  name TEXT,
   park_code TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
  

@@ -31,7 +31,12 @@ function FavoritesList({user}) {
 //     setCompanies(companies);
 //   }
 
+if (favorites.length ===0) {
+    return <div className="reviews">No favorites yet!</div>;
+  }
+
     return (
+        <>
         <div className="card-container">
             {/* <SearchForm searchFor={search} /> */}
             {favorites.map(favorite => (
@@ -50,6 +55,8 @@ function FavoritesList({user}) {
                 />
             ))}
         </div>
+        
+        </>
     );
 }
 

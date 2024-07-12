@@ -71,10 +71,15 @@ import { Link,NavLink, useNavigate } from "react-router-dom";
                   </NavLink>
                 </li>                 
                 <li className="nav-right">
-                  <NavLink className="nav-link" to="/profile">
+                  <NavLink className="nav-link" to={`/users/${user.username}/profile`}>
                     Profile
                   </NavLink>
                 </li>
+              {/* <li className="nav-right">
+                  <NavLink className="nav-link" to="/profile">
+                    Profile
+                  </NavLink>
+                </li>   */}
                 {/* <li className="nav-right">
                   <NavLink className="nav-link" to="/login">
                     Login

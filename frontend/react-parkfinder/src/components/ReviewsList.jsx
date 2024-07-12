@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ParkfinderApi from '../services/ParkfinderApi';
 import ReviewCard from './ReviewCard';
+import "./ReviewsList.css";
 
 function ReviewsList({park}) {
     const [reviews, setReviews] = useState([]);
@@ -29,8 +30,12 @@ function ReviewsList({park}) {
 //     setCompanies(companies);
 //   }
 
+if (reviews.length ===0) {
+    return <div className="reviews">No reviews yet!</div>;
+  }
+
     return (
-        <div className="card-container">
+        <div className="review-container">
             {/* <SearchForm searchFor={search} /> */}
             {reviews.map(review => (
                 <ReviewCard 

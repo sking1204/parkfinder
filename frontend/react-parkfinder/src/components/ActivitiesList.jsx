@@ -1,26 +1,31 @@
-/* Version 6/30 */
+//7/18
 
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-// import { useNavigate } from 'react-router-dom';
 import './ActivitiesList.css';
 import ParkfinderApi from '../services/ParkfinderApi';
 
-const ActivitiesList = ({ park,user}) => {
+const ActivitiesList = ({ park, user }) => {
   const [checkedActivities, setCheckedActivities] = useState(new Set());
-  // const navigate = useNavigate();
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleCheckboxChange = (evt) => {
     const { value, checked } = evt.target;
+    const [activityId, activityName] = value.split('|');
+    const activity = { id: activityId, name: activityName };
+    
     setCheckedActivities((prevCheckedActivities) => {
       const newCheckedActivities = new Set(prevCheckedActivities);
       if (checked) {
-        newCheckedActivities.add(value);
+        newCheckedActivities.add(activity);
       } else {
-        newCheckedActivities.delete(value);
+        newCheckedActivities.forEach(act => {
+          if (act.id === activityId) {
+            newCheckedActivities.delete(act);
+          }
+        });
       }
       return newCheckedActivities;
     });
@@ -28,25 +33,10 @@ const ActivitiesList = ({ park,user}) => {
 
   const handleSelectAllChange = (evt) => {
     const { checked } = evt.target;
-    setCheckedActivities(checked ? new Set(park.activities.map(activity => activity.id)) : new Set());
+    setCheckedActivities(checked ? new Set(park.activities.map(activity => ({ id: activity.id, name: activity.name }))) : new Set());
   };
 
   const isAllChecked = checkedActivities.size === park.activities.length;
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const nps_activity_id = Array.from(checkedActivities);
-  //   console.log('Selected activities:', nps_activity_id);
-
-  //   try{
-  //     const response = await ParkfinderApi.saveActivities(user, park.parkCode, {nps_activity_id});
-  //     console.log('Activities saved successfully:', response);
-  //   }catch(error){
-  //     console.error('Error saving activities:', error);
-  //   }
-    
-  //   // Here you can send the selected activities to a server or perform any other actions
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,34 +46,38 @@ const ActivitiesList = ({ park,user}) => {
     setErrorMessage('');
 
     // Check if any activities are selected
-    if (checkedActivities.size === 0 ) {
+    if (checkedActivities.size === 0) {
       setErrorMessage('Please select at least one activity.');
       return;
     }
-  
+//OLD
     // Convert checkedActivities to an array of IDs
-    const nps_activity_ids = Array.from(checkedActivities);
-  
-    console.log('Selected activities:', nps_activity_ids);
-    
-  
+    // const nps_activity_ids = Array.from(checkedActivities).map(activity => activity.id);
+
+    // console.log('Selected activities:', nps_activity_ids);
+
+    //NEW 7/18
+    // Convert checkedActivities to an array of activity objects
+  const activities = Array.from(checkedActivities);
+
+  console.log('Selected activities:', activities);
+
+
     try {
-      const response = await ParkfinderApi.saveActivities(user, park.parkCode, { nps_activity_ids });
+      // const response = await ParkfinderApi.saveActivities(user, park.parkCode, { nps_activity_ids });
+      const response = await ParkfinderApi.saveActivities(user, park.parkCode, activities);
       console.log('Activities saved successfully:', response);
       setSuccessMessage('Activities saved successfully!');
       setIsSubmitted(true); // Set submission status to true
-      
     } catch (error) {
       console.error('Error saving activities:', error);
       setSuccessMessage('Failed to save activities. Please try again.');
     }
-    // navigate(`/parks/parkCode/${park.parkCode}`);
   };
 
   const handleBackClick = () => {
     setShowActivities(false);
   };
-  
 
   return (
     <div className="activities-container">
@@ -109,8 +103,8 @@ const ActivitiesList = ({ park,user}) => {
                 <label>
                   <input
                     type="checkbox"
-                    value={activity.id}
-                    checked={checkedActivities.has(activity.id)}
+                    value={`${activity.id}|${activity.name}`}
+                    checked={Array.from(checkedActivities).some(act => act.id === activity.id)}
                     onChange={handleCheckboxChange}
                     className={`check-box ${isSubmitted ? 'submitted' : ''}`}
                     disabled={isSubmitted} // Disable checkbox if submitted
@@ -121,29 +115,158 @@ const ActivitiesList = ({ park,user}) => {
             ))}
           </ul>
           <button
-                type="submit"
-                className={`submit-button ${isSubmitted ? 'submitted' : ''}`}
-                disabled={isSubmitted} // Disable button if submitted
-              >
-                Submit
-              </button>
-          {/* <button type="submit" className="submit-button">Submit</button> */}
+            type="submit"
+            className={`submit-button ${isSubmitted ? 'submitted' : ''}`}
+            disabled={isSubmitted} // Disable button if submitted
+          >
+            Submit
+          </button>
         </div>
       </form>
       <div>
-      <Link className="back" to={`/parks/parkCode/${park.parkCode}`} onClick={handleBackClick}>Back to Park Details!</Link>
+        <Link className="back" to={`/parks/parkCode/${park.parkCode}`} onClick={handleBackClick}>Back to Park Details!</Link>
       </div>
     </div>
+  );
+};
+
+export default ActivitiesList;
+
+
+
+/* Version 6/30 */
+
+// import React, { useState } from 'react';
+// import { Link } from "react-router-dom";
+// // import { useNavigate } from 'react-router-dom';
+// import './ActivitiesList.css';
+// import ParkfinderApi from '../services/ParkfinderApi';
+
+// const ActivitiesList = ({ park,user}) => {
+//   const [checkedActivities, setCheckedActivities] = useState(new Set());
+//   // const navigate = useNavigate();
+//   const [successMessage, setSuccessMessage] = useState('');
+//   const [errorMessage, setErrorMessage] = useState('');
+//   const [isSubmitted, setIsSubmitted] = useState(false);
+
+//   const handleCheckboxChange = (evt) => {
+//     const { value, checked } = evt.target;
+//     setCheckedActivities((prevCheckedActivities) => {
+//       const newCheckedActivities = new Set(prevCheckedActivities);
+//       if (checked) {
+//         newCheckedActivities.add(value);
+//       } else {
+//         newCheckedActivities.delete(value);
+//       }
+//       return newCheckedActivities;
+//     });
+//   };
+
+//   const handleSelectAllChange = (evt) => {
+//     const { checked } = evt.target;
+//     setCheckedActivities(checked ? new Set(park.activities.map(activity => activity.id)) : new Set());
+//   };
+
+//   const isAllChecked = checkedActivities.size === park.activities.length;
+
+
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     // Clear any previous messages
+//     setSuccessMessage('');
+//     setErrorMessage('');
+
+//     // Check if any activities are selected
+//     if (checkedActivities.size === 0 ) {
+//       setErrorMessage('Please select at least one activity.');
+//       return;
+//     }
+  
+//     // Convert checkedActivities to an array of IDs
+//     const nps_activity_ids = Array.from(checkedActivities);
+  
+//     console.log('Selected activities:', nps_activity_ids);
+    
+  
+//     try {
+//       const response = await ParkfinderApi.saveActivities(user, park.parkCode, { nps_activity_ids });
+//       console.log('Activities saved successfully:', response);
+//       setSuccessMessage('Activities saved successfully!');
+//       setIsSubmitted(true); // Set submission status to true
+      
+//     } catch (error) {
+//       console.error('Error saving activities:', error);
+//       setSuccessMessage('Failed to save activities. Please try again.');
+//     }
+//     // navigate(`/parks/parkCode/${park.parkCode}`);
+//   };
+
+//   const handleBackClick = () => {
+//     setShowActivities(false);
+//   };
+  
+
+//   return (
+//     <div className="activities-container">
+//       <h2>Activities</h2>
+//       <h5>Select activities to add to your saved items!</h5>
+//       {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
+//       {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}
+//       <form onSubmit={handleSubmit}>
+//         <div className="multiselect">
+//           <label>
+//             <input
+//               type="checkbox"
+//               checked={isAllChecked}
+//               onChange={handleSelectAllChange}
+//               className={`check-box ${isSubmitted ? 'submitted' : ''}`}
+//               disabled={isSubmitted} // Disable checkbox if submitted
+//             />
+//             Select All
+//           </label>
+//           <ul className="park-activities-grid">
+//             {park.activities.map((activity, index) => (
+//               <li key={index}>
+//                 <label>
+//                   <input
+//                     type="checkbox"
+//                     value={activity.id}
+//                     checked={checkedActivities.has(activity.id)}
+//                     onChange={handleCheckboxChange}
+//                     className={`check-box ${isSubmitted ? 'submitted' : ''}`}
+//                     disabled={isSubmitted} // Disable checkbox if submitted
+//                   />
+//                   <strong>{activity.name}</strong>
+//                 </label>
+//               </li>
+//             ))}
+//           </ul>
+//           <button
+//                 type="submit"
+//                 className={`submit-button ${isSubmitted ? 'submitted' : ''}`}
+//                 disabled={isSubmitted} // Disable button if submitted
+//               >
+//                 Submit
+//               </button>
+//           {/* <button type="submit" className="submit-button">Submit</button> */}
+//         </div>
+//       </form>
+//       <div>
+//       <Link className="back" to={`/parks/parkCode/${park.parkCode}`} onClick={handleBackClick}>Back to Park Details!</Link>
+//       </div>
+//     </div>
    
 
 
 
 
 
-  );
-};
+//   );
+// };
 
-export default ActivitiesList;
+// export default ActivitiesList;
 
 
 

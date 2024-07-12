@@ -3,7 +3,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import Homepage from "./Homepage";
 import ParksList from "./ParksList";
-import StateCodeSearch from "./StateCodeSearch";
+import StateCodeSearch from "../Old-UnusedComponents/StateCodeSearch";
 import ParkCodeSearch from "./SelectParkResultsCard";
 import LoginForm from "../auth/LoginForm";
 import TokenContext from "../contexts/TokenContext";
@@ -23,10 +23,10 @@ import FindParks from "./FindParks";
 import SignUpForm from "../auth/SignUpForm";
 import ParkfinderApi from "../services/ParkfinderApi";
 import useLocalStorage from "../hooks/useLocalStorage";
-import TripPlannerForm from "./TripPlannerForm";
+import TripPlannerForm from "../Old-UnusedComponents/TripPlannerForm";
 import ParksByName from "./ParksByName";
 import ParkReview from "./ParkReview"; 
-import FormTextArea from "./ReviewForm";
+import ReviewForm from "./ReviewForm";
 import ReviewsList from "./ReviewsList";
 import SavedEvents from "./SavedEvents";
 import ParkForm from "./ParkForm";
@@ -85,9 +85,8 @@ const ParkfinderRoutes = () => {
           <Route path="/parks/parkCode/:parkCode/review" element={<ParkReview />} />
           <Route path="/users/:username/reviews/:parkCode" element={<ParkReview user={user} />} />
           <Route path="/users/:username/leave-review" element={<ParksByName  />} />
-          <Route path="/users/:username/saved-items" element={<SavedItems user ={user}  />} />
-          {/* all-saved-favorites route not working */}
-          {/* <Route path="/users/:username/all-saved-favorites" element={<FavoritedParks user ={user}  />} />            */}
+          <Route path="/users/:username/saved-items" element={<SavedItems user ={user}  />} />          
+          <Route path="/users/:username/all-saved-favorites" element={<FavoritedParks user ={user}  />} />           
           {/* <Route path="/users/:username/favorites" element={<FavoritedParksWrapper user={user}  />} />            */}
                      
           {/* <Route path="/plan-trip" element={<TripPlannerForm />} /> */}
@@ -104,7 +103,7 @@ const ParkfinderRoutes = () => {
             <Route path="/users/:username/favorites" element={<FavoritesList user={user} />} />
           <Route path="/review-park" element={<ParksByName/>} />
           <Route path="/signup" element={<SignUpForm />} />
-          <Route path="/profile" element={<UserProfile user={user} setUser={setUser} setToken={setToken} />} />
+          <Route path="/users/:username/profile" element={<UserProfile user={user} setUser={setUser} setToken={setToken} />} />
         </Routes>
         </UserContext.Provider>
         </TokenContext.Provider>

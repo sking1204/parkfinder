@@ -6,7 +6,7 @@ import './SelectParkResultsCard.css'
 function SelectParkResultsCard({ park, onClick }) {
     return (
         // <Link className="parkcard" to = {`/parks/${company.handle}`}>
-        <div className="card" onClick ={() =>onClick(park.parkCode)}>
+        <div className="park-card" onClick ={() =>onClick(park.parkCode)}>
             <h2>{park.fullName}</h2>
             <div>
                 <h3>Park Code: {park.parkCode}</h3>

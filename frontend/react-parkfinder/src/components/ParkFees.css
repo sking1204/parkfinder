@@ -1,9 +1,11 @@
 .park-fees  {
-    border: 1px solid #ddd;
+    border: 3px solid #353535;
+    /* border: 1px solid #ddd; */
     padding: 16px;
     border-radius: 4px;
     list-style: none;
     margin: 0;
+    background-color: #DDDD;
   }
 
   /* ParkFees.css */

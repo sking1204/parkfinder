@@ -43,14 +43,20 @@ const SavedItems = ({ user }) => {
         <div className="items-container">
           <h2>Saved Activities</h2>
           {savedActivities.length > 0 ? (
+            
             <ul>
               {savedActivities.map((activity, index) => (
+                <div className="items-grouping">
                 <li key={index}>
                   <p><strong>Activity ID:</strong> {activity.nps_activity_id}</p>
+                  <p><strong>Activity Name:</strong> {activity.name}</p>
                   <p><strong>Park Code:</strong> {activity.park_code}</p>
                 </li>
+                </div>
+                
               ))}
             </ul>
+            
           ) : (
             <p>No saved activities.</p>
           )}
@@ -61,11 +67,13 @@ const SavedItems = ({ user }) => {
           {savedEvents.length > 0 ? (
             <ul>
               {savedEvents.map((event, index) => (
+                <div className="items-grouping">
                 <li key={index}>
                   <p><strong>Title:</strong> {event.title}</p>
                   <p><strong>Description:</strong> {event.description}</p>
                   <p><strong>Park Code:</strong> {event.park_code}</p>
                 </li>
+                </div>
               ))}
             </ul>
           ) : (
@@ -78,10 +86,12 @@ const SavedItems = ({ user }) => {
           {savedFees.length > 0 ? (
             <ul>
               {savedFees.map((fee, index) => (
+                <div className="items-grouping">
                 <li key={index}>
                   <p><strong>Title:</strong> {fee.title}</p>
                   <p><strong>Park Code:</strong> {fee.park_code}</p>
                 </li>
+                </div>
               ))}
             </ul>
           ) : (
@@ -92,15 +102,19 @@ const SavedItems = ({ user }) => {
         <div className="items-container">
           <h2>Saved Map Locations</h2>
           {savedMap.length > 0 ? (
+            
             <ul>
               {savedMap.map((map, index) => (
+                <div className="items-grouping">
                 <li key={index}>
                   <p><strong>Latitude:</strong> {map.latitude}</p>
                   <p><strong>Longitude:</strong> {map.longitude}</p>
                   <p><strong>Park Code:</strong> {map.park_code}</p>
                 </li>
+                </div>
               ))}
             </ul>
+            
           ) : (
             <p>No saved map locations.</p>
           )}
@@ -109,16 +123,20 @@ const SavedItems = ({ user }) => {
         <div className="items-container">
           <h2>Things To Do</h2>
           {savedTodo.length > 0 ? (
+             
             <ul>
               {savedTodo.map((todo, index) => (
+                <div className="items-grouping">
                 <li key={index}>
                   <p><strong>Title:</strong> {todo.title}</p>
                   <p><strong>Short Description:</strong> {todo.short_description}</p>
                   <p><strong>Location Description:</strong> {todo.location_description}</p>
                   <p><strong>Park Code:</strong> {todo.park_code}</p>
                 </li>
+                </div>
               ))}
             </ul>
+            
           ) : (
             <p>No things to do saved.</p>
           )}

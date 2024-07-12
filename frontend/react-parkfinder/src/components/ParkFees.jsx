@@ -66,7 +66,7 @@ const ParkFees = ({ park, user }) => {
         <form onSubmit={handleSubmit}>
         <ul>
           {park.entranceFees.map((fee, index) => (
-            <li key={index}>
+            <li key={index}>               
               <p>{fee.title} - <strong>${fee.cost}</strong></p>
               <label>
                 <input type="checkbox"
@@ -74,9 +74,10 @@ const ParkFees = ({ park, user }) => {
                   onChange={handleCheckboxChange}
                   />
               </label>
-            </li>
+            </li>             
           ))}
         </ul>
+        
         <button type="submit" className="submit-button">Submit</button>
         </form>
       ) : (
@@ -99,6 +100,7 @@ const ParkFees = ({ park, user }) => {
               >
                 Submit
               </button>
+              
             {/* <button type="submit" className="submit-button">Submit</button> */}
           </form>
       )}
