@@ -72,6 +72,7 @@ const SavedItems = ({ user }) => {
                   <p><strong>Title:</strong> {event.title}</p>
                   <p><strong>Description:</strong> {event.description}</p>
                   <p><strong>Park Code:</strong> {event.park_code}</p>
+                  <p><strong>Selected Date:</strong> {event.selected_date}</p>
                 </li>
                 </div>
               ))}
@@ -90,6 +91,7 @@ const SavedItems = ({ user }) => {
                 <li key={index}>
                   <p><strong>Title:</strong> {fee.title}</p>
                   <p><strong>Park Code:</strong> {fee.park_code}</p>
+                  <p><strong>Cost:</strong> {fee.cost}</p>
                 </li>
                 </div>
               ))}

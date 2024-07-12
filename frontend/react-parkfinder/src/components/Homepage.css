@@ -9,7 +9,9 @@
 } */
 
 .homepage-img{
-    margin: 50px;
+    margin-top: 30px;
+    margin-bottom:20px;
+    
     /* padding: 50px; */
     /* background-size: cover; */
     background-position: center;
@@ -22,5 +24,31 @@
 
 
 .homepage-header{
-    margin: 5px;
+    margin: 10px;
+    font-size: 40px;
+}
+
+/* .homepage-login-msg{
+    text-align: left;
+    
+} */
+
+/* .homepage-login-msg {
+    /* border: 1px solid black; */
+    /* border-bottom: 1px solid black; */
+    /* color: green;
+    display: inline-block;
+   
+}  */
+
+.parks-link {
+    display: inline-block; /* Ensure the link respects the margin */
+    margin: 10px; /* Adjust the margin values as needed */
+    font-size: 20px;
+    
+    /* padding: 10px;
+    text-decoration: none; 
+    color: blue; 
+    border: 1px solid black;  */
+    /* border-radius: 5px;  */
 }

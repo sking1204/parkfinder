@@ -4,54 +4,55 @@
     "title": "Root Schema",
     "type": "object",
     "default": {},
-    "required": [],
+    "required": [],     
     "properties": {
-        "password": {
-            "title": "The password Schema",
+        "username": {
+            "title": "The username Schema",
             "type": "string",
-            "default": "",
-            "minLength": 5,
+            "minLength":5,
             "maxLength": 20,
+            "default": "",
             "examples": [
-                "password!"
+                "AnnieCat"
             ]
         },
         "firstName": {
             "title": "The firstName Schema",
             "type": "string",
-            "default": "",
             "minLength": 1,
             "maxLength": 30,
+            "default": "",
             "examples": [
-                "Test"
+                "Annie"
             ]
         },
         "lastName": {
             "title": "The lastName Schema",
             "type": "string",
-            "default": "", 
             "minLength": 1,
-            "maxLength": 30,           
+            "maxLength": 30,
+            "default": "",
             "examples": [
-                "User4"
+                "Cat"
             ]
         },
         "email": {
             "title": "The email Schema",
             "type": "string",
-            "default": "",
             "minLength": 6,
             "maxLength": 60,
+            "default": "",
             "format": "email",
+           
             "examples": [
-                "testuser4@email.com"
+                "anniecat@email.com"
             ]
         }
     },
     "examples": [{
-        "password": "password!",
-        "firstName": "Test",
-        "lastName": "User4",
-        "email": "testuser4@email.com"
+        "username": "AnnieCat",
+        "firstName": "Annie",
+        "lastName": "Cat",
+        "email": "anniecat@email.com"
     }]
 }

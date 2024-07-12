@@ -102,8 +102,8 @@ const GetMap = ({ park, user, parkCode }) => {
         } catch (err) {
           console.error("Error saving map to database:", err);
           setSuccessMessage('Failed to save map. Please try again.');
-          const successTimeout = setTimeout(() => {
-            setSuccessMessage('');
+          const failureTimeout = setTimeout(() => {
+            setErrorMessage('');
         }, 3000); // Clear message after 3 seconds
 
         }

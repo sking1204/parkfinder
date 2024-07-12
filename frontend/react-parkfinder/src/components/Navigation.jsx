@@ -71,6 +71,11 @@ import { Link,NavLink, useNavigate } from "react-router-dom";
                   </NavLink>
                 </li>                 
                 <li className="nav-right">
+                  <NavLink className="nav-link" to={`/users/${user.username}/saved-items`}>
+                    Saved Items
+                  </NavLink>
+                </li>                 
+                <li className="nav-right">
                   <NavLink className="nav-link" to={`/users/${user.username}/profile`}>
                     Profile
                   </NavLink>
@@ -92,7 +97,8 @@ import { Link,NavLink, useNavigate } from "react-router-dom";
                 </li>                
                 <li className="nav-right">
                   <Link className="nav-link" to="/" onClick={handleLogout} >                                  
-                    Log out {user.first_name || user.username}
+                    {/* Log out {user.first_name || user.username} */}
+                    Log out
                   </Link>
                 </li>
                 

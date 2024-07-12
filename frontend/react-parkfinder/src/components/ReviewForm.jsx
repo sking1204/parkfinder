@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import ParkfinderApi from '../services/ParkfinderApi';
 import UserContext from '../contexts/UserContext';
+import "./ReviewForm.css"
 
 const ReviewForm = ({ user,selectedName }) => {
   const INITIAL_STATE = {
@@ -14,6 +15,8 @@ const ReviewForm = ({ user,selectedName }) => {
   };
 
   const [formData, setFormData] = useState(INITIAL_STATE);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false); // New state for submission status
   const navigate = useNavigate();
   const { parkCode } = useParams(); // Assuming username is in the URL parameters
@@ -22,23 +25,48 @@ const ReviewForm = ({ user,selectedName }) => {
   // Debugging: check the extracted parkCode
   console.log('Extracted parkCode:', parkCode);
 
+  const validateForm = () => {
+    return formData.review_title && formData.review_data && formData.rating;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+       // Clear any previous messages
+       setSuccessMessage('');
+       setErrorMessage('');
+
+            // Check if any fees are selected
+     if (!validateForm() ) {
+      setErrorMessage('Please fill in all fields');
+      const errorTiemout = setTimeout(() =>{
+        setErrorMessage('');
+      }, 3000);
+      return;
+    }
+
     try {
       const review = await ParkfinderApi.leaveReview(user.username, parkCode, formData);
       if (review) {
         setFormData(INITIAL_STATE);
+        setSuccessMessage('Review saved successfully! Redirecting to homepage...');
         setIsSubmitted(true); // Set submission status to true
 
         // Delay navigation to allow user to see the success message
         setTimeout(() => {
+          setSuccessMessage('');
           navigate('/');
         }, 2000); // 2 seconds delay
       }
       console.log('Response from leaving review:', review);
+
     } catch (err) {
       console.error('Error during leaving review:', err);
-      alert("Failed review");
+      // alert("Failed review");
+      setErrorMessage("Failed to save review. Please try again.")
+      const  failureTimeout = setTimeout(() =>{
+        setErrorMessage('');
+      },3000);
     }
   };
 
@@ -57,7 +85,9 @@ const ReviewForm = ({ user,selectedName }) => {
         <h2>Park Code: {parkCode}</h2>
         {user && <h3>Review by: {user.username}</h3>} {/* Displaying current user */}
       </div>
-      {isSubmitted && <p>Your review has been submitted successfully! Redirecting to the home page...</p>} {/* Success message */}
+      {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
+      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}
+      {/* {isSubmitted && <p className="review-success">Your review has been submitted successfully! Redirecting to the home page...</p>} Success message */}
       <Box
         component="form"
         sx={{
@@ -99,6 +129,7 @@ const ReviewForm = ({ user,selectedName }) => {
           onChange={handleChange}
           margin="normal"
           type="number"
+          inputProps={{ min: 1, max: 5 }}
         />
         <TextField
           label={parkCode}

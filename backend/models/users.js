@@ -200,18 +200,18 @@ class User {
 
   // /** Delete given user from database; returns undefined. */
 
-  // static async remove(username) {
-  //   let result = await db.query(
-  //         `DELETE
-  //          FROM users
-  //          WHERE username = $1
-  //          RETURNING username`,
-  //       [username],
-  //   );
-  //   const user = result.rows[0];
+  static async remove(username) {
+    let result = await db.query(
+          `DELETE
+           FROM users
+           WHERE username = $1
+           RETURNING username`,
+        [username],
+    );
+    const user = result.rows[0];
 
-  //   if (!user) throw new NotFoundError(`No user: ${username}`);
-  // }
+    if (!user) throw new NotFoundError(`No user: ${username}`);
+  }
 
 // 7/17 TRYING TO ADD LOGIC TO UPDATE USERNAME:
 static async update(username, data) {
@@ -601,7 +601,7 @@ static async saveActivities(username, parkCode, activities) {
 
   
 
-  static async saveFees(username, parkCode, titles) {
+  static async saveFees(username, parkCode, feeData) {
     // Find the user by username
     const userResult = await db.query(
       "SELECT id FROM users WHERE username = $1",
@@ -615,12 +615,12 @@ static async saveActivities(username, parkCode, activities) {
     }
   
     // Prepare the data to insert multiple rows for each fee 
-    const insertPromises = titles.map(async (title) => {
+    const insertPromises = feeData.map(async (fee) => {
       const result = await db.query(
-        `INSERT INTO saved_fees (user_id, username,park_code, title)
-         VALUES ($1, $2, $3, $4)
-         RETURNING id, user_id, username,park_code, title`,
-        [user.id, username, parkCode, title]
+        `INSERT INTO saved_fees (user_id, username,park_code, title, cost)
+         VALUES ($1, $2, $3, $4, $5)
+         RETURNING id, user_id, username,park_code, title, cost`,
+        [user.id, username, parkCode, fee.title, fee.cost]
       );
   
       return result.rows[0];
@@ -797,7 +797,7 @@ static async saveActivities(username, parkCode, activities) {
     }
   
     // Prepare the query and parameters
-    let query = `SELECT id, user_id, username, event_id,park_code, title,description
+    let query = `SELECT id, user_id, username, event_id,park_code, title,description,selected_date
                  FROM saved_events
                  WHERE user_id = $1`;
     const params = [user.id];
@@ -831,7 +831,7 @@ static async saveActivities(username, parkCode, activities) {
     }
   
     // Prepare the query and parameters
-    let query = `SELECT id, user_id, username, park_code, title 
+    let query = `SELECT id, user_id, username, park_code, title, cost 
                  FROM saved_fees 
                  WHERE user_id = $1`;
     
@@ -856,7 +856,7 @@ static async saveActivities(username, parkCode, activities) {
     }
   
     // Prepare the query and parameters
-    let query = `SELECT id, user_id, username, event_id,park_code, title,description
+    let query = `SELECT id, user_id, username, event_id,park_code, title,description, selected_date
                  FROM saved_events
                  WHERE user_id = $1`;
     const params = [user.id];

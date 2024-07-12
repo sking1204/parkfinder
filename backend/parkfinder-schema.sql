@@ -78,6 +78,7 @@ CREATE TABLE saved_fees (
     REFERENCES users(id) ON DELETE CASCADE,
   username TEXT NOT NULL,
   title TEXT,
+  cost TEXT,
   -- activity_name TEXT,
   park_code TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

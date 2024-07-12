@@ -4,12 +4,19 @@
 const jsonschema = require("jsonschema")
 const express = require("express");
 const { ensureCorrectUserOrAdmin, ensureAdmin } = require("../middleware/auth");
-const { BadRequestError } = require("../expressError");
+const { BadRequestError, ExpressError } = require("../expressError");
 const User = require("../models/users");
 const { createToken } = require("../helpers/tokens");
 
 const userNewSchema = require("../schemas/userNew.json");
 const userUpdateSchema = require("../schemas/userUpdate.json");
+const userReviewSchema = require("../schemas/userReviewSchema.json")
+const userEventSchema = require("../schemas/userEventSchema.json")
+const userFeeSchema = require("../schemas/userFeeSchema.json")
+const userFavoritesSchema = require("../schemas/userFavoritesSchema.json");
+const userTodoSchema = require("../schemas/userTodoSchema.json");
+const userMapSchema = require("../schemas/userMap.json");
+const userActivitiesSchema = require("../schemas/userActivities.json");
 
 
 const router = express.Router();
@@ -91,10 +98,38 @@ router.get("/:username/reviews",  async function (req, res, next) {
     // return res.send("Placeholder for reviews by username...review form")
   });
 
-//OLD
+// //OLD
+
+// router.post("/:username/reviews/:parkCode",  async function (req, res, next) {
+//   try {
+//       const username = req.params.username;
+//       const parkCode = req.params.parkCode;  
+//       const { review_title, review_data, rating } = req.body;  // Assuming review data and rating are sent in the request body
+
+//       // Validate the rating if necessary (e.g., ensure it's between 1 and 5)
+//       if (rating < 1 || rating > 5) {
+//           return res.status(400).json({ error: "Rating must be between 1 and 5" });
+//       }
+
+//       const review = await User.reviewPark(username, parkCode, { review_title, review_data, rating });
+
+//       return res.json({ reviewed: review });
+//   } catch (err) {
+//       return next(err);
+//   }  
+
+// });
+
+//ADDING JSON SCHEMA validation 7/19
 
 router.post("/:username/reviews/:parkCode",  async function (req, res, next) {
-  try {
+  try{
+    const validator = jsonschema.validate(req.body, userReviewSchema)
+    if(!validator.valid){
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
+    }   
+  
       const username = req.params.username;
       const parkCode = req.params.parkCode;  
       const { review_title, review_data, rating } = req.body;  // Assuming review data and rating are sent in the request body
@@ -150,7 +185,13 @@ router.post("/:username/reviews/:parkCode",  async function (req, res, next) {
 
 
 router.post("/:username/saved-events/:parkCode", async function (req, res, next) {
-  try {
+  try{
+    const validator = jsonschema.validate(req.body, userEventSchema);
+    if(!validator.valid){
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
+    }
+  
     const username = req.params.username;
     const parkCode = req.params.parkCode;  
     const eventData = req.body;  
@@ -169,20 +210,33 @@ router.post("/:username/saved-events/:parkCode", async function (req, res, next)
 
 
 router.post("/:username/saved-fees/:parkCode", async function (req, res, next) {
-  try {
+  try{
+    const validator = jsonschema.validate(req.body, userFeeSchema);
+    if(!validator.valid){
+      const errs = validator.errors.map(e=> e.stack);
+      throw new BadRequestError(errs);
+    }
+
     const username = req.params.username;
     const parkCode = req.params.parkCode;  
-    const { titles } = req.body;  // Note the plural "nps_activity_ids"
+    const feeData = req.body;  // Note the plural "nps_activity_ids"
 
-    const fees = await User.saveFees(username, parkCode, titles);
+    const fees = await User.saveFees(username, parkCode, feeData);
 
     return res.json({ fees });
   } catch (err) {
     return next(err);
   }  
 });
+
 router.post("/:username/saved-favorites/:parkCode", async function (req, res, next) {
-  try {
+  try{
+    const validator = jsonschema.validate(req.body, userFavoritesSchema);
+    if(!validator.valid){
+      const errs = validator.errors.map(e=>e.stack);
+      throw new BadRequestError(errs);
+    }
+ 
     const username = req.params.username;
     const parkCode = req.params.parkCode;  
     const favoriteData  = req.body;  // Note the plural "nps_activity_ids"
@@ -230,7 +284,13 @@ router.get("/:username/saved-favorites/:parkCode", async function (req, res, nex
 
 
 router.post("/:username/saved-things-to-do/:parkCode", async function (req, res, next) {
-  try {
+  try{
+    const validator = jsonschema.validate(req.body, userTodoSchema);
+    if(!validator.valid){
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
+    }
+  
     const username = req.params.username;
     const parkCode = req.params.parkCode;  
     const todoData = req.body;  
@@ -244,7 +304,13 @@ router.post("/:username/saved-things-to-do/:parkCode", async function (req, res,
 });
 
 router.post("/:username/saved-map/:parkCode", async function (req, res, next) {
-  try {
+  try{
+    const validator = jsonschema.validate(req.body, userMapSchema);
+    if(!validator.valid){
+      const errs = validator.errors.map(e=>e.stack);
+      throw new BadRequestError(errs);
+    }
+  
     const username = req.params.username;
     const parkCode = req.params.parkCode;  
     const mapData = req.body;  
@@ -287,7 +353,13 @@ router.get("/:username/all-saved-fees", async function (req, res, next) {
 
 //NEW 7/18 - WORKING !!!!
 router.post("/:username/saved-activities/:parkCode", async function (req, res, next) {
-  try {
+  try{
+    const validator = jsonschema.validate(req.body, userActivitiesSchema);
+    if(!validator.valid){
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
+    }
+  
     const username = req.params.username;
     const parkCode = req.params.parkCode;
     const activities = req.body; // Expecting an array of activity objects
@@ -380,7 +452,13 @@ router.get("/:username/all-saved-events", async function (req, res, next) {
 
 //7/17 TRYING TO ADD LOGIC TO UPDATE USERNAME:
 router.patch("/:username", async function (req, res, next) {
-  try {
+  try{
+    const validator = jsonschema.validate(req.body, userUpdateSchema);
+    if(!validator.valid){
+      const errs = validator.errors.map(e => e.stack);
+      throw new ExpressError(errs)
+    }
+ 
     const oldUsername = req.params.username;
     const data = req.body; // Extract data from the request body
 
@@ -488,20 +566,21 @@ router.get("/:username/park-details/:parkCode", async function (req, res, next) 
  * Authorization required: admin or same-user-as-:username
  **/
 
-router.patch("/:username", ensureCorrectUserOrAdmin,  async function (req, res, next) {
-  try {
-    const validator = jsonschema.validate(req.body, userUpdateSchema);
-    if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
-    }
+//OLD WITHOUT USERNAME UPDATE FUNCTIONALITY
+// router.patch("/:username", ensureCorrectUserOrAdmin,  async function (req, res, next) {
+//   try {
+//     const validator = jsonschema.validate(req.body, userUpdateSchema);
+//     if (!validator.valid) {
+//       const errs = validator.errors.map(e => e.stack);
+//       throw new BadRequestError(errs);
+//     }
 
-    const user = await User.update(req.params.username, req.body);
-    return res.json({ user });
-  } catch (err) {
-    return next(err);
-  }
-});
+//     const user = await User.update(req.params.username, req.body);
+//     return res.json({ user });
+//   } catch (err) {
+//     return next(err);
+//   }
+// });
 
 /** DELETE /[username]  =>  { deleted: username }
  *

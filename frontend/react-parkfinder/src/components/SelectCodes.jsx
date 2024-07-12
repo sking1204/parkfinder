@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import SelectParkResultsCard from './SelectParkResultsCard';
 
 export default function SelectCodes({ selectedCode }) {
-  const [parks, setParks] = useState([]);
+  const [parks, setParks] = useState([]); 
+  const [loading,setLoding]  = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,7 +29,9 @@ export default function SelectCodes({ selectedCode }) {
     fetchParks();
   }, [selectedCode]);
 
-  if (!selectedCode) {
+ 
+
+  if (!selectedCode)  {
     return <p>Please select a state to view parks.</p>;
   }
 

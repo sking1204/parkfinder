@@ -48,6 +48,9 @@ const ActivitiesList = ({ park, user }) => {
     // Check if any activities are selected
     if (checkedActivities.size === 0) {
       setErrorMessage('Please select at least one activity.');
+      const errorTiemout = setTimeout(() =>{
+        setErrorMessage('');
+      }, 3000);
       return;
     }
 //OLD
@@ -69,9 +72,15 @@ const ActivitiesList = ({ park, user }) => {
       console.log('Activities saved successfully:', response);
       setSuccessMessage('Activities saved successfully!');
       setIsSubmitted(true); // Set submission status to true
+      const successTimeout = setTimeout(() => {
+        setSuccessMessage('');
+      }, 3000);
     } catch (error) {
       console.error('Error saving activities:', error);
       setSuccessMessage('Failed to save activities. Please try again.');
+      const errorTiemout = setTimeout(() =>{
+        setErrorMessage('');
+      }, 3000);
     }
   };
 

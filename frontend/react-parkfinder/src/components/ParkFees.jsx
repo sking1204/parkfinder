@@ -12,13 +12,17 @@ const ParkFees = ({ park, user }) => {
 
   const handleCheckboxChange = (evt) => {
     const { value, checked } = evt.target;
+    const [feeName, feeCost] = value.split('|');
+    const fee = { title: feeName, cost: feeCost };
+
     setCheckedFees((prevCheckedFees) => {
       const newCheckedFees = new Set(prevCheckedFees);
       if (checked) {
-        newCheckedFees.add(value);
+        newCheckedFees.add(fee);
       } else {
-        newCheckedFees.delete(value);
+        newCheckedFees.delete(fee);
       }
+      console.log(newCheckedFees)
       return newCheckedFees;
     });
   };
@@ -31,25 +35,31 @@ const ParkFees = ({ park, user }) => {
     setSuccessMessage('');
     setErrorMessage('');
 
-     // Check if any fees are selected
-     if (checkedFees.size === 0 ) {
+    if (checkedFees.size === 0) {
       setErrorMessage('Please make at least one selection.');
+      setTimeout(() => setErrorMessage(''), 3000);
       return;
     }
   
     // Convert checkedFees to an array of IDs
-    const titles = Array.from(checkedFees);
+    const feeData = Array.from(checkedFees);
   
-    console.log('Selected activities:', titles);
+    console.log('Selected activities:', feeData);
   
     try {
-      const response = await ParkfinderApi.saveEntranceFees(user, park.parkCode, { titles });
-      console.log('Activities saved successfully:', response);
-      setSuccessMessage('Activities saved successfully!');
+      const response = await ParkfinderApi.saveEntranceFees(user, park.parkCode, feeData);
+      console.log('Fees saved successfully:', response);
+      setSuccessMessage('Fees saved successfully!');
       setIsSubmitted(true); // Set submission status to true
+      const successTimeout = setTimeout(() =>{
+        setSuccessMessage('');
+      }, 3000);
     } catch (error) {
-      console.error('Error saving activities:', error);
-      setSuccessMessage('Failed to save activities. Please try again.');
+      console.error('Error saving fees:', error);
+      setErrorMessage('Failed to save fees. Please try again.');
+      const errorTimeout = setTimeout(() =>{
+        setErrorMessage('');
+      }, 3000);
     }
   };
 
@@ -61,7 +71,9 @@ const ParkFees = ({ park, user }) => {
     <>
     <div className="park-fees">
       <h2>Entrance Fees</h2>
-      <h5>Select fees/passes to add to your saved items!</h5>       
+      <h5>Select fees/passes to add to your saved items!</h5>
+      {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
+      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}       
       {park.entranceFees.length > 0 ? (
         <form onSubmit={handleSubmit}>
         <ul>
@@ -70,7 +82,8 @@ const ParkFees = ({ park, user }) => {
               <p>{fee.title} - <strong>${fee.cost}</strong></p>
               <label>
                 <input type="checkbox"
-                  value={fee.title}
+                value={`${fee.title}|${fee.cost}`}
+                  // value={fee.title}
                   onChange={handleCheckboxChange}
                   />
               </label>

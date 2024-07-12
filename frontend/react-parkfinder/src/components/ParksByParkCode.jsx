@@ -42,8 +42,9 @@ return (
   <>
   <h1>Find Park By ParkCode:</h1>
     {loading ? (
-      <p>Loading...</p>
-    ): (     
+      <p>Loading, this may take a moment...</p>
+    ): (    
+      
     <Box className="nativeselect" sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
         <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -65,10 +66,11 @@ return (
             </option>
           ))}
         </NativeSelect>
-      </FormControl>
-    </Box>
-    )}
-    <SelectCodes selectedCode={selectedCode} />
+      </FormControl>       
+    </Box>    
+    
+    )}    
+    <SelectCodes selectedCode={selectedCode} loading={loading} />
   </>
 );
 }

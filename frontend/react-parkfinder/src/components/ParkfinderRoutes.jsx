@@ -35,6 +35,7 @@ import FavoritedParks from "./FavoritedParks"
 import FavoritedParksWrapper from "./FavoritedParksWrapper";
 import FavoritesList from "./FavoritesList"
 import ParksByParkCode from "./ParksByParkCode";
+import NotFound from "./NotFound";
 
 
 
@@ -104,6 +105,7 @@ const ParkfinderRoutes = () => {
           <Route path="/review-park" element={<ParksByName/>} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/users/:username/profile" element={<UserProfile user={user} setUser={setUser} setToken={setToken} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         </UserContext.Provider>
         </TokenContext.Provider>

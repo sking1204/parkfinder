@@ -38,3 +38,15 @@
     background-color: lightgrey;
     cursor: not-allowed;
   }
+
+  .success-message {
+    color: green;
+    background-color: #f0fff0;
+    border: 1px solid green;
+  }
+  
+  .error-message {
+    color: red;
+    background-color: #fff0f0;
+    border: 1px solid red;
+  }
