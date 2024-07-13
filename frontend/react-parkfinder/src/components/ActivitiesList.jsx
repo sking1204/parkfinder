@@ -14,7 +14,7 @@ const ActivitiesList = ({ park, user }) => {
   const handleCheckboxChange = (evt) => {
     const { value, checked } = evt.target;
     const [activityId, activityName] = value.split('|');
-    const activity = { id: activityId, name: activityName };
+    const activity = { nps_activity_id: activityId, name: activityName };
     
     setCheckedActivities((prevCheckedActivities) => {
       const newCheckedActivities = new Set(prevCheckedActivities);
@@ -22,7 +22,7 @@ const ActivitiesList = ({ park, user }) => {
         newCheckedActivities.add(activity);
       } else {
         newCheckedActivities.forEach(act => {
-          if (act.id === activityId) {
+          if (act.nps_activity_id === activityId) {
             newCheckedActivities.delete(act);
           }
         });
@@ -33,7 +33,7 @@ const ActivitiesList = ({ park, user }) => {
 
   const handleSelectAllChange = (evt) => {
     const { checked } = evt.target;
-    setCheckedActivities(checked ? new Set(park.activities.map(activity => ({ id: activity.id, name: activity.name }))) : new Set());
+    setCheckedActivities(checked ? new Set(park.activities.map(activity => ({ nps_activity_id: activity.id, name: activity.name }))) : new Set());
   };
 
   const isAllChecked = checkedActivities.size === park.activities.length;
@@ -77,7 +77,7 @@ const ActivitiesList = ({ park, user }) => {
       }, 3000);
     } catch (error) {
       console.error('Error saving activities:', error);
-      setSuccessMessage('Failed to save activities. Please try again.');
+      setErrorMessage('Failed to save activities. Please try again.');
       const errorTiemout = setTimeout(() =>{
         setErrorMessage('');
       }, 3000);
@@ -113,7 +113,7 @@ const ActivitiesList = ({ park, user }) => {
                   <input
                     type="checkbox"
                     value={`${activity.id}|${activity.name}`}
-                    checked={Array.from(checkedActivities).some(act => act.id === activity.id)}
+                    checked={Array.from(checkedActivities).some(act => act.nps_activity_id === activity.id)}
                     onChange={handleCheckboxChange}
                     className={`check-box ${isSubmitted ? 'submitted' : ''}`}
                     disabled={isSubmitted} // Disable checkbox if submitted

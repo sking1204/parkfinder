@@ -71,10 +71,19 @@ const ReviewForm = ({ user,selectedName }) => {
   };
 
   const handleChange = (evt) => {
-    const { name, value } = evt.target;
+    const {name,value} = evt.target;
+   
+    let newValue;
+    if (name === 'rating') {
+      newValue = parseInt(value, 10);
+    } else {
+      newValue = value;
+    }
+
+
     setFormData(formData => ({
       ...formData,
-      [name]: value
+      [name]: newValue
     }));
   };
 

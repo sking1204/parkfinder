@@ -6,11 +6,20 @@ import matchers from '@testing-library/jest-dom'
 import { expect, it } from 'vitest'
 // expect.extend(matchers)
 
-describe('ParksByName', () => {
-  it('renders the ParkReviewForm component', () => {
+describe('ParkEvents', () => {
+  it('renders the ParkEvents component', () => {
+    const mockPark = {
+      parkCode: 'abc123',
+      fullName: 'Mock Park',
+      events: [
+        { id: '1', name: 'Trail Talk' },
+        { id: '2', name: 'Guided Tour' },
+        { id: '3', name: 'Fishing Trip' },
+      ],
+    };
     render(
     <MemoryRouter>
-        <ParkEvents  />
+        <ParkEvents park={mockPark} user={{username: 'testUser'}} parkCode={mockPark.parkCode}  />
     </MemoryRouter>
     )
     

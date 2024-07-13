@@ -48,7 +48,7 @@ const SavedItems = ({ user }) => {
               {savedActivities.map((activity, index) => (
                 <div className="items-grouping">
                 <li key={index}>
-                  <p><strong>Activity ID:</strong> {activity.nps_activity_id}</p>
+                  <p><strong>Activity ID:</strong> {activity.id}</p>
                   <p><strong>Activity Name:</strong> {activity.name}</p>
                   <p><strong>Park Code:</strong> {activity.park_code}</p>
                 </li>

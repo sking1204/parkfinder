@@ -437,7 +437,7 @@ router.get("/:username/all-saved-events", async function (req, res, next) {
   }  
 });
 
-//NEW 7/17
+//OLD 7/17
 // router.patch("/:username", async function (req, res, next) {
 //   try {
 //     const username = req.params.username;
@@ -450,13 +450,13 @@ router.get("/:username/all-saved-events", async function (req, res, next) {
 //   }  
 // });
 
-//7/17 TRYING TO ADD LOGIC TO UPDATE USERNAME:
-router.patch("/:username", async function (req, res, next) {
+//7/17 NEW ADDED LOGIC TO UPDATE USERNAME:
+router.patch("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try{
     const validator = jsonschema.validate(req.body, userUpdateSchema);
     if(!validator.valid){
       const errs = validator.errors.map(e => e.stack);
-      throw new ExpressError(errs)
+      throw new BadRequestError(errs)
     }
  
     const oldUsername = req.params.username;

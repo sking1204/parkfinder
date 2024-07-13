@@ -8,6 +8,7 @@ import UserContext from '../contexts/UserContext'
 // import { describe, it, expect } from 'vitest'
 import matchers from '@testing-library/jest-dom'
 import { expect, it, vi } from 'vitest'
+import { MemoryRouter } from 'react-router-dom'
 // expect.extend(matchers)
 
 const token = 'sampleToken';
@@ -16,7 +17,11 @@ const setUser = vi.fn();
 
 describe('FindParks', () => {
   it('renders the FindParks component', () =>{
-    render(<FindParks />)
+    render(
+      <MemoryRouter>
+        <FindParks /> 
+      </MemoryRouter>
+    )
   })
 
 

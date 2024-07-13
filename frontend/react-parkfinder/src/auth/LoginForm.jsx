@@ -4,14 +4,15 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import ParkfinderApi from '../services/ParkfinderApi';
+import "./LoginForm.css";
 
 const LoginForm = ({setToken, setUser}) =>{
     const initialState ={
-        username: "",
-        email: "",
+        username: "",         
         password:""
     }
     const [formData, setFormData] = useState(initialState);
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
     const handleChange = (evt) => {
@@ -30,11 +31,18 @@ const LoginForm = ({setToken, setUser}) =>{
                 setToken(token);
                 setFormData(initialState);
                 
-                navigate("/parks");
+                // navigate("/parks");
+                navigate("/");
             }
 
         } catch(error) {
             console.error(error);
+            setErrorMessage("Incorrect username and/or password. Please try again.")
+            // setFormData(initialState);
+            const errorTimeout = setTimeout(() =>{
+                setErrorMessage(''); 
+                setFormData(initialState);                
+            }, 2000);
         }
         
         
@@ -48,6 +56,7 @@ const LoginForm = ({setToken, setUser}) =>{
             onSubmit={handleSubmit}
             className="form-style"  // Apply the CSS class
         >
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
             <TextField
                 label="Username"
                 variant="outlined"
