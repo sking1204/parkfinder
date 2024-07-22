@@ -49,13 +49,13 @@ const ReviewForm = ({ user,selectedName }) => {
       const review = await ParkfinderApi.leaveReview(user.username, parkCode, formData);
       if (review) {
         setFormData(INITIAL_STATE);
-        setSuccessMessage('Review saved successfully! Redirecting to homepage...');
+        setSuccessMessage('Review saved successfully! Redirecting to reviews page...');
         setIsSubmitted(true); // Set submission status to true
 
         // Delay navigation to allow user to see the success message
         setTimeout(() => {
           setSuccessMessage('');
-          navigate('/');
+          navigate('/reviews');
         }, 2000); // 2 seconds delay
       }
       console.log('Response from leaving review:', review);
