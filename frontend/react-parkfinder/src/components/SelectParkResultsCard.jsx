@@ -9,7 +9,7 @@ function SelectParkResultsCard({ park, onClick }) {
     return (
         <Card  sx={{
                      maxWidth: 345, 
-                     margin: 2 ,
+                     margin: 4 ,
                      display: 'flex',
                      flexDirection: 'column',
                      boxShadow: 3,

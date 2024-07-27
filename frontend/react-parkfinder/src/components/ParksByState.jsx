@@ -96,9 +96,9 @@ import ParksByParkCode from './ParksByParkCode';
 
 
 //7-26 OLD
-export default function ParksByState() {
+export default function ParksByState({ selectedState, setSelectedState }) {
   const [stateCodes, setStateCodes] = useState([]);
-  const [selectedState, setSelectedState] = useState("");
+  // const [selectedState, setSelectedState] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -127,7 +127,9 @@ export default function ParksByState() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <Box className="nativeselect" sx={{ minWidth: 120 }}>
+        <Box className="nativeselect" sx={{ 
+          minWidth: 120,
+           }}>
           <FormControl fullWidth>
             {selectedState === "" && (
               <InputLabel

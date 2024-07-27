@@ -11,12 +11,13 @@ import SelectCodes from './SelectCodes';
 import './ParksByParkCode.css';
 
 
-export default function ParksByParkCode() {
+export default function ParksByParkCode({ selectedCode, setSelectedCode }) {
 
   const [parkCodes, setParkCodes] = useState([]);
-  const [selectedCode, setSelectedCode] = useState("");
+  // const [selectedCode, setSelectedCode] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showParksByCode, setShowParksByCode] = useState(true);
+  // const [showParksByCode, setShowParksByCode] = useState(true);
+
   
 
 useEffect(() => {
@@ -39,17 +40,17 @@ useEffect(() => {
 const handleCodeChange = (evt) =>{
   setSelectedCode(evt.target.value);
   // Hide ParksByCode once a state is selected
-  if (evt.target.value) {
-    setShowParksByCode(false); 
-  }
-}
+  // if (evt.target.value) {
+  //   setShowParksByCode(true); 
+  };
+// }
 
 
 
 return (
   <>
-  {showParksByCode &&(
-    <>
+  {/* {showParksByCode &&(
+    <> */}
   <div className="park-by-code">Find Park By ParkCode:</div>
     {loading ? (
       <p>Loading, this may take a moment...</p>
@@ -93,8 +94,8 @@ return (
       </FormControl>       
     </Box>
     )}
-    </>     
-    )}    
+    {/* </>     
+    )}     */}
     <SelectCodes selectedCode={selectedCode} loading={loading} />
   </>
 );

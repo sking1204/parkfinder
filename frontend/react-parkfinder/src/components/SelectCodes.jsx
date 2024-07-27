@@ -7,12 +7,13 @@ import './SelectCodes.css';
 
 export default function SelectCodes({ selectedCode }) {
   const [parks, setParks] = useState([]); 
-  const [loading,setLoding]  = useState([]);
+  // const [loading,setLoding]  = useState([]);
+  const [selectedPark, setSelectedPark] = useState(null)
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchParks() {
-      if (selectedCode) {
+      // if (selectedCode) {
         try {
           const fetchedParks = await ParkfinderApi.getParksByParkCode(selectedCode);
           console.log("Fetched parks data:", fetchedParks);
@@ -26,25 +27,27 @@ export default function SelectCodes({ selectedCode }) {
 
         }
       }
-    }
+    // }
 
     fetchParks();
   }, [selectedCode]);
 
  
-
-  if (!selectedCode)  {
-    return <p className='select-code'>Please select a code to view parks.</p>;
-  }
+//removed 7/31 too clutterd
+  // if (!selectedCode)  {
+  //   return <p className='select-code'>Please select a code to view parks.</p>;
+  // }
 
   const handleParkClick = (parkCode) =>{
+    setSelectedPark(parkCode)
     navigate(`/parks/parkCode/${parkCode}`);
   };
 
   return (
     <>
-    <div>
-    <h5>Select park to view more details!</h5>       
+    {/* removed 7/31 */}
+    {/* <div>
+    <h5>Select park to view more details!</h5>        */}
 
       <div className="park-list">
           {parks.map((park) => (
@@ -52,7 +55,7 @@ export default function SelectCodes({ selectedCode }) {
             <SelectParkCodeResultsCard key={park.id} park={park} parks={parks} onClick={handleParkClick} />
           ))}
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

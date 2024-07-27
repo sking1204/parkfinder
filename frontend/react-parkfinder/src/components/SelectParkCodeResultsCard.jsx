@@ -5,12 +5,25 @@ import { Card, CardContent, CardMedia, Typography, CardActionArea } from '@mui/m
 function SelectParkCodeResultsCard({ park, onClick }) {
     return (
         <Card  sx={{
-            maxWidth: 750, // Set the desired width in pixels
-            margin: 'auto', // Center the card
-            marginTop: 4,
-            boxShadow: 3, // Add subtle shadow for depth
-            borderRadius: 2, // Round the corners
-                     }} 
+            maxWidth: 750, 
+            margin: 10 ,
+            display: 'flex',
+            flexDirection: 'column',
+            boxShadow: 3,
+            marginBottom: 4,
+            '&:hover': {
+               transform: 'scale(1.05)',
+               boxShadow: 6,
+               backgroundColor:'#f0f0f0',
+            },
+            }} 
+        // <Card  sx={{
+        //     maxWidth: 750, // Set the desired width in pixels
+        //     margin: 'auto', // Center the card
+        //     marginTop: 4,
+        //     boxShadow: 3, // Add subtle shadow for depth
+        //     borderRadius: 2, // Round the corners
+        //              }} 
                      onClick={() => onClick(park.parkCode)}>
             <CardActionArea>
                 <CardMedia
