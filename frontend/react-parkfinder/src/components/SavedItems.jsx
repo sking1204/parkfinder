@@ -39,13 +39,15 @@ const SavedItems = ({ user }) => {
 
   return (
     <>
-      <div>
-        <h3>Saved Items for: {user.username}</h3>               
-      </div>
+      {/* <div>
+        <p className="saved-items-header">Saved Items for: {user.username}</p>               
+      </div> */}
 
       <Card style={{ 
+        marginTop:'20px',
         marginBottom: '20px',
         backgroundColor: '#DCEDC8',
+        
          }}>
         <CardContent>
           <Typography variant="h5"
@@ -66,13 +68,13 @@ const SavedItems = ({ user }) => {
                 key={index} 
                 style={{ 
                   marginBottom: '10px',
-                  backgroundColor:'#EEEE',
+                  // backgroundColor:'#EEEE',
                    }}>
                   <CardContent>
                     <ListItem>
                       <ListItemText
                         primary={
-                          <Typography variant="h6" component="span" sx={{ fontWeight: 'normal' }}>
+                          <Typography variant="h6" component="span" sx={{ fontWeight: 'bold' }}>
                           {`${activity.name}`}
                           {/* {`Activity: ${activity.name}`} */}
                           </Typography>
@@ -100,21 +102,58 @@ const SavedItems = ({ user }) => {
       <Card style={{ 
         marginBottom: '20px',
         backgroundColor: '#DCEDC8',
+      
+        
 
          }}>
         <CardContent>
-          <Typography variant="h5">Saved Events</Typography>
+          <Typography 
+          variant="h5"
+          sx={{
+            marginBottom: '20px',
+          }}> 
+          Saved Events</Typography>
           {savedEvents.length > 0 ? (
-            <List>
+            // <List>
+            <div style={{ 
+              display: 'grid',               
+              // gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(3,1fr)',
+              gap: '20px', // gap between cards
+            }}>
+              
+              
               {savedEvents.map((event, index) => (
-                <Card key={index} style={{ marginBottom: '10px' }}>
+                <Card key={index}
+                 style={{
+                   marginBottom: '10px',
+                  height: '380px', // Set fixed height
+                  overflow: 'auto' // Enable scrolling
+                  }}>
                   <CardContent>
                     <ListItem>
                       <ListItemText
-                        primary={`Title: ${event.title}`}
-                        secondary={
+                        // primary={`Title: ${event.title}`}
+                        primary={
+                          <Typography variant="h6" component="span" sx={{ 
+                            fontWeight: 'bold',
+                            marginBottom: '10px',
+                            // marginBottom: '20px' // Adds margin to the top and bottom                            
+                             }}>
+                          {event.title}
+                        </Typography>
+                        }
+                        secondary ={
                           <>
-                            <Typography component="span"><strong>Description:</strong> {event.description}</Typography>
+                            {/* <Typography component="span"><strong>Description:</strong> {event.description}</Typography>
+                            <br />
+                            <Typography component="span"><strong>Park Code:</strong> {event.park_code}</Typography>
+                            <br />
+                            <Typography component="span"><strong>Selected Date:</strong> {event.selected_date}</Typography> */}
+                            <Typography component="span"
+                            sx={{
+                              marginTop:'10px',
+                            }}>{event.description}</Typography>
                             <br />
                             <Typography component="span"><strong>Park Code:</strong> {event.park_code}</Typography>
                             <br />
@@ -124,31 +163,58 @@ const SavedItems = ({ user }) => {
                       />
                     </ListItem>
                   </CardContent>
-                </Card>
+                </Card>                
               ))}
-            </List>
+              </div>
+            /* // </List> */
           ) : (
             <Typography>No saved events.</Typography>
           )}
         </CardContent>
       </Card>
 
-      <Card style={{ marginBottom: '20px' }}>
+      <Card style={{ 
+        marginBottom: '20px',
+        backgroundColor: '#DCEDC8',
+         }}>
         <CardContent>
-          <Typography variant="h5">Saved Fees</Typography>
+          <Typography
+          variant="h5" 
+          sx={{
+            marginBottom: '20px',
+          }}> 
+          Saved Fees</Typography>
           {savedFees.length > 0 ? (
-            <List>
+            // <List>
+            <div style={{ 
+              display: 'grid',               
+              // gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(3,1fr)',
+              gap: '20px', // gap between cards
+            }}>
               {savedFees.map((fee, index) => (
-                <Card key={index} style={{ marginBottom: '10px' }}>
+                <Card 
+                key={index} 
+                style={{ 
+                  marginBottom: '10px',
+                  // backgroundColor:'#EEEE',
+                  height: '200px',
+                   }}>
                   <CardContent>
                     <ListItem>
                       <ListItemText
-                        primary={`Title: ${fee.title}`}
+                        // primary={`Fee: ${fee.title}`}
+                        // primary={`${fee.title}`}
+                        primary={
+                          <Typography variant="h6" component="span" sx={{ fontWeight: 'bold' }}>
+                          {fee.title}
+                        </Typography>
+                        }
                         secondary={
                           <>
-                            <Typography component="span"><strong>Park Code:</strong> {fee.park_code}</Typography>
+                             <Typography component="span"><strong>Cost:</strong> {fee.cost}</Typography>                             
                             <br />
-                            <Typography component="span"><strong>Cost:</strong> {fee.cost}</Typography>
+                            <Typography component="span"><strong>Park Code:</strong> {fee.park_code}</Typography>
                           </>
                         }
                       />
@@ -156,7 +222,8 @@ const SavedItems = ({ user }) => {
                   </CardContent>
                 </Card>
               ))}
-            </List>
+            {/* </List> */}
+            </div>
           ) : (
             <Typography>No saved fees.</Typography>
           )}
@@ -193,17 +260,41 @@ const SavedItems = ({ user }) => {
         </CardContent>
       </Card>
 
-      <Card style={{ marginBottom: '20px' }}>
+      <Card style={{ 
+        marginBottom: '20px',
+        backgroundColor: '#DCEDC8', 
+         }}>
         <CardContent>
-          <Typography variant="h5">Things To Do</Typography>
+          <Typography 
+          variant="h5"
+          sx={{
+            marginBottom: '20px',
+          }}> 
+          Things To Do</Typography>
           {savedTodo.length > 0 ? (
-            <List>
+            // <List>
+            <div style={{ 
+              display: 'grid',               
+              // gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(3,1fr)',
+              gap: '20px', // gap between cards
+            }}>
               {savedTodo.map((todo, index) => (
-                <Card key={index} style={{ marginBottom: '10px' }}>
+                <Card key={index} 
+                style={{ 
+                  marginBottom: '10px',
+                  height: '370px', // Set fixed height
+                  overflow: 'auto', // Enable scrolling
+                   }}>
                   <CardContent>
                     <ListItem>
                       <ListItemText
-                        primary={`Title: ${todo.title}`}
+                        // primary={`Title: ${todo.title}`}
+                        primary={
+                          <Typography variant="h6" component="span" sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
+                          {todo.title}
+                        </Typography>
+                        }
                         secondary={
                           <>
                             <Typography component="span"><strong>Short Description:</strong> {todo.short_description}</Typography>
@@ -218,7 +309,8 @@ const SavedItems = ({ user }) => {
                   </CardContent>
                 </Card>
               ))}
-            </List>
+            {/* </List> */}
+            </div>
           ) : (
             <Typography>No things to do saved.</Typography>
           )}
@@ -229,6 +321,68 @@ const SavedItems = ({ user }) => {
 };
 
 export default SavedItems;
+
+/* old card
+<Card style={{ 
+        marginBottom: '20px',
+        backgroundColor: '#DCEDC8',
+       
+         }}>
+        <CardContent>
+          <Typography variant="h5"
+          sx={{
+            marginBottom: '20px',
+          }}>
+            Saved Activities</Typography>
+          {savedActivities.length > 0 ? (
+            <div style={{ 
+              display: 'grid',               
+              // gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(5,1fr)',
+              gap: '20px', // gap between cards
+              marginBottom: '20px';
+            }}>
+           
+              {savedActivities.map((activity, index) => (
+                <Card 
+                key={index} 
+                style={{ 
+                  marginBottom: '10px',
+                  // backgroundColor:'#EEEE',
+                  height: '150px', // Set fixed height
+                  // overflow: 'auto' // Enable scrolling
+                   }}>
+                  <CardContent>
+                    <ListItem>
+                      <ListItemText
+                        primary={
+                          <Typography variant="h6" component="span" sx={{ fontWeight: 'normal' }}>
+                          {`${activity.name}`}
+                          {/* {`Activity: ${activity.name}`} */
+      //                     </Typography>
+      //                   }
+      //                   secondary={
+      //                     <>
+      //                       <Typography component="span">Activity ID: {activity.id}</Typography>
+      //                       <br />
+      //                       <Typography component="span">Park Code: {activity.park_code}</Typography>
+      //                     </>
+      //                   }
+      //                 />
+      //               </ListItem>
+      //             </CardContent>
+      //           </Card>
+      //         ))}
+      //         </div>
+          
+      //     ) : (
+      //       <Typography>No saved activities.</Typography>
+      //     )}
+      //   </CardContent>
+      // </Card>
+
+
+
 
 
 

@@ -72,8 +72,8 @@ import './Navigation.css';
                 </li>                 */}
                 <li className="nav-right">
                   <Link className="nav-link" to="/" onClick={handleLogout} >                                  
-                    {/* Log out {user.first_name || user.username} */}
-                    Log out
+                    Log out {user.first_name || user.username}
+                    {/* Log out */}
                   </Link>
                 </li>
                 

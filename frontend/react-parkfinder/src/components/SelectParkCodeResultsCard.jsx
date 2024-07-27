@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, CardActionArea } from '@mui/material';
-import './SelectParkCodeResultsCard.css';
+// import './SelectParkCodeResultsCard.css';
 
 function SelectParkCodeResultsCard({ park, onClick }) {
     return (
