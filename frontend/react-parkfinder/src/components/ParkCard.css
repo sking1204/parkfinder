@@ -2,9 +2,11 @@
     border: "1px solid white";
 } */
 
-img {
-    border-radius: 10px;
-    border: 2px solid #353535;
+/* img {
+    box-sizing: border-box;
+    border-radius: 10px 10px 0 0;     
+    border: 2px solid #F1F8E9;
     
-}
+    
+} */
 

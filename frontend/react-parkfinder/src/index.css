@@ -5,7 +5,10 @@
 
   /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.973); */
-  background-color: #e7e4d0;
+  /* light sandy brown - ORIGINAL COLOR */
+  /* background-color: #e7e4d0; */
+  /* background-color:#D1E1D4; */
+  background-color: #F1F8E9;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,10 +27,12 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+
+  /* default react styling */
+  /* display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100vh; */
 }
 
 h1 {
@@ -68,7 +73,7 @@ button:focus-visible {
 }
 
 /* Navbar Styling */
-.navbar {
+/* .navbar {
   background-color: #353535;
   color: #fff;
   display: flex; 
@@ -77,34 +82,74 @@ button:focus-visible {
   align-items: center;
   border-radius: 5px;
   
-}
+} */
 
-.nav-link {
+/* .navbar-nav {
+  /* background-color: #353535; */
+  /* background-color:#3B403C;
   color: #fff;
+  display: flex; 
+  justify-content: space-between;  */
+  /* padding: 10px 20px; */
+  /* padding: 5px 10px;
+  align-items: center;
+  border-radius: 5px;
+} */ 
+
+/* .nav-link {
+  /* ORIGINAL COLOR */
+   /* color: #fff; 
+  color: #F9F8E9;
   text-decoration: none;
   padding: 10px 15px;
   margin: 0 10px;
   font-size: 20px;
-}
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+} */ 
 
-.nav-link:hover {
+/* .nav-link:hover {
   background-color: #555;
-}
+} */
 
-.nav-right{
+/* .nav-right{
   display: inline-block;
   margin-right: 10px;
   
-}
-.home-nav-link{
+} */
+
+/* .nav-right {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  margin: 0 10px;
+  
+} */
+
+
+
+/* .home-nav-link{
   font-size: 2em;
   color: #fff;
   text-decoration: none;
   padding: 10px 15px;
   margin: 0 10px;
-}
+} */
 
 .form-input{
   background-color: white;   
 }
 
+
+.parkfinder-link {
+  font-size: 25px; /* Adjust the size as needed */
+  /* color: rgb(197, 150, 88); */
+  /* color:#d0d3e7; */
+  /* color:#638868; */
+  /* color: 	#D1E1D4; */
+  /* color:	#CDDC39; */
+  color:	#8BC34A;
+  
+}

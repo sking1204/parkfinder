@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ParkfinderApi from '../services/ParkfinderApi';
 import { useNavigate } from 'react-router-dom';
 import SelectParkResultsCard from './SelectParkResultsCard';
+import SelectParkCodeResultsCard from './SelectParkCodeResultsCard';
 
 export default function SelectCodes({ selectedCode }) {
   const [parks, setParks] = useState([]); 
@@ -32,7 +33,7 @@ export default function SelectCodes({ selectedCode }) {
  
 
   if (!selectedCode)  {
-    return <p>Please select a state to view parks.</p>;
+    return <p>Please select a code to view parks.</p>;
   }
 
   const handleParkClick = (parkCode) =>{
@@ -46,7 +47,8 @@ export default function SelectCodes({ selectedCode }) {
 
       <div className="park-list">
           {parks.map((park) => (
-            <SelectParkResultsCard key={park.id} park={park} onClick={handleParkClick} />
+            // <SelectParkResultsCard key={park.id} park={park} onClick={handleParkClick} />
+            <SelectParkCodeResultsCard key={park.id} park={park} parks={parks} onClick={handleParkClick} />
           ))}
         </div>
       </div>

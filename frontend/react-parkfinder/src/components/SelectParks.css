@@ -1,0 +1,36 @@
+.select-state{
+    text-align: left;
+    padding: 5px;
+    color:#558B2F;
+    font-weight: bold;
+}
+
+.park-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Adjust the gap between cards as needed */
+    justify-content: center; /* Center the cards in the row */
+  }
+  
+  .park-list > * {
+    flex: 1 1 calc(33.333% - 32px); /* 33.333% width with space for gaps */
+    max-width: 345px; /* Match the card's max-width for consistent layout */
+  }
+
+  .select-state-header{
+    font-size: 35px;
+    color:#3B403C;
+    /* font-weight: bold; */
+    font-weight:600;
+    margin: 15px;
+
+  }
+
+  .select-state-details{
+    margin:20px;
+    color:#3B403C;
+    /* color:#616161; */
+    /* color:#3B403C; */
+    font-style:italic;
+    /* font-weight:500; */
+  }

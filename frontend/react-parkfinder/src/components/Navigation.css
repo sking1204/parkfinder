@@ -1,0 +1,64 @@
+.navbar-nav {
+    /* background-color: #353535; */
+    background-color:#3B403C;
+    color: #fff;
+    display: flex; 
+    justify-content: space-between; 
+    /* padding: 10px 20px; */
+    padding: 5px 10px;
+    align-items: center;
+    border-radius: 5px;
+  }
+  
+  .nav-link {
+    /* ORIGINAL COLOR */
+    /* color: #fff; */
+    color: #F9F8E9;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 10px;
+    font-size: 20px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  /* .nav-link:hover {
+    background-color: #555;
+  } */
+  
+  /* .nav-right{
+    display: inline-block;
+    margin-right: 10px;
+    
+  } */
+  
+  .nav-right {
+    display: flex; /* Changed from inline-block to flex */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin: 0 10px;
+    
+  }
+  
+  
+  
+  .home-nav-link{
+    font-size: 2em;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 10px;
+  }
+
+  .parkfinder-link {
+    font-size: 25px; /* Adjust the size as needed */
+    /* color: rgb(197, 150, 88); */
+    /* color:#d0d3e7; */
+    /* color:#638868; */
+    /* color: 	#D1E1D4; */
+    /* color:	#CDDC39; */
+    color:	#8BC34A;
+    
+  }

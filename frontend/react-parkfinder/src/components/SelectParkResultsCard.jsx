@@ -1,29 +1,111 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import ParkfinderRoutes from './ParkfinderRoutes';
-import './SelectParkResultsCard.css'
+import { Card, CardContent, CardMedia, Typography, CardActionArea } from '@mui/material';
+
+
+
+
 
 function SelectParkResultsCard({ park, onClick }) {
     return (
-        // <Link className="parkcard" to = {`/parks/${company.handle}`}>
-        <div className="park-card" onClick ={() =>onClick(park.parkCode)}>
-            <h2>{park.fullName}</h2>
-            <div>
-                <h3>Park Code: {park.parkCode}</h3>
-            </div>
+        <Card  sx={{
+                     maxWidth: 345, 
+                     margin: 2 ,
+                     display: 'flex',
+                     flexDirection: 'column',
+                     boxShadow: 3,
+                     }} 
+                     onClick={() => onClick(park.parkCode)}>
+            <CardActionArea>
+                <CardMedia
+                    component="img"
+                    height="140"
+                    image={park.images[0].url}
+                    alt={park.fullName}
+                    sx={{
+                        border: '5px solid #C5E1A5', /* Add border */
+                        borderRadius: '5px 5px 0 0', /* Optional: rounded corners */
+                        boxSizing:'border-box',
+                        
+                    }}
+                    
+                />
+                <CardContent>
+                    <Typography 
+                    gutterBottom 
+                    variant="h5" 
+                    component="div"
+                    sx={{
+                        color: '#3B403C',
+                        fontWeight: '600',
+                        // color: '#616161',
+                        // fontWeight: 'bold',
+                     }} 
+                    >
+                        {park.fullName}
+                    </Typography>
+                    <Typography
+                    gutterBottom 
+                    variant="body2" 
+                    color="text.secondary"
+                    sx={{ 
+                        mb: 3, // Add bottom margin
+                        // color: '#33691E',
+                        color:'#3B403C',
+                        fontWeight: '500',
+                        fontSize: '14px',
 
-            <img width= "200px" src={park.images[0].url} />
-            <p>{park.description}</p>
-            {/* <p>{company.description}</p> */}
-            
+                    }} 
+                    >
+                        Park Code: {park.parkCode}
+                    </Typography>
+                    <Typography                      
+                    variant="body2" 
+                    color="text.secondary" 
+                    sx={{     
+                        mb: 5, // Add bottom margin                     
+                        color: '#616161',
+                        textAlign:'left',
+                        // fontWeight: 'bold',
 
-        </div>
-        // </Link>
+                    }}                    
+                    >
+                        {park.description}
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
+        </Card>
     );
 }
 
-
 export default SelectParkResultsCard;
+
+
+// import React from 'react';
+// import {Link} from 'react-router-dom';
+// import ParkfinderRoutes from './ParkfinderRoutes';
+// import './SelectParkResultsCard.css'
+
+// function SelectParkResultsCard({ park, onClick }) {
+//     return (
+//         // <Link className="parkcard" to = {`/parks/${company.handle}`}>
+//         <div className="park-card" onClick ={() =>onClick(park.parkCode)}>
+//             <h2>{park.fullName}</h2>
+//             <div>
+//                 <h3>Park Code: {park.parkCode}</h3>
+//             </div>
+
+//             <img width= "200px" src={park.images[0].url} />
+//             <p>{park.description}</p>
+//             {/* <p>{company.description}</p> */}
+            
+
+//         </div>
+//         // </Link>
+//     );
+// }
+
+
+// export default SelectParkResultsCard;
 
 // return (
 //     <>

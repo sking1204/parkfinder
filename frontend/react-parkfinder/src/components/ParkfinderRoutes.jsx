@@ -75,7 +75,7 @@ const ParkfinderRoutes = () => {
           {/* <Route path="/" element={<Homepage user={user} />} /> */}
           <Route path="/" element={<Homepage user={user} />} />
           {/* <Route path="/parks" element={<FindParks token={token} user={user} setUser={setUser} />} /> */}
-          <Route path="/parks" element={<FindParks user={user}/>} />
+          <Route path="/parks" element={<FindParks user={user} />} />
           {/* <Route path="/parks" element={<ParksList />} /> */}
           {/* HARDCODING THIS TO FL PARKS FOR NOW... */}
           {/* <Route path="/parks/FL-parks" element={<ParksList />} /> */}

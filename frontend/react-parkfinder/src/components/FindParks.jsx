@@ -2,6 +2,7 @@
 import "./Homepage.css"
 import ParksByState from "./ParksByState";
 import ParksByParkCode from "./ParksByParkCode";
+
 // import TokenContext from "../contexts/TokenContext";
 // import UserContext from "../contexts/UserContext";
 
@@ -12,6 +13,10 @@ const FindParks = ({user}) =>{
         <>
         <ParksByState user={user}  />
         <ParksByParkCode user={user} />
+        {/* <div className="img-container">
+                        <img src="../src/assets/background.jpg" alt="" />
+                    </div> */}
+                    
         
         </>
     )

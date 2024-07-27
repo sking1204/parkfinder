@@ -4,9 +4,12 @@ import ParkfinderApi from '../services/ParkfinderApi';
 import { useNavigate } from 'react-router-dom';
 import SelectParkResultsCard from './SelectParkResultsCard';
 
+import "./SelectParks.css"
+
 
 export default function SelectParks({ selectedState }) {
-  const [parks, setParks] = useState([]);
+  const [parks, setParks] = useState([]); 
+  const [selectedPark, setSelectedPark] = useState(null)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,11 +36,12 @@ export default function SelectParks({ selectedState }) {
   }, [selectedState]);
 
   if (!selectedState) {
-    return <p>Please select a state to view parks.</p>;
+    return <p className='select-state'>Please select a state to view parks.</p>;
   }
 
   //onclick renders ParkDetail component
   const handleParkClick = (parkCode) =>{
+    setSelectedPark(parkCode); // Set the selected park
     navigate(`/parks/parkCode/${parkCode}`);
   };
 
@@ -45,12 +49,12 @@ export default function SelectParks({ selectedState }) {
     <>
      
     <div>
-      <h1>Parks in {selectedState}:</h1>
-      <h5>Select park to view more details!</h5>
+      <div className='select-state-header'>Parks in {selectedState}:</div>
+      <div className="select-state-details">Select park to view more details!</div>
 
       <div className="park-list">
           {parks.map((park) => (
-            <SelectParkResultsCard key={park.id} park={park} onClick={handleParkClick} />
+            <SelectParkResultsCard key={park.id} park={park} parks={parks}onClick={handleParkClick} />
           ))}
         </div>
       </div>
