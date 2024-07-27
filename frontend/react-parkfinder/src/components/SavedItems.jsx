@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import ParkfinderApi from "../services/ParkfinderApi";
+import { Card, CardContent, Typography, List, ListItem, ListItemText } from '@mui/material';
+
 import './SavedItems.css';
 
 const SavedItems = ({ user }) => {
@@ -33,122 +35,321 @@ const SavedItems = ({ user }) => {
 
   const { savedActivities, savedEvents, savedFees, savedMap, savedTodo } = savedItems;
 
+  //new 7/29
+
   return (
     <>
       <div>
-        <h1>Saved Items for: {user.username}</h1>         
+        <h3>Saved Items for: {user.username}</h3>               
       </div>
 
-      <div className="saved-items-container">
-        <div className="items-container">
-          <h2>Saved Activities</h2>
+      <Card style={{ 
+        marginBottom: '20px',
+        backgroundColor: '#DCEDC8',
+         }}>
+        <CardContent>
+          <Typography variant="h5"
+          sx={{
+            marginBottom: '20px',
+          }}>
+            Saved Activities</Typography>
           {savedActivities.length > 0 ? (
-            
-            <ul>
+            <div style={{ 
+              display: 'grid',               
+              // gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(4,1fr)',
+              gap: '20px', // gap between cards
+            }}>
+           
               {savedActivities.map((activity, index) => (
-                <div className="items-grouping">
-                <li key={index}>
-                  <p><strong>Activity ID:</strong> {activity.id}</p>
-                  <p><strong>Activity Name:</strong> {activity.name}</p>
-                  <p><strong>Park Code:</strong> {activity.park_code}</p>
-                </li>
-                </div>
-                
+                <Card 
+                key={index} 
+                style={{ 
+                  marginBottom: '10px',
+                  backgroundColor:'#EEEE',
+                   }}>
+                  <CardContent>
+                    <ListItem>
+                      <ListItemText
+                        primary={
+                          <Typography variant="h6" component="span" sx={{ fontWeight: 'normal' }}>
+                          {`${activity.name}`}
+                          {/* {`Activity: ${activity.name}`} */}
+                          </Typography>
+                        }
+                        secondary={
+                          <>
+                            <Typography component="span">Activity ID: {activity.id}</Typography>
+                            <br />
+                            <Typography component="span">Park Code: {activity.park_code}</Typography>
+                          </>
+                        }
+                      />
+                    </ListItem>
+                  </CardContent>
+                </Card>
               ))}
-            </ul>
-            
+              </div>
+          
           ) : (
-            <p>No saved activities.</p>
+            <Typography>No saved activities.</Typography>
           )}
-        </div>
+        </CardContent>
+      </Card>
 
-        <div className="items-container">
-          <h2>Saved Events</h2>
+      <Card style={{ 
+        marginBottom: '20px',
+        backgroundColor: '#DCEDC8',
+
+         }}>
+        <CardContent>
+          <Typography variant="h5">Saved Events</Typography>
           {savedEvents.length > 0 ? (
-            <ul>
+            <List>
               {savedEvents.map((event, index) => (
-                <div className="items-grouping">
-                <li key={index}>
-                  <p><strong>Title:</strong> {event.title}</p>
-                  <p><strong>Description:</strong> {event.description}</p>
-                  <p><strong>Park Code:</strong> {event.park_code}</p>
-                  <p><strong>Selected Date:</strong> {event.selected_date}</p>
-                </li>
-                </div>
+                <Card key={index} style={{ marginBottom: '10px' }}>
+                  <CardContent>
+                    <ListItem>
+                      <ListItemText
+                        primary={`Title: ${event.title}`}
+                        secondary={
+                          <>
+                            <Typography component="span"><strong>Description:</strong> {event.description}</Typography>
+                            <br />
+                            <Typography component="span"><strong>Park Code:</strong> {event.park_code}</Typography>
+                            <br />
+                            <Typography component="span"><strong>Selected Date:</strong> {event.selected_date}</Typography>
+                          </>
+                        }
+                      />
+                    </ListItem>
+                  </CardContent>
+                </Card>
               ))}
-            </ul>
+            </List>
           ) : (
-            <p>No saved events.</p>
+            <Typography>No saved events.</Typography>
           )}
-        </div>
+        </CardContent>
+      </Card>
 
-        <div className="items-container">
-          <h2>Saved Fees</h2>
+      <Card style={{ marginBottom: '20px' }}>
+        <CardContent>
+          <Typography variant="h5">Saved Fees</Typography>
           {savedFees.length > 0 ? (
-            <ul>
+            <List>
               {savedFees.map((fee, index) => (
-                <div className="items-grouping">
-                <li key={index}>
-                  <p><strong>Title:</strong> {fee.title}</p>
-                  <p><strong>Park Code:</strong> {fee.park_code}</p>
-                  <p><strong>Cost:</strong> {fee.cost}</p>
-                </li>
-                </div>
+                <Card key={index} style={{ marginBottom: '10px' }}>
+                  <CardContent>
+                    <ListItem>
+                      <ListItemText
+                        primary={`Title: ${fee.title}`}
+                        secondary={
+                          <>
+                            <Typography component="span"><strong>Park Code:</strong> {fee.park_code}</Typography>
+                            <br />
+                            <Typography component="span"><strong>Cost:</strong> {fee.cost}</Typography>
+                          </>
+                        }
+                      />
+                    </ListItem>
+                  </CardContent>
+                </Card>
               ))}
-            </ul>
+            </List>
           ) : (
-            <p>No saved fees.</p>
+            <Typography>No saved fees.</Typography>
           )}
-        </div>
+        </CardContent>
+      </Card>
 
-        <div className="items-container">
-          <h2>Saved Map Locations</h2>
+      <Card style={{ marginBottom: '20px' }}>
+        <CardContent>
+          <Typography variant="h5">Saved Map Locations</Typography>
           {savedMap.length > 0 ? (
-            
-            <ul>
+            <List>
               {savedMap.map((map, index) => (
-                <div className="items-grouping">
-                <li key={index}>
-                  <p><strong>Latitude:</strong> {map.latitude}</p>
-                  <p><strong>Longitude:</strong> {map.longitude}</p>
-                  <p><strong>Park Code:</strong> {map.park_code}</p>
-                </li>
-                </div>
+                <Card key={index} style={{ marginBottom: '10px' }}>
+                  <CardContent>
+                    <ListItem>
+                      <ListItemText
+                        primary={`Park Code: ${map.park_code}`}
+                        secondary={
+                          <>
+                            <Typography component="span"><strong>Latitude:</strong> {map.latitude}</Typography>
+                            <br />
+                            <Typography component="span"><strong>Longitude:</strong> {map.longitude}</Typography>
+                          </>
+                        }
+                      />
+                    </ListItem>
+                  </CardContent>
+                </Card>
               ))}
-            </ul>
-            
+            </List>
           ) : (
-            <p>No saved map locations.</p>
+            <Typography>No saved map locations.</Typography>
           )}
-        </div>
+        </CardContent>
+      </Card>
 
-        <div className="items-container">
-          <h2>Things To Do</h2>
+      <Card style={{ marginBottom: '20px' }}>
+        <CardContent>
+          <Typography variant="h5">Things To Do</Typography>
           {savedTodo.length > 0 ? (
-             
-            <ul>
+            <List>
               {savedTodo.map((todo, index) => (
-                <div className="items-grouping">
-                <li key={index}>
-                  <p><strong>Title:</strong> {todo.title}</p>
-                  <p><strong>Short Description:</strong> {todo.short_description}</p>
-                  <p><strong>Location Description:</strong> {todo.location_description}</p>
-                  <p><strong>Park Code:</strong> {todo.park_code}</p>
-                </li>
-                </div>
+                <Card key={index} style={{ marginBottom: '10px' }}>
+                  <CardContent>
+                    <ListItem>
+                      <ListItemText
+                        primary={`Title: ${todo.title}`}
+                        secondary={
+                          <>
+                            <Typography component="span"><strong>Short Description:</strong> {todo.short_description}</Typography>
+                            <br />
+                            <Typography component="span"><strong>Location Description:</strong> {todo.location_description}</Typography>
+                            <br />
+                            <Typography component="span"><strong>Park Code:</strong> {todo.park_code}</Typography>
+                          </>
+                        }
+                      />
+                    </ListItem>
+                  </CardContent>
+                </Card>
               ))}
-            </ul>
-            
+            </List>
           ) : (
-            <p>No things to do saved.</p>
+            <Typography>No things to do saved.</Typography>
           )}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </>
   );
 };
 
 export default SavedItems;
+
+
+
+  //old
+
+//   return (
+//     <>
+//       <div>
+//         <h1>Saved Items for: {user.username}</h1>         
+//       </div>
+
+//       <div className="saved-items-container">
+//         <div className="items-container">
+//           <h2>Saved Activities</h2>
+//           {savedActivities.length > 0 ? (
+            
+//             <ul>
+//               {savedActivities.map((activity, index) => (
+//                 <div className="items-grouping">
+//                 <li key={index}>
+//                   <p><strong>Activity ID:</strong> {activity.id}</p>
+//                   <p><strong>Activity Name:</strong> {activity.name}</p>
+//                   <p><strong>Park Code:</strong> {activity.park_code}</p>
+//                 </li>
+//                 </div>
+                
+//               ))}
+//             </ul>
+            
+//           ) : (
+//             <p>No saved activities.</p>
+//           )}
+//         </div>
+
+//         <div className="items-container">
+//           <h2>Saved Events</h2>
+//           {savedEvents.length > 0 ? (
+//             <ul>
+//               {savedEvents.map((event, index) => (
+//                 <div className="items-grouping">
+//                 <li key={index}>
+//                   <p><strong>Title:</strong> {event.title}</p>
+//                   <p><strong>Description:</strong> {event.description}</p>
+//                   <p><strong>Park Code:</strong> {event.park_code}</p>
+//                   <p><strong>Selected Date:</strong> {event.selected_date}</p>
+//                 </li>
+//                 </div>
+//               ))}
+//             </ul>
+//           ) : (
+//             <p>No saved events.</p>
+//           )}
+//         </div>
+
+//         <div className="items-container">
+//           <h2>Saved Fees</h2>
+//           {savedFees.length > 0 ? (
+//             <ul>
+//               {savedFees.map((fee, index) => (
+//                 <div className="items-grouping">
+//                 <li key={index}>
+//                   <p><strong>Title:</strong> {fee.title}</p>
+//                   <p><strong>Park Code:</strong> {fee.park_code}</p>
+//                   <p><strong>Cost:</strong> {fee.cost}</p>
+//                 </li>
+//                 </div>
+//               ))}
+//             </ul>
+//           ) : (
+//             <p>No saved fees.</p>
+//           )}
+//         </div>
+
+//         <div className="items-container">
+//           <h2>Saved Map Locations</h2>
+//           {savedMap.length > 0 ? (
+            
+//             <ul>
+//               {savedMap.map((map, index) => (
+//                 <div className="items-grouping">
+//                 <li key={index}>
+//                   <p><strong>Latitude:</strong> {map.latitude}</p>
+//                   <p><strong>Longitude:</strong> {map.longitude}</p>
+//                   <p><strong>Park Code:</strong> {map.park_code}</p>
+//                 </li>
+//                 </div>
+//               ))}
+//             </ul>
+            
+//           ) : (
+//             <p>No saved map locations.</p>
+//           )}
+//         </div>
+
+//         <div className="items-container">
+//           <h2>Things To Do</h2>
+//           {savedTodo.length > 0 ? (
+             
+//             <ul>
+//               {savedTodo.map((todo, index) => (
+//                 <div className="items-grouping">
+//                 <li key={index}>
+//                   <p><strong>Title:</strong> {todo.title}</p>
+//                   <p><strong>Short Description:</strong> {todo.short_description}</p>
+//                   <p><strong>Location Description:</strong> {todo.location_description}</p>
+//                   <p><strong>Park Code:</strong> {todo.park_code}</p>
+//                 </li>
+//                 </div>
+//               ))}
+//             </ul>
+            
+//           ) : (
+//             <p>No things to do saved.</p>
+//           )}
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default SavedItems;
 
 
 

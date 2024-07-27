@@ -1,0 +1,42 @@
+.error-message {
+    color: red;
+    margin-bottom: 16px;
+}
+
+.submitButton.submitted {
+    background-color: lightgrey;
+    cursor: not-allowed;
+  }
+
+  .formField{
+    color:grey;
+  }
+
+  .form-style {
+    width: 100%;
+    max-width: 500px;
+    margin: 5rem auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-style .formField {
+    margin-bottom: 1rem;
+  }
+
+  .form-style .formField input{
+    color: black;
+  }
+  
+  .form-style .formField label
+   {
+    color: grey;
+    /* color: black !important;  */
+  }
+  
+  .form-style .submitButton {
+    margin-top: 1.5rem;
+    color: black !important;
+  }

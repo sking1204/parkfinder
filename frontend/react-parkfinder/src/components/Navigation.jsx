@@ -36,6 +36,7 @@ import './Navigation.css';
                     Parkfinder
                   </NavLink>
                 </li>
+                
                 <li className="nav-right">
                   <NavLink className="nav-link" to="/parks">
                     Parks
@@ -64,11 +65,11 @@ import './Navigation.css';
                   </NavLink>
                 </li>
            
-                <li className="nav-right">
+                {/* <li className="nav-right">
                   <NavLink className="nav-link" to="/signup">
                     Signup
                   </NavLink>
-                </li>                
+                </li>                 */}
                 <li className="nav-right">
                   <Link className="nav-link" to="/" onClick={handleLogout} >                                  
                     {/* Log out {user.first_name || user.username} */}

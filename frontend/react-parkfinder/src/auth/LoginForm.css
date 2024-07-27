@@ -2,3 +2,8 @@
     color: red;
     margin-bottom: 16px;
 }
+
+.submitButton.submitted {
+    background-color: lightgrey;
+    cursor: not-allowed;
+  }

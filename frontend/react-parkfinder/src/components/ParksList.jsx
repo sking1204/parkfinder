@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ParkfinderApi from '../services/ParkfinderApi';
 import ParkCard from './ParkCard';
+import './ParksList.css'
 
 function ParksList() {
     const [parks, setParks] = useState([]);

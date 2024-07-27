@@ -11,28 +11,32 @@ const LoginForm = ({setToken, setUser}) =>{
         username: "",         
         password:""
     }
-    const [formData, setFormData] = useState(initialState);
+    const [formData, setFormData] = useState(initialState);    
     const [errorMessage, setErrorMessage] = useState("");
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
     const navigate = useNavigate();
 
     const handleChange = (evt) => {
-        const {value, name} = evt.target;
+        const {value, name} = evt.target;         
         setFormData(data => ({
             ...data,
             [name]: value
+            
         }));
     };
 
     const handleSubmit = async (evt) => {
         evt.preventDefault();
+        // Disable the button immediately
+        setIsSubmitted(true);
         try {
             const token = await ParkfinderApi.login(formData);
-            if(token) {
+            if(token) {                 
                 setToken(token);
-                setFormData(initialState);
-                
-                // navigate("/parks");
+                setFormData(initialState);              
                 navigate("/");
+               
             }
 
         } catch(error) {
@@ -40,8 +44,9 @@ const LoginForm = ({setToken, setUser}) =>{
             setErrorMessage("Incorrect username and/or password. Please try again.")
             // setFormData(initialState);
             const errorTimeout = setTimeout(() =>{
-                setErrorMessage(''); 
-                setFormData(initialState);                
+                setErrorMessage('');                  
+                setFormData(initialState);  
+                setIsSubmitted(false);
             }, 2000);
         }
         
@@ -86,7 +91,9 @@ const LoginForm = ({setToken, setUser}) =>{
                 color="primary"
                 type="submit"
                 fullWidth
-                className="submitButton"  // Apply the CSS class
+                // className="submitButton"  // Apply the CSS class
+                className = {`submitButton ${isSubmitted ? 'submitted' : ''}`}
+                disabled={isSubmitted}
             >
                 Submit
             </Button>

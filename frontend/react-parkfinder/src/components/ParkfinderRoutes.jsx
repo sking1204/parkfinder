@@ -103,7 +103,7 @@ const ParkfinderRoutes = () => {
            {/* NEW */}
             <Route path="/users/:username/favorites" element={<FavoritesList user={user} />} />
           <Route path="/review-park" element={<ParksByName/>} />
-          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/signup" element={<SignUpForm setToken={setToken} setUser={setUser} />} />
           <Route path="/users/:username/profile" element={<UserProfile user={user} setUser={setUser} setToken={setToken} />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

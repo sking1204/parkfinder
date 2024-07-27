@@ -13,6 +13,7 @@ function SelectParkResultsCard({ park, onClick }) {
                      display: 'flex',
                      flexDirection: 'column',
                      boxShadow: 3,
+                     marginBottom: 4,
                      }} 
                      onClick={() => onClick(park.parkCode)}>
             <CardActionArea>

@@ -24,15 +24,15 @@
     height: 100%;
   }
   
-  /* .nav-link:hover {
+  .nav-link:hover {
     background-color: #555;
-  } */
+  } 
   
-  /* .nav-right{
+   .nav-right{
     display: inline-block;
     margin-right: 10px;
     
-  } */
+  } 
   
   .nav-right {
     display: flex; /* Changed from inline-block to flex */

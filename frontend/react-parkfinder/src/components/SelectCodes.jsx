@@ -3,6 +3,7 @@ import ParkfinderApi from '../services/ParkfinderApi';
 import { useNavigate } from 'react-router-dom';
 import SelectParkResultsCard from './SelectParkResultsCard';
 import SelectParkCodeResultsCard from './SelectParkCodeResultsCard';
+import './SelectCodes.css';
 
 export default function SelectCodes({ selectedCode }) {
   const [parks, setParks] = useState([]); 
@@ -33,7 +34,7 @@ export default function SelectCodes({ selectedCode }) {
  
 
   if (!selectedCode)  {
-    return <p>Please select a code to view parks.</p>;
+    return <p className='select-code'>Please select a code to view parks.</p>;
   }
 
   const handleParkClick = (parkCode) =>{
