@@ -2,14 +2,17 @@
     color: white;
 }
 
-.button-container {
+.card-div{
+  justify-content: center;
+}
+/* .button-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 10px; /* optional: space between buttons */
-  }
+  /* } */
 
   .park-description-container{ 
     /* border: 5px solid #eee; */
@@ -29,9 +32,12 @@
   }
 
   .review{
-    color: #1976D2;
+    color: #8BC34A;
     font-family: Roboto,Arial, Helvetica, sans-serif;
     font-size: 14px;
+   
+    
+    
   }
 
   /* 
