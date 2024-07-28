@@ -31,11 +31,11 @@ function ReviewsList({park}) {
 //   }
 
 if (reviews.length ===0) {
-    return <div className="reviews">No reviews yet!</div>;
+    return <div className="no-reviews">No reviews yet!</div>;
   }
 
     return (
-        <div className="review-container">
+        <div className="reviews-grid">
             {/* <SearchForm searchFor={search} /> */}
             {reviews.map(review => (
                 <ReviewCard 

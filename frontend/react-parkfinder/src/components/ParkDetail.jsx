@@ -36,7 +36,10 @@ function ParkDetail({user}) {
   
       let res = await ParkfinderApi.saveFavorites(user.username, parkCode, favoriteData);
       console.log("Park res:", res);
-      navigate(`/users/${user.username}/all-saved-favorites`, { state: { user, park, parkCode } });
+      //orig
+      // navigate(`/users/${user.username}/all-saved-favorites`, { state: { user, park, parkCode } });
+      //new 8/1
+      navigate(`/users/${user.username}/favorites`, { state: { user, park, parkCode } });
     } catch (error) {
       console.error('Error saving favorite:', error);
     }
