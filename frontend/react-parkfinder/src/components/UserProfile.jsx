@@ -1,9 +1,10 @@
 //TRYING TO ADD ABILITY TO CHANGE USERNAME:
 
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+// import TextField from '@mui/material/TextField';
+// import Button from '@mui/material/Button';
+// import Box from '@mui/material/Box';
+import { Card, CardContent, TextField, Button, Box } from '@mui/material';
 import ParkfinderApi from '../services/ParkfinderApi';
 
 function UserProfile({ user, setUser, setToken, token }) {
@@ -117,6 +118,81 @@ function UserProfile({ user, setUser, setToken, token }) {
 }
 
 export default UserProfile;
+
+
+  //8/1
+//   return (
+//     <Box
+//       component="form"
+//       onSubmit={handleSubmit}
+//       className="form-style" // Apply the CSS class
+//       data-testid="form-component"
+//     >
+//       <TextField
+//         label="Username"
+//         variant="outlined"
+//         fullWidth
+//         margin="normal"
+//         id="username"
+//         name="username"
+//         value={formData.username}
+//         onChange={handleChange}
+//         className="formField" // Apply the CSS class
+//         data-testid="username-input"
+//       />
+
+//       <TextField
+//         label="First Name"
+//         variant="outlined"
+//         fullWidth
+//         margin="normal"
+//         id="firstName"
+//         name="firstName"
+//         value={formData.firstName}
+//         onChange={handleChange}
+//         className="formField" // Apply the CSS class
+//         data-testid="first-name-input"
+//       />
+//       <TextField
+//         label="Last Name"
+//         variant="outlined"
+//         fullWidth
+//         margin="normal"
+//         id="lastName"
+//         name="lastName"
+//         value={formData.lastName}
+//         onChange={handleChange}
+//         className="formField" // Apply the CSS class
+//         data-testid="last-name-input"
+//       />
+//       <TextField
+//         label="Email"
+//         variant="outlined"
+//         type="email"
+//         fullWidth
+//         margin="normal"
+//         id="email"
+//         name="email"
+//         value={formData.email}
+//         onChange={handleChange}
+//         className="formField" // Apply the CSS class
+//         data-testid="email-input"
+//       />
+//       <Button
+//         variant="contained"
+//         color="primary"
+//         type="submit"
+//         fullWidth
+//         className="submitButton" // Apply the CSS class
+//         data-testid="submit-button"
+//       >
+//         Save Changes
+//       </Button>
+//     </Box>
+//   );
+// }
+
+// export default UserProfile;
 
 
 

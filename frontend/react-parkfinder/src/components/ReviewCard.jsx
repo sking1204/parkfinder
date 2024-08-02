@@ -9,7 +9,8 @@ function ReviewCard({ id,park_code,title,description,created_at, rating, usernam
         sx={{
             marginTop: '20px',
             height: '280px', // Set fixed height
-            overflow: 'auto' // Enable scrolling
+            overflow: 'auto', // Enable scrolling
+            backgroundColor: 'white'
         }}>
           
           <CardContent>

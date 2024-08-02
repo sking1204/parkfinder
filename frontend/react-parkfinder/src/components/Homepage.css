@@ -46,6 +46,10 @@
     border-radius: 5px;
 }
 
+.homepage-photo{
+    margin: 5px;
+}
+
 
 
 
@@ -54,7 +58,7 @@
 
 .homepage-header{
     margin: 30px;
-    font-size: 25px;
+    font-size: 30px;
     /* color:#3B403C; */
     color:#689F38;
 
@@ -76,7 +80,7 @@
 .parks-link {
     display: inline-block; /* Ensure the link respects the margin */
     margin: 5px; /* Adjust the margin values as needed */
-    font-size: 16px;
+    font-size: 20px;
     color:#33691E;
 }
 

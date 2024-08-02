@@ -89,20 +89,24 @@ const ReviewForm = ({ user,selectedName }) => {
 
   return (
     <>
-      <div>
-        <h1>Leave a review for: {selectedName}</h1>
-        <h2>Park Code: {parkCode}</h2>
+    {/* <div>
+    <h3>Please leave a review!</h3>
+    </div> */}
+
+      {/* <div>
+        <h3>Leave a review for: {selectedName}</h3>         
+        <h3>Park Code: {parkCode}</h3>
         {user && <h3>Review by: {user.username}</h3>} {/* Displaying current user */}
-      </div>
+      {/* </div> */}
+      <div>
       {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
       {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}
       {/* {isSubmitted && <p className="review-success">Your review has been submitted successfully! Redirecting to the home page...</p>} Success message */}
+      </div>
       <Box
         component="form"
-        sx={{
-          width: 500,
-          maxWidth: '100%',
-        }}
+        className="form-style"
+       data-testid="form-component"
         onSubmit={handleSubmit}
       >
         <TextField
@@ -141,7 +145,7 @@ const ReviewForm = ({ user,selectedName }) => {
           inputProps={{ min: 1, max: 5 }}
         />
         <TextField
-          label={parkCode}
+          label='parkCode'
           variant="outlined"
           fullWidth
           margin="normal"
@@ -151,7 +155,14 @@ const ReviewForm = ({ user,selectedName }) => {
           }}
           className="form-style"
         />
-        <Button type="submit" variant="contained" color="primary" sx={{ marginTop: 2 }}>
+        <Button 
+        type="submit" 
+        variant="contained" 
+        color="primary" 
+        fullWidth
+        className="submitButton"
+        sata-testid="submit-button"        
+        >
           Submit
         </Button>
       </Box>

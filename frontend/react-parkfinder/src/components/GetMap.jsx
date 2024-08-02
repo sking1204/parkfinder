@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '@mui/material';
+import { Card, CardContent, Typography, Button, Box } from '@mui/material';
 import './GetMap.css';
 import ParkfinderApi from '../services/ParkfinderApi';
+
 
 
 const GetMap = ({ park, user, parkCode }) => {
@@ -79,8 +80,8 @@ const GetMap = ({ park, user, parkCode }) => {
 
     const handleSaveMap = async (event) => {
         const mapData = {
-          latitude: latitude,
-          longitude: longitude
+          latitude: latitude.toString(),
+          longitude: longitude.toString(),
          
          
           // cost: event.cost
@@ -108,28 +109,79 @@ const GetMap = ({ park, user, parkCode }) => {
 
         }
       };
+
+      return (
+        <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8', width:'100%' }}>
+          <CardContent>
+            <Typography
+              variant="h4"
+              component="div"
+              gutterBottom
+              sx={{
+                fontWeight: 'bold',
+                fontSize: '25px',
+                color: '#3B403C',
+              }}
+            >
+              Map - {park.fullName}
+            </Typography>
+    
+            {successMessage && (
+              <Typography variant="body2" color="success" sx={{ marginBottom: 2 }}>
+                {successMessage}
+              </Typography>
+            )}
+            {errorMessage && (
+              <Typography variant="body2" color="error" sx={{ marginBottom: 2 }}>
+                {errorMessage}
+              </Typography>
+            )}
+            
+            
+    
+            <Box id="map" sx={{ height: '100vh', width: '100%', border: '3px solid #bbb8b8' }}>
+              {/* This is the mapholder component placeholder! */}
+            </Box>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSaveMap}
+              sx={{ 
+                marginTop: '20px'
+                // marginBottom: 2
+
+               }}
+            >
+              Save Map!
+            </Button>
+          </CardContent>
+        </Card>
+      );
+    };
+    
+    export default GetMap;
     
 
-    return (
-        // <div id="map" >
-        <>
-        <div>
-            <h3>Map - {park.fullName}</h3>
-        </div>               
-        <div>
-            {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
-            {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}
-        </div>
-        <div>
-        <Button className="submit-button"onClick={handleSaveMap}> Save Map !</Button>
-        </div>         
+//     return (
+//         // <div id="map" >
+//         <>
+//         <div>
+//             <h3>Map - {park.fullName}</h3>
+//         </div>               
+//         <div>
+//             {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
+//             {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}
+//         </div>
+//         <div>
+//         <Button className="submit-button"onClick={handleSaveMap}> Save Map !</Button>
+//         </div>         
       
-        <div id="map" style={{ height: '100vh', width: '100%', border: '3px solid #bbb8b8' }}>
-            {/* This is the mapholder component placeholder! */}
-        </div>
+//         <div id="map" style={{ height: '100vh', width: '100%', border: '3px solid #bbb8b8' }}>
+//             {/* This is the mapholder component placeholder! */}
+//         </div>
      
-        </>
-    );
-};
+//         </>
+//     );
+// };
 
-export default GetMap;
+// export default GetMap;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Card, CardContent, CardMedia,Typography, List, ListItem, ListItemText, Grid, Select, MenuItem, Button, Box } from '@mui/material';
 import ParkfinderApi from "../services/ParkfinderApi";
 import stripHtmlTags from "../helper/stripHtmlTags";
 
@@ -16,7 +17,7 @@ const ParkEvents = ({ parkCode, park, user }) => {
   useEffect(() => {
     async function fetchEventsByParkCode() {
       try {
-        const fetchedParks = await ParkfinderApi.getEventsByParkCode(parkCode);
+        const fetchedParks = await ParkfinderApi.getEventsByParkCode(park.parkCode);
         console.log("Fetched Events By Park Code:", fetchedParks.eventsRes.data);
         setFetchedParks(fetchedParks.eventsRes.data);
       } catch (err) {
@@ -88,62 +89,399 @@ const ParkEvents = ({ parkCode, park, user }) => {
   };
 
   return (
-    <div className="park-events">
-      <h2>Events</h2>
-      <h5>Select event to add to your saved items!</h5>
-      
-      {fetchedParks.length > 0 ? (
-        <ul>
-          
-          {fetchedParks.map((event, index) => (
-            <li key={index} className="event-card">
-              <div className="park-event-container">
-              <p><strong>Event Title:</strong> {event.title}</p>
-              <p><strong>Event Type:</strong> {event.types}</p>
-              <p><strong>Description:</strong> {stripHtmlTags(event.description)}</p>
-              <p><strong>Dates:</strong></p>
-              
-              {Array.isArray(event.dates) && (
-                <select onChange={(e) => handleDateChange(e, event.id)}>
-                  <option value="">Select a date</option>
-                  {event.dates.map((date, dateIndex) => (
-                    <option key={dateIndex} value={date}>{date}</option>
-                  ))}
-                </select>
-                
-              )}
-
-              {submittedEvents[event.id] && submittedEvents[event.id].message && (
-                <div className={`message ${submittedEvents[event.id].status ? 'success-message' : 'error-message'}`}>
-                  {submittedEvents[event.id].message}
-                </div>
-              )}
-              {/* {Array.isArray(event.dates) && (
-                <select onChange={(e) => handleDateChange(e, event.id)}>
-                  {event.dates.map((date, dateIndex) => (
-                    <option key={dateIndex} value={date}>{date}</option>
-                  ))}
-                </select>
-              )} */}
-              <div>
-                <button className={`submit-button ${submittedEvents[event.id] ? 'submitted' : ''}`} 
-                disabled={submittedEvents[event.id]} 
-                onClick={() => handleSaveEvent(event)} >Save Event</button>
-              </div>
-              {/* {successMessage && <div className="success-message">{successMessage}</div>}
-                {errorMessage && <div className="error-message">{errorMessage}</div>} */}
-                </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>{park.fullName} has no listed events.</p>
-      )}
-    </div>
+    <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8' }}>
+      <CardContent>
+        <Typography
+          variant="h4"
+          component="div"
+          gutterBottom
+          sx={{
+            fontWeight: 'bold',
+            fontSize: '25px',
+            color: '#3B403C',
+          }}
+        >
+          Events
+        </Typography>
+        <Typography variant="subtitle1" gutterBottom>
+          Select events to add to your saved items!
+        </Typography>
+        
+        {fetchedParks.length > 0 ? (
+          <Grid container spacing={2}>
+            {fetchedParks.map((event, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Card variant="outlined" sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography variant="h5" component="div" sx={{ textAlign: 'left' }}>
+                      {event.title}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '5px' }}>
+                      Event Type: {event.types}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '5px' }}>
+                      Description: {stripHtmlTags(event.description)}
+                    </Typography>
+                    {/* <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '10px', fontSize: '12px' }}>
+                      Dates:
+                    </Typography> */}
+                    {Array.isArray(event.dates) && (
+                      <Select
+                        onChange={(e) => handleDateChange(e, event.id)}
+                        displayEmpty
+                        defaultValue=""
+                        sx={{ marginTop: '30px', width: '50%', height: '10%' }}
+                      >
+                        <MenuItem value=""
+                        
+                        >Select a date</MenuItem>
+                        {event.dates.map((date, dateIndex) => (
+                          <MenuItem key={dateIndex} value={date}>{date}</MenuItem>
+                        ))}
+                      </Select>
+                    )}
+                    {submittedEvents[event.id] && submittedEvents[event.id].message && (
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          marginTop: '10px',
+                          color: submittedEvents[event.id].status ? 'green' : 'red'
+                        }}
+                      >
+                        {submittedEvents[event.id].message}
+                      </Typography>
+                    )}
+                  </CardContent>
+                  <Box sx={{ padding: 2 }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disabled={submittedEvents[event.id]}
+                      onClick={() => handleSaveEvent(event)}
+                      // fullWidth
+                    >
+                      Save Event
+                    </Button>
+                  </Box>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <Typography variant="body2" color="textSecondary">
+            {park.fullName} has no listed events.
+          </Typography>
+        )}
+      </CardContent>
+    </Card>
   );
-}
+};
 
 export default ParkEvents;
+//   return (
+//     <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8' }}>
+//       <CardContent>
+//         <Typography
+//           variant="h4"
+//           component="div"
+//           gutterBottom
+//           sx={{
+//             fontWeight: 'bold',
+//             fontSize: '25px',
+//             color: '#3B403C',
+//           }}
+//         >
+//           Events
+//         </Typography>
+//         <Typography variant="subtitle1" gutterBottom>
+//           Select events to add to your saved items!
+//         </Typography>
+        
+//         {fetchedParks.length > 0 ? (
+//           <Grid container spacing={2}>
+//             {fetchedParks.map((event, index) => (
+//               <Grid item xs={12} sm={6} md={4} key={index}>
+//                 <Card variant="outlined">
+//                   <CardContent>
+//                     <Typography variant="h5" component="div" sx={{ textAlign: 'left' }}>
+//                       Event Title: {event.title}
+//                     </Typography>
+//                     <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '5px' }}>
+//                       Event Type: {event.types}
+//                     </Typography>
+//                     <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '5px' }}>
+//                       Description: {stripHtmlTags(event.description)}
+//                     </Typography>
+//                     <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '10px', fontSize: '12px' }}>
+//                       Dates:
+//                     </Typography>
+//                     {Array.isArray(event.dates) && (
+//                       <Select
+//                         onChange={(e) => handleDateChange(e, event.id)}
+//                         displayEmpty
+//                         defaultValue=""
+//                         sx={{ marginTop: '5px', width: '100%' }}
+//                       >
+//                         <MenuItem value="">Select a date</MenuItem>
+//                         {event.dates.map((date, dateIndex) => (
+//                           <MenuItem key={dateIndex} value={date}>{date}</MenuItem>
+//                         ))}
+//                       </Select>
+//                     )}
+//                     {submittedEvents[event.id] && submittedEvents[event.id].message && (
+//                       <Typography
+//                         variant="body2"
+//                         sx={{
+//                           marginTop: '10px',
+//                           color: submittedEvents[event.id].status ? 'green' : 'red'
+//                         }}
+//                       >
+//                         {submittedEvents[event.id].message}
+//                       </Typography>
+//                     )}
+//                     <Button
+//                       variant="contained"
+//                       color="primary"
+//                       sx={{ marginTop: '10px' }}
+//                       disabled={submittedEvents[event.id]}
+//                       onClick={() => handleSaveEvent(event)}
+//                     >
+//                       Save Event
+//                     </Button>
+//                   </CardContent>
+//                 </Card>
+//               </Grid>
+//             ))}
+//           </Grid>
+//         ) : (
+//           <Typography variant="body2" color="textSecondary">
+//             {park.fullName} has no listed events.
+//           </Typography>
+//         )}
+//       </CardContent>
+//     </Card>
+//   );
+// };
+
+// export default ParkEvents;
+  //grid for cards
+
+//  return (
+//     <div className="park-events">
+//       <Typography variant="h4" component="div" gutterBottom>
+//         Events
+//       </Typography>
+//       <Typography variant="h6" component="div" gutterBottom>
+//         Select event to add to your saved items!
+//       </Typography>
+
+//       {fetchedParks.length > 0 ? (
+//         <Grid container spacing={3}>
+//           {fetchedParks.map((event, index) => (
+//             <Grid item xs={12} sm={6} md={4} key={index}>
+//               <Card variant="outlined">
+//                 <CardContent>
+//                   <Typography variant="h5" component="div" sx={{ textAlign: 'left' }}>
+//                     Event Title: {event.title}
+//                   </Typography>
+//                   <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '5px' }}>
+//                     Event Type: {event.types}
+//                   </Typography>
+//                   <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '5px' }}>
+//                     Description: {stripHtmlTags(event.description)}
+//                   </Typography>
+//                   <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '10px', fontSize: '12px' }}>
+//                     Dates:
+//                   </Typography>
+//                   {Array.isArray(event.dates) && (
+//                     <Select
+//                       onChange={(e) => handleDateChange(e, event.id)}
+//                       displayEmpty
+//                       defaultValue=""
+//                       sx={{ marginTop: '5px', width: '100%' }}
+//                     >
+//                       <MenuItem value="">Select a date</MenuItem>
+//                       {event.dates.map((date, dateIndex) => (
+//                         <MenuItem key={dateIndex} value={date}>{date}</MenuItem>
+//                       ))}
+//                     </Select>
+//                   )}
+//                   {submittedEvents[event.id] && submittedEvents[event.id].message && (
+//                     <Typography
+//                       variant="body2"
+//                       sx={{
+//                         marginTop: '10px',
+//                         color: submittedEvents[event.id].status ? 'green' : 'red'
+//                       }}
+//                     >
+//                       {submittedEvents[event.id].message}
+//                     </Typography>
+//                   )}
+//                   <Button
+//                     variant="contained"
+//                     color="primary"
+//                     sx={{ marginTop: '10px' }}
+//                     disabled={submittedEvents[event.id]}
+//                     onClick={() => handleSaveEvent(event)}
+//                   >
+//                     Save Event
+//                   </Button>
+//                 </CardContent>
+//               </Card>
+//             </Grid>
+//           ))}
+//         </Grid>
+//       ) : (
+//         <Typography variant="body2" color="textSecondary">
+//           {park.fullName} has no listed events.
+//         </Typography>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default ParkEvents;
+
+
+  //updated 8/2
+
+//   return (
+//     <div className="park-events">
+//       <Typography variant="h4" component="div" gutterBottom>
+//         Events
+//       </Typography>
+//       <Typography variant="h6" component="div" gutterBottom>
+//         Select event to add to your saved items!
+//       </Typography>
+
+//       {fetchedParks.length > 0 ? (
+//         <ul style={{ listStyleType: 'none', padding: 0 }}>
+//           {fetchedParks.map((event, index) => (
+//             <li key={index} style={{ marginBottom: '20px' }}>
+//               <Card variant="outlined">
+//                 <CardContent>
+//                   <Typography variant="h5" component="div" sx={{ textAlign: 'left' }}>
+//                     Event Title: {event.title}
+//                   </Typography>
+//                   <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '5px' }}>
+//                     Event Type: {event.types}
+//                   </Typography>
+//                   <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '5px' }}>
+//                     Description: {stripHtmlTags(event.description)}
+//                   </Typography>
+//                   <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '10px', fontSize: '12px' }}>
+//                     Dates:
+//                   </Typography>
+//                   {Array.isArray(event.dates) && (
+//                     <Select
+//                       onChange={(e) => handleDateChange(e, event.id)}
+//                       displayEmpty
+//                       defaultValue=""
+//                       sx={{ marginTop: '5px', width: '100%' }}
+//                     >
+//                       <MenuItem value="">Select a date</MenuItem>
+//                       {event.dates.map((date, dateIndex) => (
+//                         <MenuItem key={dateIndex} value={date}>{date}</MenuItem>
+//                       ))}
+//                     </Select>
+//                   )}
+//                   {submittedEvents[event.id] && submittedEvents[event.id].message && (
+//                     <Typography
+//                       variant="body2"
+//                       sx={{
+//                         marginTop: '10px',
+//                         color: submittedEvents[event.id].status ? 'green' : 'red'
+//                       }}
+//                     >
+//                       {submittedEvents[event.id].message}
+//                     </Typography>
+//                   )}
+//                   <Button
+//                     variant="contained"
+//                     color="primary"
+//                     sx={{ marginTop: '10px' }}
+//                     disabled={submittedEvents[event.id]}
+//                     onClick={() => handleSaveEvent(event)}
+//                   >
+//                     Save Event
+//                   </Button>
+//                 </CardContent>
+//               </Card>
+//             </li>
+//           ))}
+//         </ul>
+//       ) : (
+//         <Typography variant="body2" color="textSecondary">
+//           {park.fullName} has no listed events.
+//         </Typography>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default ParkEvents;
+
+
+
+  //orig
+
+//   return (
+//     <div className="park-events">
+//       <h2>Events</h2>
+//       <h5>Select event to add to your saved items!</h5>
+      
+//       {fetchedParks.length > 0 ? (
+//         <ul>
+          
+//           {fetchedParks.map((event, index) => (
+//             <li key={index} className="event-card">
+//               <div className="park-event-container">
+//               <p><strong>Event Title:</strong> {event.title}</p>
+//               <p><strong>Event Type:</strong> {event.types}</p>
+//               <p><strong>Description:</strong> {stripHtmlTags(event.description)}</p>
+//               <p><strong>Dates:</strong></p>
+              
+//               {Array.isArray(event.dates) && (
+//                 <select onChange={(e) => handleDateChange(e, event.id)}>
+//                   <option value="">Select a date</option>
+//                   {event.dates.map((date, dateIndex) => (
+//                     <option key={dateIndex} value={date}>{date}</option>
+//                   ))}
+//                 </select>
+                
+//               )}
+
+//               {submittedEvents[event.id] && submittedEvents[event.id].message && (
+//                 <div className={`message ${submittedEvents[event.id].status ? 'success-message' : 'error-message'}`}>
+//                   {submittedEvents[event.id].message}
+//                 </div>
+//               )}
+//               {/* {Array.isArray(event.dates) && (
+//                 <select onChange={(e) => handleDateChange(e, event.id)}>
+//                   {event.dates.map((date, dateIndex) => (
+//                     <option key={dateIndex} value={date}>{date}</option>
+//                   ))}
+//                 </select>
+//               )} */}
+//               <div>
+//                 <button className={`submit-button ${submittedEvents[event.id] ? 'submitted' : ''}`} 
+//                 disabled={submittedEvents[event.id]} 
+//                 onClick={() => handleSaveEvent(event)} >Save Event</button>
+//               </div>
+//               {/* {successMessage && <div className="success-message">{successMessage}</div>}
+//                 {errorMessage && <div className="error-message">{errorMessage}</div>} */}
+//                 </div>
+//             </li>
+//           ))}
+//         </ul>
+//       ) : (
+//         <p>{park.fullName} has no listed events.</p>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default ParkEvents;
 
 
 

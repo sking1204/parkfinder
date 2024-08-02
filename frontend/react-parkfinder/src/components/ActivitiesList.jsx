@@ -79,6 +79,7 @@ const ActivitiesList = ({ park, user }) => {
   return (
     <Card sx={{ padding: 2,
      margin: 2,
+     backgroundColor: '#DCEDC8',
       }}>
       <CardContent>
         <Typography  
@@ -98,7 +99,15 @@ const ActivitiesList = ({ park, user }) => {
               <Checkbox
                 checked={isAllChecked}
                 onChange={handleSelectAllChange}
-                disabled={isSubmitted}
+                disabled={isSubmitted} 
+                // sx={{
+                //   '& .MuiSvgIcon-root': {
+                //     color: '#3B403C',
+                //   },
+                // }}
+                // sx={{
+                //   color: 'white',
+                // }}
               />
             }
             label="Select All"
@@ -140,13 +149,15 @@ const ActivitiesList = ({ park, user }) => {
         </form>
       </CardContent>
       <CardActions>
-        <Button
-          component={Link}
-          to={`/parks/parkCode/${park.parkCode}`}
-          onClick={handleBackClick}
-        >
-          Back to Park Details!
-        </Button>
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <Button
+            component={Link}
+            to={`/parks/parkCode/${park.parkCode}`}
+            onClick={handleBackClick}
+          >
+            Back to Park Details!
+          </Button>
+      </Box>
       </CardActions>
     </Card>
   );

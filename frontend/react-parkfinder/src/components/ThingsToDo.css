@@ -1,4 +1,4 @@
-.things-to-do-container{
+/* .things-to-do-container{
    
     border: 3px solid #bbb8b8;
     padding: 16px;
@@ -6,17 +6,20 @@
     list-style: none;
     margin: 0;
       
-}
+} */
 
 .submit-button.submitted {
     background-color: #ccc;
   }
 
-  .todo-container { 
+  /* .todo-container { 
     border: 3px solid #353535;
     /* border: 3px solid #aca8a8; */
-    padding: 20px;
+    /* padding: 20px;
     border-radius: 5px;
-    margin-bottom: 15px; /* Optional: Adds space between items */
-    background-color: #DDDDDD;
+    margin-bottom: 15px; 
+    background-color: #DDDDDD; */
+  /* }  */
+  .things-to-do-container{
+    background-color: #DCEDC8;
   }

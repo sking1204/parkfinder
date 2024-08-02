@@ -21,7 +21,7 @@ const Homepage = ({ user }) => {
                 <Card sx={{ maxWidth: 800,
                             margin: 'auto', 
                             marginTop: 4,
-                            boxShadow: '0px 4px 10px #558B2F)', // Custom colored box shadow
+                            boxShadow: '0px 4px 10px #558B2F', 
                             backgroundColor:'#F1F8E9',
                              }}>
                     <CardMedia
@@ -35,7 +35,7 @@ const Homepage = ({ user }) => {
                             boxSizing:'border-box',
                         }}
                     />
-                    <CardContent>
+                     <CardContent>
                         <Typography 
                         variant="body2" 
                         color="textSecondary" 
@@ -45,9 +45,13 @@ const Homepage = ({ user }) => {
                         >
                             Photo by <a href="https://unsplash.com/@skamenar">Steven Kamenar</a> on <a href="https://unsplash.com/">Unsplash</a>
                         </Typography>
-                    </CardContent>
+                    </CardContent> 
+                    </Card>
+                    </div>
+            
+                    {/* <div className="homepage-photo">Photo by <a href="https://unsplash.com/@skamenar">Steven Kamenar</a> on <a href="https://unsplash.com/">Unsplash</a></div>
                 </Card>
-            </div>
+            </div> */}
                     {/* <div>
                     <Link className="parks-link" to={`/parks`}>Click here to find a park!</Link>
                     </div> */}
@@ -70,7 +74,7 @@ const Homepage = ({ user }) => {
                 <Card sx={{ maxWidth: 800,
                             margin: 'auto', 
                             marginTop: 4,
-                            boxShadow: '0px 4px 10px #558B2F)', // Custom colored box shadow
+                            boxShadow: '0px 4px 10px #558B2F', // Custom colored box shadow
                             backgroundColor:'#F1F8E9',
                              }}>
                     <CardMedia

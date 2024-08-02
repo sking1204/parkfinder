@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import { Link } from "react-router-dom";
+import { Card, CardContent, Checkbox, Button, Typography, Grid, FormControlLabel, Box, CardActions } from '@mui/material';
 import ParkfinderApi from '../services/ParkfinderApi';
 import './ParkFees.css';
 
@@ -68,64 +69,387 @@ const ParkFees = ({ park, user }) => {
   };
 
   return (
-    <>
-    <div className="park-fees">
-      <h2>Entrance Fees</h2>
-      <h5>Select fees/passes to add to your saved items!</h5>
-      {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
-      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}       
-      {park.entranceFees.length > 0 ? (
-        <form onSubmit={handleSubmit}>
-        <ul>
-          {park.entranceFees.map((fee, index) => (
-            <li key={index}>               
-              <p>{fee.title} - <strong>${fee.cost}</strong></p>
-              <label>
-                <input type="checkbox"
-                value={`${fee.title}|${fee.cost}`}
-                  // value={fee.title}
-                  onChange={handleCheckboxChange}
-                  />
-              </label>
-            </li>             
-          ))}
-        </ul>
-        
-        <button type="submit" className="submit-button">Submit</button>
-        </form>
-      ) : (
-        <form onSubmit={handleSubmit}>
-            <p>{park.fullName} is FREE, no entrance pass required!</p>
-            <label>
-              <input
-                type="checkbox"
-                value="Free"
-                onChange={handleCheckboxChange}
-                className={`check-box ${isSubmitted ? 'submitted' : ''}`}
-                disabled={isSubmitted} // Disable checkbox if submitted
-              />
-              This park is free
-            </label>
-            <button
+    <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8' }}>
+      <CardContent>
+        <Typography
+          gutterBottom
+          sx={{
+            fontWeight: 'bold',
+            fontSize: '25px',
+            color: '#3B403C',
+          }}
+        >
+          Entrance Fees
+        </Typography>
+        <Typography variant="subtitle1" gutterBottom>
+          Select fees/passes to add to your saved items!
+        </Typography>
+        {successMessage && (
+          <Typography variant="body2" color="success">
+            {successMessage}
+          </Typography>
+        )}
+        {errorMessage && (
+          <Typography variant="body2" color="error">
+            {errorMessage}
+          </Typography>
+        )}
+        {park.entranceFees.length > 0 ? (
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              {park.entranceFees.map((fee, index) => (
+                <Grid item xs={12} sm={6} md={3} key={index}>
+                  <Card variant="outlined">
+                    <CardContent>
+                      <Typography variant="body1">
+                        {fee.title} - <strong>${fee.cost}</strong>
+                      </Typography>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            value={`${fee.title}|${fee.cost}`}
+                            onChange={handleCheckboxChange}
+                          />
+                        }
+                        label="Select"
+                      />
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+            <Box sx={{ marginTop: 2 }}>
+              <Button
                 type="submit"
-                className={`submit-button ${isSubmitted ? 'submitted' : ''}`}
-                disabled={isSubmitted} // Disable button if submitted
+                variant="contained"
+                color="primary"
+                disabled={isSubmitted}
               >
                 Submit
-              </button>
-              
-            {/* <button type="submit" className="submit-button">Submit</button> */}
+              </Button>
+            </Box>
           </form>
-      )}
-    </div>
-    <div>
-    <Link className="back" to={`/parks/parkCode/${park.parkCode}`} onClick={handleBackClick}>Back to Park Details!</Link>
-    </div>
-    </>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <Typography>
+              {park.fullName} is FREE, no entrance pass required!
+            </Typography>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  value="Free"
+                  onChange={handleCheckboxChange}
+                  disabled={isSubmitted}
+                />
+              }
+              label="This park is free"
+            />
+            <Box sx={{ marginTop: 2 }}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={isSubmitted}
+              >
+                Submit
+              </Button>
+            </Box>
+          </form>
+        )}
+      </CardContent>
+      <CardActions>
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <Button
+            component={Link}
+            to={`/parks/parkCode/${park.parkCode}`}
+            onClick={handleBackClick}
+          >
+            Back to Park Details!
+          </Button>
+        </Box>
+      </CardActions>
+    </Card>
   );
 };
 
 export default ParkFees;
+
+//   return (
+//     <Card
+//       sx={{
+//         padding: 2,
+//         margin: 6,
+//         backgroundColor: '#DCEDC8',
+//         // border: '10px solid #DCEDC8'
+//       }}
+//     >
+//       <CardContent>
+//         <Typography
+//           gutterBottom
+//           sx={{
+//             fontWeight: 'bold',
+//             fontSize: '25px',
+//             color: '#3B403C',
+//           }}
+//         >
+//           Entrance Fees
+//         </Typography>
+//         <Typography variant="subtitle1" gutterBottom>
+//           Select fees/passes to add to your saved items!
+//         </Typography>
+//         {successMessage && (
+//           <Typography variant="body2" color="success">
+//             {successMessage}
+//           </Typography>
+//         )}
+//         {errorMessage && (
+//           <Typography variant="body2" color="error">
+//             {errorMessage}
+//           </Typography>
+//         )}
+//         {park.entranceFees.length > 0 ? (
+//           <form onSubmit={handleSubmit}>
+//             <Grid container spacing={2}>
+//               {park.entranceFees.map((fee, index) => (
+//                 <Grid item xs={12} sm={6} md={3} key={index}>
+//                   <Card variant="outlined">
+//                   <Typography variant="body1">
+//                     {fee.title} - <strong>${fee.cost}</strong>
+//                   </Typography>
+//                   <FormControlLabel
+//                     control={
+//                       <Checkbox
+//                         value={`${fee.title}|${fee.cost}`}
+//                         onChange={handleCheckboxChange}
+//                       />
+//                     }
+//                     label="Select"
+//                   />
+//                   </Card>
+//                 </Grid>
+              
+//               ))}
+             
+//             </Grid>
+//             <Box sx={{ marginTop: 2 }}>
+//               <Button
+//                 type="submit"
+//                 variant="contained"
+//                 color="primary"
+//                 disabled={isSubmitted}
+//               >
+//                 Submit
+//               </Button>
+//             </Box>
+//           </form>
+//         ) : (
+//           <form onSubmit={handleSubmit}>
+//             <Typography>
+//               {park.fullName} is FREE, no entrance pass required!
+//             </Typography>
+//             <FormControlLabel
+//               control={
+//                 <Checkbox
+//                   value="Free"
+//                   onChange={handleCheckboxChange}
+//                   disabled={isSubmitted}
+//                 />
+//               }
+//               label="This park is free"
+//             />
+//             <Box sx={{ marginTop: 2 }}>
+//               <Button
+//                 type="submit"
+//                 variant="contained"
+//                 color="primary"
+//                 disabled={isSubmitted}
+//               >
+//                 Submit
+//               </Button>
+//             </Box>
+//           </form>
+//         )}
+//       </CardContent>
+//       <CardActions>
+//         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+//           <Button
+//             component={Link}
+//             to={`/parks/parkCode/${park.parkCode}`}
+//             onClick={handleBackClick}
+//           >
+//             Back to Park Details!
+//           </Button>
+//         </Box>
+//       </CardActions>
+//     </Card>
+//   );
+// };
+
+// export default ParkFees;
+
+  
+  //   return (
+  //     <Card sx={{ 
+  //       padding: 2, 
+  //       margin: 6,
+  //       backgroundColor: '#DCEDC8',
+  //        }}>
+  //       <CardContent>
+  //         <Typography
+  //           gutterBottom
+  //           sx={{
+  //             fontWeight: 'bold',
+  //             fontSize: '25px',
+  //             color: '#3B403C',
+  //           }}
+  //         >
+  //           Entrance Fees
+  //         </Typography>
+  //         <Typography variant="subtitle1" gutterBottom>Select fees/passes to add to your saved items!</Typography>
+  //         {successMessage && <Typography variant="body2" color="success">{successMessage}</Typography>}
+  //         {errorMessage && <Typography variant="body2" color="error">{errorMessage}</Typography>}
+  //         {park.entranceFees.length > 0 ? (
+  //           <form onSubmit={handleSubmit}>
+  //             <Grid container spacing={2}>
+  //               {park.entranceFees.map((fee, index) => (
+  //                 <Grid item xs={12} sm={6} md={4} key={index}>
+  //                   <Card 
+  //                   variant="outlined"
+                  
+  //                   >
+  //                     <CardContent>
+  //                       <Typography variant="body1">{fee.title} - <strong>${fee.cost}</strong></Typography>
+  //                       <FormControlLabel
+  //                         control={
+  //                           <Checkbox
+  //                             value={`${fee.title}|${fee.cost}`}
+  //                             onChange={handleCheckboxChange}
+  //                           />
+  //                         }
+  //                         label="Select"
+  //                       />
+  //                     </CardContent>
+  //                   </Card>
+  //                 </Grid>
+  //               ))}
+  //             </Grid>
+  //             <Box sx={{ marginTop: 2 }}>
+  //               <Button
+  //                 type="submit"
+  //                 variant="contained"
+  //                 color="primary"
+  //                 disabled={isSubmitted}
+  //               >
+  //                 Submit
+  //               </Button>
+  //             </Box>
+  //           </form>
+  //         ) : (
+  //           <form onSubmit={handleSubmit}>
+  //             <Typography>{park.fullName} is FREE, no entrance pass required!</Typography>
+  //             <FormControlLabel
+  //               control={
+  //                 <Checkbox
+  //                   value="Free"
+  //                   onChange={handleCheckboxChange}
+  //                   disabled={isSubmitted}
+  //                 />
+  //               }
+  //               label="This park is free"
+  //             />
+  //             <Box sx={{ marginTop: 2 }}>
+  //               <Button
+  //                 type="submit"
+  //                 variant="contained"
+  //                 color="primary"
+  //                 disabled={isSubmitted}
+  //               >
+  //                 Submit
+  //               </Button>
+  //             </Box>
+  //           </form>
+  //         )}
+  //       </CardContent>
+  //       <CardActions>
+  //         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+  //           <Button
+  //             component={Link}
+  //             to={`/parks/parkCode/${park.parkCode}`}
+  //             onClick={handleBackClick}
+  //           >
+  //             Back to Park Details!
+  //           </Button>
+  //         </Box>
+  //       </CardActions>
+  //     </Card>
+  //   );
+  // };
+  
+  // export default ParkFees;
+
+
+
+  //orig
+//   return (
+//     <>
+    
+//     <div className="park-fees">
+//       <h2>Entrance Fees</h2>
+//       <h5>Select fees/passes to add to your saved items!</h5>
+//       {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
+//       {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}       
+//       {park.entranceFees.length > 0 ? (
+//         <form onSubmit={handleSubmit}>
+//         <ul>
+//           {park.entranceFees.map((fee, index) => (
+//             <li key={index}>               
+//               <p>{fee.title} - <strong>${fee.cost}</strong></p>
+//               <label>
+//                 <input type="checkbox"
+//                 value={`${fee.title}|${fee.cost}`}
+//                   // value={fee.title}
+//                   onChange={handleCheckboxChange}
+//                   />
+//               </label>
+//             </li>             
+//           ))}
+//         </ul>
+        
+//         <button type="submit" className="submit-button">Submit</button>
+//         </form>
+//       ) : (
+//         <form onSubmit={handleSubmit}>
+//             <p>{park.fullName} is FREE, no entrance pass required!</p>
+//             <label>
+//               <input
+//                 type="checkbox"
+//                 value="Free"
+//                 onChange={handleCheckboxChange}
+//                 className={`check-box ${isSubmitted ? 'submitted' : ''}`}
+//                 disabled={isSubmitted} // Disable checkbox if submitted
+//               />
+//               This park is free
+//             </label>
+//             <button
+//                 type="submit"
+//                 className={`submit-button ${isSubmitted ? 'submitted' : ''}`}
+//                 disabled={isSubmitted} // Disable button if submitted
+//               >
+//                 Submit
+//               </button>
+              
+//             {/* <button type="submit" className="submit-button">Submit</button> */}
+//           </form>
+//       )}
+//     </div>
+//     <div>
+//     <Link className="back" to={`/parks/parkCode/${park.parkCode}`} onClick={handleBackClick}>Back to Park Details!</Link>
+//     </div>
+//     </>
+//   );
+// };
+
+// export default ParkFees;
 
 /* Once selected fee, then show description/details */
 

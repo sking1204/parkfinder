@@ -253,7 +253,7 @@ function ParkDetail({ user }) {
         </div> */}
 
         {showMap && <GetMap park={park} user={user.username} parkCode={parkCode} />}
-        {showActivities && <ActivitiesList park={park} user={user.username} />}
+        {showActivities && <ActivitiesList parCode={parkCode} park={park} user={user.username} />}
         {showFees && <ParkFees park={park} user={user.username} />}
         {showEvents && <ParkEvents parkCode={parkCode} park={park} user={user.username} />}
         {showThingsToDo && <ThingsToDo parkCode={parkCode} park={park} user={user.username} />}
