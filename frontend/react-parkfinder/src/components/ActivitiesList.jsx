@@ -51,7 +51,7 @@ const ActivitiesList = ({ park, user }) => {
     // Check if any activities are selected
     if (checkedActivities.size === 0) {
       setErrorMessage('Please select at least one activity.');
-      setTimeout(() => setErrorMessage(''), 3000);
+      setTimeout(() => setErrorMessage(''), 2000);
       return;
     }
 
@@ -64,11 +64,11 @@ const ActivitiesList = ({ park, user }) => {
       console.log('Activities saved successfully:', response);
       setSuccessMessage('Activities saved successfully!');
       setIsSubmitted(true); // Set submission status to true
-      setTimeout(() => setSuccessMessage(''), 3000);
+      setTimeout(() => setSuccessMessage(''), 2000);
     } catch (error) {
       console.error('Error saving activities:', error);
       setErrorMessage('Failed to save activities. Please try again.');
-      setTimeout(() => setErrorMessage(''), 3000);
+      setTimeout(() => setErrorMessage(''), 2000);
     }
   };
 
@@ -89,25 +89,23 @@ const ActivitiesList = ({ park, user }) => {
           fontSize: '25px',
           color:'#3B403C',
         }}
-        >Activities</Typography>
-        {/* <Typography variant="subtitle1" gutterBottom>Select activities to add to your saved items!</Typography> */}
-        {successMessage && <Typography variant="body2" color="success">{successMessage}</Typography>}
-        {errorMessage && <Typography variant="body2" color="error">{errorMessage}</Typography>}
+        >Activities</Typography> 
+        <Typography variant="subtitle1" gutterBottom>
+          Select activities to add to your saved items!
+        </Typography>        
+        {successMessage && <Typography 
+        className="success-message"       
+        >{successMessage}</Typography>}
+        {errorMessage && <Typography
+        className="error-message"
+        >{errorMessage}</Typography>}
         <form onSubmit={handleSubmit}>
           <FormControlLabel
             control={
               <Checkbox
                 checked={isAllChecked}
                 onChange={handleSelectAllChange}
-                disabled={isSubmitted} 
-                // sx={{
-                //   '& .MuiSvgIcon-root': {
-                //     color: '#3B403C',
-                //   },
-                // }}
-                // sx={{
-                //   color: 'white',
-                // }}
+                disabled={isSubmitted}                 
               />
             }
             label="Select All"
@@ -143,7 +141,7 @@ const ActivitiesList = ({ park, user }) => {
               color="primary"
               disabled={isSubmitted}
             >
-              Submit
+              Save
             </Button>
           </Box>
         </form>
@@ -166,7 +164,7 @@ const ActivitiesList = ({ park, user }) => {
 export default ActivitiesList;
 
 
-
+//OLD CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //box version
 
 // const ActivitiesList = ({ park, user }) => {

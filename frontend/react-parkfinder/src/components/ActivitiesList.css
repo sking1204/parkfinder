@@ -1,5 +1,27 @@
-.park-activities-grid {
-    /* border: 1px solid #bbb8b8; */
+  /* Styling for success/error messages */
+  
+  
+  .success-message {
+    color: green;
+    background-color: #f0fff0;
+    border: 1px solid green;
+    border-radius: 5px;
+  }
+  
+  .error-message {
+    color: red;
+    background-color: #fff0f0;
+    border: 1px solid red;
+    border-radius: 5px;
+  }
+
+
+
+
+
+  /* old code `````````````````````````````
+  .park-activities-grid {
+    border: 1px solid #bbb8b8;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 16px;
@@ -8,7 +30,7 @@
   }
   
   .park-activities-grid li {
-    /* border: 1px solid #bbb8b8; */
+    border: 1px solid #bbb8b8;
     padding: 2px;
     border-radius: 4px;
     text-align: center;
@@ -20,7 +42,7 @@
 
   }
 
-  .submit-button {
+    .submit-button {
     background-color: #1976D2;
     color: white;
     border: none;
@@ -30,7 +52,7 @@
     font-size: 16px;
   }
 
-  .submit-button.submitted {
+    .submit-button.submitted {
     background-color: lightgrey;
     cursor: not-allowed;
   }
@@ -40,14 +62,6 @@
     cursor: not-allowed;
   }
 
-  .success-message {
-    color: green;
-    background-color: #f0fff0;
-    border: 1px solid green;
-  }
+
+
   
-  .error-message {
-    color: red;
-    background-color: #fff0f0;
-    border: 1px solid red;
-  }

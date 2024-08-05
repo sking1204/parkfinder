@@ -1,18 +1,40 @@
-.park-events {
+  /* Styling for success/error messages */
+  
+  .success-message {
+    color: green;
+    background-color: #f0fff0;
+    border: 1px solid green;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .error-message {
+    color: red;
+    background-color: #fff0f0;
+    border: 1px solid red;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+
+
+  /* old code ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* .park-events {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+  } */
   
-  ul {
+  /* ul {
     list-style: none; /* Removes default bullet points or numbering */
-    padding: 0; /* Removes default padding */
-    margin: 0; /* Removes default margin */
-  }
-  
-  li {
+    /* padding: 0; /* Removes default padding */
+    /* margin: 0; Removes default margin */
+  /* } */  
+
+  /* li {
     margin-bottom: 40px; /* Optional: Adds space between list items */
-  }
+  /* } */ 
   /* .event-card {
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -31,17 +53,17 @@
     /* border-radius: 5px;
   } */ 
 
-  .park-event-container { 
+  /* .park-event-container { 
     border: 3px solid #353535;
     /* border: 3px solid #aca8a8; */
-    padding: 20px;
+    /* padding: 20px;
     border-radius: 5px;
     margin-bottom: 15px; /* Optional: Adds space between items */
-    background-color: #DDDDDD;
-  }
+    /* background-color: #DDDDDD; */
+  /* }  */
 
   
-  .event-card h3 {
+  /* .event-card h3 {
     margin-top: 0;
   }
   
@@ -64,27 +86,30 @@
   
   .event-card .submit-button.submitted {
     background-color: #ccc;
-  }
+  } */
   
-  .event-card .success-message,
+  /* .event-card .success-message,
   .event-card .error-message {
     margin-top: 10px;
     padding: 10px;
     border-radius: 5px;
   }
   
-  .event-card .success-message {
+   .event-card .success-message {
     color: green;
     background-color: #f0fff0;
     border: 1px solid green;
-  }
+    border-radius: 5px;
+   } */
+
   
-  .event-card .error-message {
+  
+  /* .event-card .error-message {
     color: red;
     background-color: #fff0f0;
     border: 1px solid red;
-  }
-  
+    border-radius: 5px;
+  } */ 
 
 
 /* .park-events{

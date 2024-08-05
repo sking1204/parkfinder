@@ -1,11 +1,12 @@
-//TRYING TO ADD ABILITY TO CHANGE USERNAME:
+
 
 import React, { useState } from 'react';
 // import TextField from '@mui/material/TextField';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
-import { Card, CardContent, TextField, Button, Box } from '@mui/material';
+import { Card, CardContent, TextField, Button, Box, Typography } from '@mui/material';
 import ParkfinderApi from '../services/ParkfinderApi';
+import './UserProfile.css';
 
 function UserProfile({ user, setUser, setToken, token }) {
 
@@ -17,6 +18,7 @@ function UserProfile({ user, setUser, setToken, token }) {
       };
 
   const [formData, setFormData] = useState(INITIAL_STATE);
+  const [errorMessage, setErrorMessage] = useState("");   
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (evt) => {
@@ -35,6 +37,17 @@ function UserProfile({ user, setUser, setToken, token }) {
       lastName: formData.lastName,
       email: formData.email
     };
+
+     // Basic form validation
+     if (!formData.username || !formData.firstName || !formData.firstName || !formData.lastName || !formData.email) {
+      setErrorMessage("All fields are required.");
+      setTimeout(() => {
+          setErrorMessage('');
+          setIsSubmitted(false);
+      }, 2000);
+      return;
+  }
+
     try {
       ParkfinderApi.token = token;
       let res = await ParkfinderApi.patchUser(user.username, data); // Pass old username here
@@ -53,6 +66,7 @@ function UserProfile({ user, setUser, setToken, token }) {
       className="form-style" // Apply the CSS class
       data-testid="form-component"
     >
+      {errorMessage && <Typography className="error-message">{errorMessage}</Typography>}
       <TextField
         label="Username"
         variant="outlined"

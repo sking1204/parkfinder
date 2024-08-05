@@ -614,13 +614,22 @@ static async saveActivities(username, parkCode, activities) {
       throw new Error("User not found");
     }
   
+  
+  
     // Prepare the data to insert multiple rows for each fee 
     const insertPromises = feeData.map(async (fee) => {
+
+      // Ensure each fee has a title and cost, set default values if missing
+    const title = fee.title || "Unknown Title";
+    const cost = fee.cost || "0.00";
+
+     
+     
       const result = await db.query(
         `INSERT INTO saved_fees (user_id, username,park_code, title, cost)
          VALUES ($1, $2, $3, $4, $5)
          RETURNING id, user_id, username,park_code, title, cost`,
-        [user.id, username, parkCode, fee.title, fee.cost]
+        [user.id, username, parkCode, title, cost]
       );
   
       return result.rows[0];

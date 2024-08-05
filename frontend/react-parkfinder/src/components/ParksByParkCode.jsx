@@ -1,8 +1,5 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import NativeSelect from '@mui/material/NativeSelect';
+import * as React from 'react'; 
+import {Box, InputLabel, FormControl, NativeSelect, CircularProgress} from '@mui/material';
 // import "./ParksByState.css"
 import {useState, useEffect} from 'react';
 import ParkfinderApi from '../services/ParkfinderApi';
@@ -13,10 +10,9 @@ import './ParksByParkCode.css';
 
 export default function ParksByParkCode({ selectedCode, setSelectedCode }) {
 
-  const [parkCodes, setParkCodes] = useState([]);
-  // const [selectedCode, setSelectedCode] = useState("");
+  const [parkCodes, setParkCodes] = useState([]); 
   const [loading, setLoading] = useState(false);
-  // const [showParksByCode, setShowParksByCode] = useState(true);
+
 
   
 
@@ -39,21 +35,20 @@ useEffect(() => {
 
 const handleCodeChange = (evt) =>{
   setSelectedCode(evt.target.value);
-  // Hide ParksByCode once a state is selected
-  // if (evt.target.value) {
-  //   setShowParksByCode(true); 
+ 
   };
-// }
+
 
 
 
 return (
-  <>
-  {/* {showParksByCode &&(
-    <> */}
+  <>  
   <div className="park-by-code">Find Park By ParkCode:</div>
     {loading ? (
+      <>
       <p>Loading, this may take a moment...</p>
+      <CircularProgress />
+      </>
     ): (    
       
     <Box className="nativeselect" sx={{ minWidth: 120 }}>
@@ -82,8 +77,7 @@ return (
           sx={{
             paddingLeft: '10px',
           }}
-        >
-          {/* <option value="" disabled>Select Park by Park Code</option> */}
+        >          
           <option value="" ></option>
           {parkCodes.map((parkCode) => (
             <option key={parkCode} value={parkCode}>
@@ -93,9 +87,7 @@ return (
         </NativeSelect>
       </FormControl>       
     </Box>
-    )}
-    {/* </>     
-    )}     */}
+    )}    
     <SelectCodes selectedCode={selectedCode} loading={loading} />
   </>
 );

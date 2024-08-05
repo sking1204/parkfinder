@@ -4,7 +4,7 @@ import ParkfinderApi from '../services/ParkfinderApi';
 // import Button from '@mui/material/Button';
 // import Stack from '@mui/material/Stack';
 // import { Button, Stack, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { Button, Box, Stack, FormControlLabel, Switch,Card, CardActionArea, CardMedia, CardContent, Typography } from "@mui/material";
+import { Button, Box, Stack, FormControlLabel, Switch,Card, CardActionArea, CardMedia, CardContent, Typography, CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 import GetMap from './GetMap';
 import ActivitiesList from './ActivitiesList';
@@ -67,6 +67,20 @@ function ParkDetail({ user }) {
       console.log("Park saved in state:", park);
     }
   }, [park]);
+
+  // if (loading) {
+  //   return (
+  //     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+  //       <Typography variant="h6" style={{ marginBottom: '20px' }}>Loading...</Typography>
+  //       <CircularProgress />
+        
+  //     </div>
+  //   );
+  // }
+
+  // if (error) {
+  //   return <p>Error loading park details: {error.message}</p>;
+  // }
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading park details: {error.message}</p>;

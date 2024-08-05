@@ -221,7 +221,7 @@ router.post("/:username/saved-fees/:parkCode", async function (req, res, next) {
     const parkCode = req.params.parkCode;  
     const feeData = req.body;  // Note the plural "nps_activity_ids"
 
-    const fees = await User.saveFees(username, parkCode, feeData);
+    let fees = await User.saveFees(username, parkCode, feeData);
 
     return res.json({ fees });
   } catch (err) {
@@ -326,11 +326,24 @@ router.post("/:username/saved-map/:parkCode", async function (req, res, next) {
 router.get("/:username/saved-fees/:parkCode", async function (req, res, next) {
   try {
     const username = req.params.username;
-    const parkCode = req.params.parkCode;  
-   
+    const parkCode = req.params.parkCode;     
 
-    const savedFees = await User.getSavedFees(username, parkCode);
+    let savedFees = await User.getSavedFees(username, parkCode);    
 
+     // If no saved fees are found, insert a default fee with cost $0.00
+     if (savedFees.length === 0) {
+      const defaultFee = {
+        title: "No Fee",
+        cost: "0.00"
+      };
+
+      await User.saveFees(username, parkCode, [defaultFee]);
+
+      // Re-fetch the saved fees after inserting the default fee
+      savedFees = await User.getSavedFees(username, parkCode);
+    }
+
+  
     return res.json({ savedFees });
   } catch (err) {
     return next(err);

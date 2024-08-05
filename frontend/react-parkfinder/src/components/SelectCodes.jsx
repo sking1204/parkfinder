@@ -6,24 +6,27 @@ import SelectParkCodeResultsCard from './SelectParkCodeResultsCard';
 import './SelectCodes.css';
 
 export default function SelectCodes({ selectedCode }) {
-  const [parks, setParks] = useState([]); 
-  // const [loading,setLoding]  = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [parks, setParks] = useState([]);    
   const [selectedPark, setSelectedPark] = useState(null)
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchParks() {
-      // if (selectedCode) {
+    async function fetchParks() {       
         try {
           const fetchedParks = await ParkfinderApi.getParksByParkCode(selectedCode);
           console.log("Fetched parks data:", fetchedParks);
           if (Array.isArray(fetchedParks.park.data)) {
             setParks(fetchedParks.park.data);
+            setLoading(false);
           }else{
             console.error("Fetched data is not an array:", fetchedParks.data);
          }
         } catch (err) {
           console.error("Error fetching parks:", err);
+          setError(err);
+          setLoading(false);
 
         }
       }
@@ -32,11 +35,9 @@ export default function SelectCodes({ selectedCode }) {
     fetchParks();
   }, [selectedCode]);
 
- 
-//removed 7/31 too clutterd
-  // if (!selectedCode)  {
-  //   return <p className='select-code'>Please select a code to view parks.</p>;
-  // }
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading park details: {error.message}</p>;   
+
 
   const handleParkClick = (parkCode) =>{
     setSelectedPark(parkCode)
