@@ -28,7 +28,7 @@ describe('Homepage', () => {
 it('displays the image with correct src path', () => {
     render(<Homepage />);
     const image = screen.getByAltText('Park image');
-    expect(image).toHaveAttribute('src', '../src/assets/background3.jpg');
+    expect(image).toHaveAttribute('src', '/assets/background.jpg');
   });
 
 

@@ -113,8 +113,14 @@ function ParkDetail({ user }) {
         }}
         >
           <FormControlLabel
-            control={<Switch checked={showActivities} onChange={() => setShowActivities(!showActivities)} />}
-            label="See Activities!"
+            control={<Switch 
+              checked={showActivities} 
+              onChange={() => {
+                console.log('show activities:', !showActivities);
+                setShowActivities(!showActivities);
+              }} 
+              />}
+            label="See Activities!"             
           />
           <FormControlLabel
             control={<Switch checked={showFees} onChange={() => setShowFees(!showFees)} />}
@@ -241,28 +247,25 @@ function ParkDetail({ user }) {
 </Button>
 <div>
 <Button
-      onClick={handleNavigate}
-      sx={{
-        mt: 0,
-        marginBottom: '20px',
-        color: '#558B2F',
-        textTransform: 'none',
-        textDecoration: 'underline',
-        padding: 0,
-        '&:hover': {
-          backgroundColor: 'transparent',
-          textDecoration: 'underline',
-        },
-      }}
-    >
-      Add to Favorites
-    </Button>
-    </div>
-  
-
-
-
-
+              component={Link}
+              to={`/users/${user.username}/favorites`}
+              sx={{
+                mt: 0,
+                marginBottom: '20px',
+                color: '#558B2F',
+                textTransform: 'none',
+                textDecoration: 'underline',
+                padding: 0,
+                '&:hover': {
+                  backgroundColor: 'transparent',
+                  textDecoration: 'underline',
+                },
+              }}
+            >
+              Add to Favorites!
+            </Button>
+            </div>
+{/* <Link className="add-to-favorites" to={`/users/${user.username}/reviews/${parkCode}`}>Add to Favorites!</Link>  */}
 
                 </CardContent>
                 
@@ -270,28 +273,17 @@ function ParkDetail({ user }) {
            
         </Card>
 )}
-            
 
-
-
-
-
-        {/* <div className="park-description-container">
-          <p>{park.description}</p>
-          <img src={park.images[0].url} width="400px" alt={park.fullName} />
-
-
-          <div>
-            <Button onClick={handleNavigate}>Save to Favorites!</Button>
-           </div>
-        </div> 
+       
+        
 
         {showMap && <GetMap park={park} user={user.username} parkCode={parkCode} />}
         {showActivities && <ActivitiesList parCode={parkCode} park={park} user={user.username} />}
-        {showFees && <ParkFees park={park} user={user.username} />}
-        {showEvents && <ParkEvents parkCode={parkCode} park={park} user={user.username} />}
-        {showThingsToDo && <ThingsToDo parkCode={parkCode} park={park} user={user.username} />}
-      {/* </Stack> */}
+       {showFees && <ParkFees park={park} user={user.username} />}
+       {showEvents && <ParkEvents parkCode={parkCode} park={park} user={user.username} />}
+        {showThingsToDo && <ThingsToDo parkCode={parkCode} park={park} user={user.username} />}         
+         
+        
       </Box>
 
      

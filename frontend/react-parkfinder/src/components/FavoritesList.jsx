@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {Grid,Container} from '@mui/material';
+import {Grid,Container, Typography} from '@mui/material';
 // import UserContext from '../contexts/UserContext';
 import ParkfinderApi from '../services/ParkfinderApi';
 import FavoriteCard from './FavoriteCard';
@@ -30,7 +30,7 @@ function FavoritesList({ user }) {
   
     return (
         <>
-        <h3>Favorites</h3>
+        <Typography variant="h5" sx={{ marginBottom: '20px' }}>Reviews</Typography>
       <div className="favorites-grid">
         {favorites.map(favorite => (
           <FavoriteCard
