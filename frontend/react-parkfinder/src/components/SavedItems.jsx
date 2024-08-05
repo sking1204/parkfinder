@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import ParkfinderApi from "../services/ParkfinderApi";
 // import { Card, CardContent, Typography, List, ListItem, ListItemText } from '@mui/material';
-import { Card, CardContent, Typography, Grid, FormControlLabel, Box, CardActions, List, ListItem,ListItemText } from '@mui/material';
+import { Card, CardContent, Typography, Grid, FormControlLabel, Box, CardActions, List, ListItem,ListItemText} from '@mui/material';
 
-import './SavedItems.css';
+// import './SavedItems.css';
 
 const SavedItems = ({ user }) => {
   const [savedItems, setSavedItems] = useState(null);
@@ -56,6 +56,11 @@ const SavedItems = ({ user }) => {
                               <Typography component="span">Activity ID: {activity.id}</Typography>
                               <br />
                               <Typography component="span">Park Code: {activity.park_code}</Typography>
+                              <br />
+                              <Typography component="span" sx={{fontSize:'12px'}}>Saved At:{new Date(activity.created_at).toLocaleString()}</Typography>
+                              {/* <Typography component="span">Saved At: {activity.created_at}</Typography> */}
+                            
+                              
                             </>
                           }
                         />
@@ -90,6 +95,9 @@ const SavedItems = ({ user }) => {
                               <Typography component="span"><strong>Park Code:</strong> {event.park_code}</Typography>
                               <br />
                               <Typography component="span"><strong>Selected Date:</strong> {event.selected_date}</Typography>
+                              <br />
+                              <Typography component="span" sx={{fontSize:'12px'}}>Saved At:{new Date(event.created_at).toLocaleString()}</Typography>
+                           
                             </>
                           }
                         />
@@ -122,6 +130,8 @@ const SavedItems = ({ user }) => {
                               <Typography component="span"><strong>Cost:</strong> {fee.cost}</Typography>
                               <br />
                               <Typography component="span"><strong>Park Code:</strong> {fee.park_code}</Typography>
+                              <br />
+                              <Typography component="span" sx={{fontSize:'12px'}}>Saved At:{new Date(fee.created_at).toLocaleString()}</Typography>
                             </>
                           }
                         />
@@ -154,6 +164,8 @@ const SavedItems = ({ user }) => {
                               <Typography component="span"><strong>Latitude:</strong> {map.latitude}</Typography>
                               <br />
                               <Typography component="span"><strong>Longitude:</strong> {map.longitude}</Typography>
+                              <br />
+                              <Typography component="span" sx={{fontSize:'12px'}}>Saved At:{new Date(map.created_at).toLocaleString()}</Typography>
                             </>
                           }
                         />
@@ -187,7 +199,9 @@ const SavedItems = ({ user }) => {
                               <br />
                               <Typography component="span"><strong>Location Description:</strong> {todo.location_description}</Typography>
                               <br />
-                              <Typography component="span"><strong>Park Code:</strong> {todo.park_code}</Typography>
+                              <Typography component="span" ><strong>Park Code:</strong> {todo.park_code}</Typography>
+                              <br />
+                              <Typography component="span" >Saved At:{new Date(todo.created_at).toLocaleString()}</Typography>
                             </>
                           }
                         />

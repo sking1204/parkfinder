@@ -127,7 +127,7 @@ const ParkEvents = ({ parkCode, park, user }) => {
     <Card sx={{ padding: 2,
      margin: 2,
      backgroundColor: '#DCEDC8',
-     width: '100%',
+     width: '1216px',
    
 
        }}>
@@ -205,7 +205,7 @@ const ParkEvents = ({ parkCode, park, user }) => {
             ))}
           </Grid>
         ) : (
-          <Card variant="outlined" sx={{ marginTop: 2, width:'1216px' }}>
+          <Card variant="outlined" sx={{ marginTop: 2 }}>
             <CardContent>
           {/* <Typography variant="body2" color="textSecondary"> */}
           <Typography >

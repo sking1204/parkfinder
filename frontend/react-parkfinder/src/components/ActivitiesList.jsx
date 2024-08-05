@@ -80,6 +80,7 @@ const ActivitiesList = ({ park, user }) => {
     <Card sx={{ padding: 2,
      margin: 2,
      backgroundColor: '#DCEDC8',
+     width: "1216px"
       }}>
       <CardContent>
         <Typography  

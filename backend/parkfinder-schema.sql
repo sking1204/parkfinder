@@ -30,7 +30,8 @@ CREATE TABLE maps (
   description TEXT,  
   latitude TEXT,
   longitude TEXT,
-  park_code TEXT   
+  park_code TEXT, 
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     
 );
 

@@ -464,7 +464,7 @@ router.get("/:username/all-saved-events", async function (req, res, next) {
 // });
 
 //7/17 NEW ADDED LOGIC TO UPDATE USERNAME:
-router.patch("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
+router.patch("/:username", async function (req, res, next) {
   try{
     const validator = jsonschema.validate(req.body, userUpdateSchema);
     if(!validator.valid){

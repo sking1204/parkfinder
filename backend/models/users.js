@@ -580,7 +580,7 @@ static async saveActivities(username, parkCode, activities) {
     }
   
     // Prepare the query and parameters
-    let query = `SELECT id, user_id, username, todo_id,park_code, title, short_description,location_description
+    let query = `SELECT id, user_id, username, todo_id,park_code, title, short_description,location_description, created_at
                  FROM saved_todo_things
                  WHERE user_id = $1`;
     const params = [user.id];
@@ -683,7 +683,7 @@ static async saveActivities(username, parkCode, activities) {
     }
   
     // Prepare the query and parameters
-    let query = `SELECT id, user_id, username, park_code, latitude, longitude 
+    let query = `SELECT id, user_id, username, park_code, latitude, longitude, created_at
                  FROM maps 
                  WHERE user_id = $1`;
     const params = [user.id];
@@ -775,7 +775,7 @@ static async saveActivities(username, parkCode, activities) {
     }
   
     // Prepare the query and parameters
-    let query = `SELECT id, user_id, username, nps_activity_id,park_code, name
+    let query = `SELECT id, user_id, username, nps_activity_id,park_code, name, created_at
                  FROM saved_activities
                  WHERE user_id = $1`;
     const params = [user.id];
@@ -806,7 +806,7 @@ static async saveActivities(username, parkCode, activities) {
     }
   
     // Prepare the query and parameters
-    let query = `SELECT id, user_id, username, event_id,park_code, title,description,selected_date
+    let query = `SELECT id, user_id, username, event_id,park_code, title,description,selected_date, created_at
                  FROM saved_events
                  WHERE user_id = $1`;
     const params = [user.id];
@@ -840,7 +840,7 @@ static async saveActivities(username, parkCode, activities) {
     }
   
     // Prepare the query and parameters
-    let query = `SELECT id, user_id, username, park_code, title, cost 
+    let query = `SELECT id, user_id, username, park_code, title, cost, created_at 
                  FROM saved_fees 
                  WHERE user_id = $1`;
     

@@ -73,7 +73,7 @@ const ParkFees = ({ park, user }) => {
   };
 
   return (
-    <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8' }}>
+    <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8', width:"1216px" }}>
       <CardContent>
         <Typography           
           sx={{

@@ -86,7 +86,7 @@ const ThingsToDo =({ parkCode, park, user }) => {
   if (error) return <p>Error loading park details: {error.message}</p>;
 
   return (
-    <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8' }}>
+    <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8', width:'1216px' }}>
       <CardContent>
         <Typography
           variant="h4"
@@ -145,9 +145,13 @@ const ThingsToDo =({ parkCode, park, user }) => {
             ))}
           </Grid>
         ) : (
-          <Typography variant="body2" color="textSecondary">
+          <Card variant="outlined" sx={{marginTop:2}}>
+          <CardContent>
+          <Typography>
             {park.fullName} has no listed events.
           </Typography>
+          </CardContent>
+          </Card>
         )}
       </CardContent>
     </Card>

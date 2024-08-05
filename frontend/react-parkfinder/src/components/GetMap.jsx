@@ -111,7 +111,7 @@ const GetMap = ({ park, user, parkCode }) => {
       };
 
       return (
-        <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8', width:'100%' }}>
+        <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8', width:'1216px' }}>
           <CardContent>
             <Typography
               variant="h4"
@@ -126,16 +126,8 @@ const GetMap = ({ park, user, parkCode }) => {
               Map - {park.fullName}
             </Typography>
     
-            {successMessage && (
-              <Typography variant="body2" color="success" sx={{ marginBottom: 2 }}>
-                {successMessage}
-              </Typography>
-            )}
-            {errorMessage && (
-              <Typography variant="body2" color="error" sx={{ marginBottom: 2 }}>
-                {errorMessage}
-              </Typography>
-            )}
+        {successMessage && <Typography className="success-message" marginBottom="20px">{successMessage}</Typography>}
+        {errorMessage && <Typography className="error-message" marginBottom="20px">{errorMessage}</Typography>}
             
             
     
@@ -146,6 +138,7 @@ const GetMap = ({ park, user, parkCode }) => {
               variant="contained"
               color="primary"
               onClick={handleSaveMap}
+              disabled={isSubmitted}
               sx={{ 
                 marginTop: '20px'
                 // marginBottom: 2
