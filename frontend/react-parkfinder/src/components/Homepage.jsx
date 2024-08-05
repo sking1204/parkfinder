@@ -27,7 +27,7 @@ const Homepage = ({ user }) => {
                     <CardMedia
                         component="img"
                         height="450"
-                        image="../src/assets/background.jpg" // Ensure the path is correct
+                        image="/assets/background.jpg" // Ensure the path is correct
                         alt="Park image"
                         sx={{
                             // border: '5px solid #C5E1A5', /* Add border */
@@ -80,7 +80,7 @@ const Homepage = ({ user }) => {
                     <CardMedia
                         component="img"
                         height="450"
-                        image="../src/assets/background.jpg" // Ensure the path is correct
+                        image="/assets/background.jpg" // Ensure the path is correct
                         alt="Park image"
                         sx={{
                             // border: '5px solid #C5E1A5', /* Add border */
