@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import './ParkCard.css';
+// import './ParkCard.css';
 
 
 function ParkCard({ id,name,description,image }) {
