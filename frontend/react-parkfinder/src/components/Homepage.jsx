@@ -1,16 +1,16 @@
-import "./Homepage.css"
 import {Link} from "react-router-dom";
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import FindParks from "./FindParks";
 import ParksByState from "./ParksByState";
 import ParksByParkCode from "./ParksByParkCode";
 import FormTextArea from "./ReviewForm";
+import "./Homepage.css"
+
 
 const Homepage = ({ user }) => {
     return (
         <>
-            {/* <ParksByState />
-            <ParksByParkCode /> */}
+         
             {user ? (
                 <div className="homepage-logged-in">
                     <h1 className="homepage-header">Welcome, {user.username}!</h1>
