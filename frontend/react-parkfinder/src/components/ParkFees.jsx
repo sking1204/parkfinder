@@ -122,7 +122,7 @@ const ParkFees = ({ park, user }) => {
                 color="primary"
                 disabled={isSubmitted}
               >
-                Submit
+                Save
               </Button>
             </Box>
           </form>
@@ -159,7 +159,7 @@ const ParkFees = ({ park, user }) => {
                 disabled={isSubmitted}
                 onClick={handleSubmit}
               >
-                Submit
+                Save
               </Button>
             </Box>
           </Grid>

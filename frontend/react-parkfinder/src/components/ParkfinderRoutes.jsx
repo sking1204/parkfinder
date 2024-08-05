@@ -80,7 +80,10 @@ const ParkfinderRoutes = () => {
           {/* HARDCODING THIS TO FL PARKS FOR NOW... */}
           {/* <Route path="/parks/FL-parks" element={<ParksList />} /> */}
           <Route path="/parks/stateCode" element={<ParksByState  />} />
+          {/* orig */}
           <Route path="/parks/parkCode" element={<ParksByParkCode user={user} />} />
+          {/* updated 8/5 */}
+          <Route path="/parks/parkCode" element={<ParksByParkCode />} />
           <Route path="/parks/stateCode/:stateCode" element={<SelectParks user={user} />} />
           <Route path="/parks/parkCode/:parkCode" element={<ParkDetail user={user}  />} />
           <Route path="/parks/parkCode/:parkCode/review" element={<ParkReview />} />

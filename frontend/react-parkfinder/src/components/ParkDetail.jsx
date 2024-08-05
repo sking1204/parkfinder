@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import ParkfinderApi from '../services/ParkfinderApi';
-// import Button from '@mui/material/Button';
-// import Stack from '@mui/material/Stack';
-// import { Button, Stack, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import ParkfinderApi from '../services/ParkfinderApi'; 
 import { Button, Box, Stack, FormControlLabel, Switch,Card, CardActionArea, CardMedia, CardContent, Typography, CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 import GetMap from './GetMap';
 import ActivitiesList from './ActivitiesList';
 import ParkFees from './ParkFees';
-import ParkEvents from './ParkEvents';
-// import UserContext from '../contexts/UserContext';
+import ParkEvents from './ParkEvents'; 
 import ThingsToDo from './ThingsToDo';
 import './ParkDetail.css';
 

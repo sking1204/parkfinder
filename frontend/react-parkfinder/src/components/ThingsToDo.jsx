@@ -9,97 +9,93 @@ import ParkfinderApi from "../services/ParkfinderApi";
 import stripHtmlTags from "../helper/stripHtmlTags";
 import "./ThingsToDo.css"
 
-
-
-const ThingsToDo =({ parkCode, park, user }) => {
-
-  const[fetchedParks, setFetchedParks] = useState([]);
-  const [savedTodos, setSavedTodos] = useState([]);
+//new 8/5
+const ThingsToDo = ({ parkCode, park, user }) => {
+  const [fetchedParks, setFetchedParks] = useState([]);
+  const [savedTodos, setSavedTodos] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        async function fetchThingsToDoByParkCode() {
-            try{
-            const fetchedParks = await ParkfinderApi.getThingsToDoByParkCode(parkCode);
-            console.log("Fetched thing to do by park code:", fetchedParks.thingsToDo.data)
-            setFetchedParks(fetchedParks.thingsToDo.data);
-            setLoading(false);
-        } catch (err){
-            console.error("Error fetching things to do: err");
-            setLoading(false);
-        }
-        }
-      
-        fetchThingsToDoByParkCode();
-        
-      }, [parkCode]);
+  useEffect(() => {
+    const fetchThingsToDoByParkCode = async () => {
+      try {
+        const fetchedParks = await ParkfinderApi.getThingsToDoByParkCode(parkCode);
+        console.log("Fetched things to do by park code:", fetchedParks.thingsToDo.data);
+        setFetchedParks(fetchedParks.thingsToDo.data);
+      } catch (err) {
+        console.error("Error fetching things to do:", err);
+        setErrorMessage('Error fetching things to do. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      const handleSavedThingToDo = async (todo) =>{
+    fetchThingsToDoByParkCode();
+  }, [parkCode]);
 
-          // Clear any previous messages
-          setSuccessMessage('');
-          setErrorMessage('');
+  const handleSavedThingToDo = async (todo) => {
+    // Clear previous messages
+    setSuccessMessage('');
+    setErrorMessage('');
 
-        console.log("Saved thing to do", todo)
-        const todoData = {
-          todo_id: todo.id,
-          title: todo.title,
-          short_description: todo.shortDescription,
-          location_description: todo.locationDescription
-          // date: event.selectedDate // Assuming you capture and pass the selected date
-        };
-      
-        try {
-          await ParkfinderApi.saveThingsToDo(user, parkCode, todoData);
-          console.log("Item saved to database:", todoData);
-      //     setSavedTodos([...savedTodos, todo]);
-      //   } catch (err) {
-      //     console.error("Error saving event to database:", err);
-      //   }
-      // };
+    const todoData = {
+      todo_id: todo.id,
+      title: todo.title,
+      short_description: todo.shortDescription,
+      location_description: todo.locationDescription
+      // date: event.selectedDate // Assuming you capture and pass the selected date
+    };
 
-       // Update the savedTodos state
-       setSavedTodos(prevState => ({
+    try {
+      await ParkfinderApi.saveThingsToDo(user, parkCode, todoData);
+      console.log("Item saved to database:", todoData);
+      setSavedTodos(prevState => ({
         ...prevState,
         [todo.id]: { status: true, message: 'Item successfully saved!' }
       }));
-
-      // Clear the success message after 2 seconds
+      setSuccessMessage("Item successfully saved!");
       setTimeout(() => {
+        setSuccessMessage('');
         setSavedTodos(prevState => ({
           ...prevState,
           [todo.id]: { ...prevState[todo.id], message: '' }
         }));
       }, 2000);
     } catch (error) {
-      console.error("Error saving item to database:", err);
+      console.error('Error saving item:', error);
       setErrorMessage('Failed to save item. Please try again.');
       setTimeout(() => setErrorMessage(''), 2000); // Clear error message after 2 seconds
     }
   };
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading park details: {error.message}</p>;
+  if (errorMessage) return <p>Error: {errorMessage}</p>;
 
-  return (
-    <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8', width:'1216px' }}>
+    return (
+    <Card sx={{ padding: 2,
+     margin: 2,
+      backgroundColor: '#DCEDC8',
+       width:'1216px' }}>
       <CardContent>
         <Typography
-          variant="h4"
-          component="div"
+          // variant="h4"
+          // component="div"
           gutterBottom
           sx={{
             fontWeight: 'bold',
             fontSize: '25px',
             color: '#3B403C',
+            
           }}
-        >
-          Things To Do
-        </Typography>
+        >Things To Do</Typography >
+
+        {successMessage && <Typography 
+        className="success-message" marginBottom="20px"       
+        >{successMessage}</Typography>}
+        {errorMessage && <Typography
+        className="error-message" marginBottom="20px"
+        >{errorMessage}</Typography>}
 
         {fetchedParks.length > 0 ? (
           <Grid container spacing={2}>
@@ -159,6 +155,157 @@ const ThingsToDo =({ parkCode, park, user }) => {
 };
 
 export default ThingsToDo;
+
+//old 8/4
+
+// const ThingsToDo =({ parkCode, park, user }) => {
+
+//   const[fetchedParks, setFetchedParks] = useState([]);
+//   const [savedTodos, setSavedTodos] = useState([]);
+//   const [successMessage, setSuccessMessage] = useState('');
+//   const [errorMessage, setErrorMessage] = useState('');
+//   const [isSubmitted, setIsSubmitted] = useState(false);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+
+//     useEffect(() => {
+//         async function fetchThingsToDoByParkCode() {
+//             try{
+//             const fetchedParks = await ParkfinderApi.getThingsToDoByParkCode(parkCode);
+//             console.log("Fetched thing to do by park code:", fetchedParks.thingsToDo.data)
+//             setFetchedParks(fetchedParks.thingsToDo.data);
+//             setLoading(false);
+//         } catch (err){
+//             console.error("Error fetching things to do: err");
+//             setLoading(false);
+//         }
+//         }
+      
+//         fetchThingsToDoByParkCode();
+        
+//       }, [parkCode]);
+
+//       const handleSavedThingToDo = async (todo) =>{
+
+//           // Clear any previous messages
+//           setSuccessMessage('');
+//           setErrorMessage('');
+
+//         console.log("Saved thing to do", todo)
+//         const todoData = {
+//           todo_id: todo.id,
+//           title: todo.title,
+//           short_description: todo.shortDescription,
+//           location_description: todo.locationDescription
+//           // date: event.selectedDate // Assuming you capture and pass the selected date
+//         };
+      
+//         try {
+//           await ParkfinderApi.saveThingsToDo(user, parkCode, todoData);
+//           console.log("Item saved to database:", todoData);
+//       //     setSavedTodos([...savedTodos, todo]);
+//       //   } catch (err) {
+//       //     console.error("Error saving event to database:", err);
+//       //   }
+//       // };
+
+//        // Update the savedTodos state
+//        setSavedTodos(prevState => ({
+//         ...prevState,
+//         [todo.id]: { status: true, message: 'Item successfully saved!' }
+//       }));
+
+//       // Clear the success message after 2 seconds
+//       setTimeout(() => {
+//         setSavedTodos(prevState => ({
+//           ...prevState,
+//           [todo.id]: { ...prevState[todo.id], message: '' }
+//         }));
+//       }, 2000);
+//     } catch (error) {
+//       console.error("Error saving item to database:", err);
+//       setErrorMessage('Failed to save item. Please try again.');
+//       setTimeout(() => setErrorMessage(''), 2000); // Clear error message after 2 seconds
+//     }
+//   };
+
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p>Error loading park details: {error.message}</p>;
+
+//   return (
+//     <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8', width:'1216px' }}>
+//       <CardContent>
+//         <Typography
+//           variant="h4"
+//           component="div"
+//           gutterBottom
+//           sx={{
+//             fontWeight: 'bold',
+//             fontSize: '25px',
+//             color: '#3B403C',
+//           }}
+//         >
+//           Things To Do
+//         </Typography>
+
+//         {fetchedParks.length > 0 ? (
+//           <Grid container spacing={2}>
+//             {fetchedParks.map((todo, index) => (
+//               <Grid item xs={12} sm={6} md={4} key={index}>
+//                 <Card variant="outlined" sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+//                   <CardContent sx={{ flexGrow: 1 }}>
+//                     <Typography variant="h5" component="div" sx={{ textAlign: 'left' }}>
+//                       {todo.title}
+//                     </Typography>
+//                     <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '5px' }}>
+//                       {todo.shortDescription}
+//                     </Typography>
+//                     <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'left', marginTop: '5px' }}>
+//                       {todo.locationDescription}
+//                     </Typography>
+//                     <img width="100%" src={todo.images[0].url} alt={todo.title} style={{ marginTop: '10px' }} />
+//                     {savedTodos[todo.id] && savedTodos[todo.id].message && (
+//                       <Typography
+//                         variant="body2"
+//                         sx={{
+//                           marginTop: '10px',
+//                           color: savedTodos[todo.id].status ? 'green' : 'red',
+//                         }}
+//                       >
+//                         {savedTodos[todo.id].message}
+//                       </Typography>
+//                     )}
+//                   </CardContent>
+//                   <Box sx={{ padding: 2 }}>
+//                     <Button
+//                       variant="contained"
+//                       color="primary"
+//                       disabled={savedTodos[todo.id]}
+//                       onClick={() => handleSavedThingToDo(todo)}
+//                       fullWidth
+//                     >
+//                       Save Event
+//                     </Button>
+//                   </Box>
+//                 </Card>
+//               </Grid>
+//             ))}
+//           </Grid>
+//         ) : (
+//           <Card variant="outlined" sx={{marginTop:2}}>
+//           <CardContent>
+//           <Typography>
+//             {park.fullName} has no listed events.
+//           </Typography>
+//           </CardContent>
+//           </Card>
+//         )}
+//       </CardContent>
+//     </Card>
+//   );
+// };
+
+// export default ThingsToDo;
 
 
 

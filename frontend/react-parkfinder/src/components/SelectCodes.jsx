@@ -36,7 +36,7 @@ export default function SelectCodes({ selectedCode }) {
   }, [selectedCode]);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading park details: {error.message}</p>;   
+  // if (error) return <p>Error loading park details: {error.message}</p>;   
 
 
   const handleParkClick = (parkCode) =>{

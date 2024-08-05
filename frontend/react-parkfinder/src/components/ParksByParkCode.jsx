@@ -12,6 +12,8 @@ export default function ParksByParkCode({ selectedCode, setSelectedCode }) {
 
   const [parkCodes, setParkCodes] = useState([]); 
   const [loading, setLoading] = useState(false);
+ 
+
 
 
   
@@ -19,12 +21,15 @@ export default function ParksByParkCode({ selectedCode, setSelectedCode }) {
 useEffect(() => {
   async function fetchParkCodesList() {
     setLoading(true);
+    
       try{
       const fetchedParks = await ParkfinderApi.getAllParks();
       console.log("Fetched Parks By Code:", fetchedParks.parks.parkCodes);
       setParkCodes(fetchedParks.parks.parkCodes);
+      
   } catch (err){
       console.error("Error fetching parks: err");
+      
   }
   setLoading(false);
   }

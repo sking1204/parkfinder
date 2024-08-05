@@ -26,19 +26,8 @@ class ParkfinderApi {
       }
     }
   
-    // Individual API routes
-  
-    /** Get details on a company by handle. */
-  
-    // static async getCompany(handle) {
-    //   let res = await this.request(`companies/${handle}`);
-    //   return res.company;
-    // }
-  
-    static async getAllFLParks() {
-      let res = await this.request(`parks/FL-parks`);
-      return res;
-    }
+    // Individual API routes  
+
     static async getAllParks() {
       let res = await this.request(`parks/`);
       return res;
