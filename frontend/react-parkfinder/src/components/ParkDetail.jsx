@@ -239,6 +239,30 @@ function ParkDetail({ user }) {
 >
   Leave A Review!
 </Button>
+<div>
+<Button
+      onClick={handleNavigate}
+      sx={{
+        mt: 0,
+        marginBottom: '20px',
+        color: '#558B2F',
+        textTransform: 'none',
+        textDecoration: 'underline',
+        padding: 0,
+        '&:hover': {
+          backgroundColor: 'transparent',
+          textDecoration: 'underline',
+        },
+      }}
+    >
+      Add to Favorites
+    </Button>
+    </div>
+  
+
+
+
+
 
                 </CardContent>
                 
@@ -259,8 +283,8 @@ function ParkDetail({ user }) {
 
           <div>
             <Button onClick={handleNavigate}>Save to Favorites!</Button>
-          </div>
-        </div> */}
+           </div>
+        </div> 
 
         {showMap && <GetMap park={park} user={user.username} parkCode={parkCode} />}
         {showActivities && <ActivitiesList parCode={parkCode} park={park} user={user.username} />}
