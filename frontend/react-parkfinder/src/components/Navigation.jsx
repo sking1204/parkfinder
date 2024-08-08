@@ -1,23 +1,9 @@
-import React from "react";
-// import "./NavBar.css";
+import React from "react"; 
 import { Link,NavLink, useNavigate } from "react-router-dom";
-import './Navigation.css';
-// import { Navbar, Nav, NavItem, NavbarBrand } from "reactstrap";
-
-
-// function Navigation() {
-
-    // const navigate = useNavigate();
-
-    // const handleLogout = () => {
-    //     setToken('');
-    //     setUser(null);
-    //     navigate("/");
-    // }
-
+import './Navigation.css'; 
     
       
-        function Navigation({user, setToken, setUser}) {
+function Navigation({user, setToken, setUser}) {
 
          const navigate = useNavigate();
          
@@ -63,13 +49,8 @@ import './Navigation.css';
                   <NavLink className="nav-link" to={`/users/${user.username}/profile`}>
                     Profile
                   </NavLink>
-                </li>
-           
-                {/* <li className="nav-right">
-                  <NavLink className="nav-link" to="/signup">
-                    Signup
-                  </NavLink>
-                </li>                 */}
+                </li>            
+             
                 <li className="nav-right">
                   <Link className="nav-link" to="/" onClick={handleLogout} >                                  
                     Log out {user.first_name || user.username}
@@ -102,16 +83,7 @@ import './Navigation.css';
                 </li>
               </ul>
           );
-        }
-
-      //   return (
-      //     <nav className="Navigation navbar navbar-expand-md">
-      //       <NavLink className="home-nav-link" to="/">
-      //         Parkfinder
-      //       </NavLink>
-      //       {user ? loggedInNav() : loggedOutNav()}
-      //     </nav>
-      // );
+        }   
     
         return(<div>
           {user ? loggedInNav() : loggedOutNav()}

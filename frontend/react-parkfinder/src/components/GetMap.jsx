@@ -27,9 +27,8 @@ const GetMap = ({ park, user, parkCode }) => {
                 setLongitude(longitude);
 
                 var greenIcon = L.icon({
-                    iconUrl: 'https://cdn-icons-png.freepik.com/256/149/149059.png?ga=GA1.1.1500839574.1718835439&semt=ais_hybrid', // Adjust the path to your images
-                    // iconUrl: 'https://cdn-icons-png.freepik.com/256/149/149059.png?semt=ais_hybrid', // Adjust the path to your images
-                    // shadowUrl: 'path/to/leaf-shadow.png', // Adjust the path to your images
+                    iconUrl: 'https://cdn-icons-png.freepik.com/256/149/149059.png?ga=GA1.1.1500839574.1718835439&semt=ais_hybrid', 
+                 
                 
                     iconSize:     [20, 45], // size of the icon
                     shadowSize:   [50, 64], // size of the shadow
@@ -53,15 +52,8 @@ const GetMap = ({ park, user, parkCode }) => {
                     }).addTo(map);
 
                     // L.marker([latitude, longitude]).addTo(map);
-                    L.marker([latitude, longitude], {icon: greenIcon}).addTo(map);
-
-                 // Add the circle
-                //  L.circle([latitude, longitude], {
-                //     color: 'red',
-                //     fillColor: '#f03',
-                //     fillOpacity: 0.5,
-                //     radius: 500
-                // }).addTo(map);                             
+                    L.marker([latitude, longitude], {icon: greenIcon}).addTo(map); 
+                                       
 
                     return () => {
                         // Clean up the map instance on component unmount
@@ -81,11 +73,8 @@ const GetMap = ({ park, user, parkCode }) => {
     const handleSaveMap = async (event) => {
         const mapData = {
           latitude: latitude.toString(),
-          longitude: longitude.toString(),
+          longitude: longitude.toString(),          
          
-         
-          // cost: event.cost
-          // date: event.selectedDate // Assuming you capture and pass the selected date
         };
       
         try {
@@ -95,17 +84,17 @@ const GetMap = ({ park, user, parkCode }) => {
           
           setSavedMap([...savedMap, map]);
           setSuccessMessage('Map saved successfully!');
-          setIsSubmitted(true); // Set submission status to true
+          setIsSubmitted(true); 
           const successTimeout = setTimeout(() => {
             setSuccessMessage('');
-        }, 3000); // Clear message after 3 seconds
+        }, 3000); 
 
         } catch (err) {
           console.error("Error saving map to database:", err);
           setErrorMessage('Failed to save map. Please try again.');
           const failureTimeout = setTimeout(() => {
             setErrorMessage('');
-        }, 3000); // Clear message after 3 seconds
+        }, 3000); 
 
         }
       };
@@ -131,8 +120,7 @@ const GetMap = ({ park, user, parkCode }) => {
             
             
     
-            <Box id="map" sx={{ height: '100vh', width: '100%', border: '3px solid #bbb8b8' }}>
-              {/* This is the mapholder component placeholder! */}
+            <Box id="map" sx={{ height: '100vh', width: '100%', border: '3px solid #bbb8b8' }}>              
             </Box>
             <Button
               variant="contained"
@@ -140,9 +128,7 @@ const GetMap = ({ park, user, parkCode }) => {
               onClick={handleSaveMap}
               disabled={isSubmitted}
               sx={{ 
-                marginTop: '20px'
-                // marginBottom: 2
-
+                marginTop: '20px'            
                }}
             >
               Save Map!
@@ -155,26 +141,4 @@ const GetMap = ({ park, user, parkCode }) => {
     export default GetMap;
     
 
-//     return (
-//         // <div id="map" >
-//         <>
-//         <div>
-//             <h3>Map - {park.fullName}</h3>
-//         </div>               
-//         <div>
-//             {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
-//             {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}
-//         </div>
-//         <div>
-//         <Button className="submit-button"onClick={handleSaveMap}> Save Map !</Button>
-//         </div>         
-      
-//         <div id="map" style={{ height: '100vh', width: '100%', border: '3px solid #bbb8b8' }}>
-//             {/* This is the mapholder component placeholder! */}
-//         </div>
-     
-//         </>
-//     );
-// };
 
-// export default GetMap;

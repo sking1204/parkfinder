@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import {Grid,Container, Typography} from '@mui/material';
-// import UserContext from '../contexts/UserContext';
+import React, { useState, useEffect} from 'react';
+import {Typography} from '@mui/material'; 
 import ParkfinderApi from '../services/ParkfinderApi';
 import FavoriteCard from './FavoriteCard';
 import './FavoriteCard.css'
@@ -30,7 +29,7 @@ function FavoritesList({ user }) {
   
     return (
         <>
-        <Typography variant="h5" sx={{ marginBottom: '20px' }}>Reviews</Typography>
+        <Typography variant="h5" sx={{ marginBottom: '20px' }}>Favorites</Typography>
       <div className="favorites-grid">
         {favorites.map(favorite => (
           <FavoriteCard
@@ -50,6 +49,9 @@ function FavoritesList({ user }) {
   }
   
   export default FavoritesList;
+
+
+  //OLD CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 //orig

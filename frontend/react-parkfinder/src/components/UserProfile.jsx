@@ -151,6 +151,12 @@ return (
 
 export default UserProfile;
 
+
+
+
+
+
+//OLD CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //     try {
 //       ParkfinderApi.token = token;
 //       let res = await ParkfinderApi.patchUser(user.username, data); // Pass old username here

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ParkfinderApi from '../services/ParkfinderApi';
-import { useNavigate } from 'react-router-dom';
-import SelectParkResultsCard from './SelectParkResultsCard';
+import { useNavigate } from 'react-router-dom'; 
 import SelectParkCodeResultsCard from './SelectParkCodeResultsCard';
 import './SelectCodes.css';
 
@@ -30,13 +29,13 @@ export default function SelectCodes({ selectedCode }) {
 
         }
       }
-    // }
+    
 
     fetchParks();
   }, [selectedCode]);
 
   if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error loading park details: {error.message}</p>;   
+  
 
 
   const handleParkClick = (parkCode) =>{
@@ -46,30 +45,15 @@ export default function SelectCodes({ selectedCode }) {
 
   return (
     <>
-    {/* removed 7/31 */}
-    {/* <div>
-    <h5>Select park to view more details!</h5>        */}
+
 
       <div className="park-list">
-          {parks.map((park) => (
-            // <SelectParkResultsCard key={park.id} park={park} onClick={handleParkClick} />
+          {parks.map((park) => (             
             <SelectParkCodeResultsCard key={park.id} park={park} parks={parks} onClick={handleParkClick} />
           ))}
-        </div>
-      {/* </div> */}
+        </div>      
     </>
   );
 }
 
-// return (
-//   <div>
-//     <h2>Park Code: {selectedCode}</h2>
-//     <ul>
-//       {parks.map((park) => (
-//         <li key={park.id}>{park.fullName}</li>
-//       ))}
-//     </ul>
-//   </div>
-// );
-// }
 

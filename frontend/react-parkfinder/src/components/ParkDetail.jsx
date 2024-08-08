@@ -64,19 +64,7 @@ function ParkDetail({ user }) {
     }
   }, [park]);
 
-  // if (loading) {
-  //   return (
-  //     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
-  //       <Typography variant="h6" style={{ marginBottom: '20px' }}>Loading...</Typography>
-  //       <CircularProgress />
-        
-  //     </div>
-  //   );
-  // }
-
-  // if (error) {
-  //   return <p>Error loading park details: {error.message}</p>;
-  // }
+  
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading park details: {error.message}</p>;
@@ -85,13 +73,7 @@ function ParkDetail({ user }) {
   const shouldShowCard = !(showActivities || showFees || showEvents || showMap || showThingsToDo);
 
   return (
-    <>
-    {/* commented out to make page cleaner - 8/1 */}
-      {/* <div className="park-detail-headers">
-        <h2>{park.fullName}</h2>
-        <h5>Click the links below to hide/show details!</h5>
-      </div> */}
-
+    <>   
     {/* adding box for spacing */}
     <Box 
       sx={{
@@ -99,12 +81,7 @@ function ParkDetail({ user }) {
         flexDirection: 'column',
         alignItems: 'center',
       }}
-    >
-
-      
-
-      {/* <Stack direction="column" spacing={2}
-      > */}
+    >      
         <Stack direction="row" 
         spacing={2} 
         className="switch-container"
@@ -140,10 +117,10 @@ function ParkDetail({ user }) {
           />
         </Stack>
 
-        {/* <Link className="review" to={`/users/${user.username}/reviews/${parkCode}`}>Leave A Review!</Link> */}
+        
 
-{/* ADD Card component instead of div, don't forget save to Favorites link!!!! */}
-{/* Conditionally render the Card based on the combined state */}
+
+ {/*  Conditionally render the Card based on the combined state */}
 {shouldShowCard && park && (
 
 
@@ -154,21 +131,10 @@ function ParkDetail({ user }) {
             
             flexDirection: 'column',
             boxShadow: 3,
-            marginBottom: 4,
-            // '&:hover': {
-            //    transform: 'scale(1.05)',
-            //    boxShadow: 6,
-            //    backgroundColor:'#f0f0f0',
-            // },
+            marginBottom: 4,             
             }} 
-        // <Card  sx={{
-        //     maxWidth: 750, // Set the desired width in pixels
-        //     margin: 'auto', // Center the card
-        //     marginTop: 4,
-        //     boxShadow: 3, // Add subtle shadow for depth
-        //     borderRadius: 2, // Round the corners
-        //              }} 
-                     onClick={() => onClick(park.parkCode)}>
+        
+            onClick={() => onClick(park.parkCode)}>
             <CardActionArea>
                 <CardMedia
                     component="img"
@@ -196,36 +162,18 @@ function ParkDetail({ user }) {
                      }} 
                     >
                         {park.fullName} - {park.parkCode}
-                    </Typography>
-                    {/* <Typography
-                    gutterBottom 
-                    variant="body2" 
-                    color="text.secondary"
-                    sx={{ 
-                        mb: 3, // Add bottom margin
-                        // color: '#33691E',
-                        color:'#3B403C',
-                        fontWeight: '500',
-                        fontSize: '14px',
-
-                    }} 
-                    >
-                        Park Code: {park.parkCode}
-                    </Typography> */}
+                    </Typography>                     
                     <Typography                      
                     variant="body2" 
                     color="text.secondary" 
                     sx={{     
                         mb: 5, // Add bottom margin                     
                         color: '#616161',
-                        textAlign:'left',
-                        // fontWeight: 'bold',
-
+                        textAlign:'left',                       
                     }}                    
                     >
                         {park.description}
-                    </Typography>
-                    {/* <Link className="review" to={`/users/${user.username}/reviews/${parkCode}`}>Leave A Review!</Link> */}
+                    </Typography>                   
                     <Button
   component={Link}
   to={`/users/${user.username}/reviews/${parkCode}`}
@@ -264,9 +212,7 @@ function ParkDetail({ user }) {
             >
               Add to Favorites!
             </Button>
-            </div>
-{/* <Link className="add-to-favorites" to={`/users/${user.username}/reviews/${parkCode}`}>Add to Favorites!</Link>  */}
-
+            </div>  
                 </CardContent>
                 
             </CardActionArea>
@@ -292,6 +238,11 @@ function ParkDetail({ user }) {
 }
 
 export default ParkDetail;
+
+
+
+
+//old Code ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //versison with toggle button
 // function ParkDetail({ user }) {

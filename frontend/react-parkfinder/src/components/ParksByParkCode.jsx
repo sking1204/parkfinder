@@ -1,10 +1,8 @@
 import * as React from 'react'; 
-import {Box, InputLabel, FormControl, NativeSelect, CircularProgress} from '@mui/material';
-// import "./ParksByState.css"
+import {Box, InputLabel, FormControl, NativeSelect, CircularProgress} from '@mui/material'; 
 import {useState, useEffect} from 'react';
 import ParkfinderApi from '../services/ParkfinderApi';
-import SelectCodes from './SelectCodes';
-
+import SelectCodes from './SelectCodes'; 
 import './ParksByParkCode.css';
 
 
@@ -12,11 +10,7 @@ export default function ParksByParkCode({ selectedCode, setSelectedCode }) {
 
   const [parkCodes, setParkCodes] = useState([]); 
   const [loading, setLoading] = useState(false);
- 
-
-
-
-  
+    
 
 useEffect(() => {
   async function fetchParkCodesList() {
@@ -41,9 +35,7 @@ useEffect(() => {
 const handleCodeChange = (evt) =>{
   setSelectedCode(evt.target.value);
  
-  };
-
-
+  }; 
 
 
 return (

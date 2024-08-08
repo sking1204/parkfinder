@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ParkfinderApi from '../services/ParkfinderApi';
-import ParkCard from './ParkCard';
+import ParkCard from '../components/ParkCard';
 import './ParksList.css'
 
 function ParksList() {
@@ -21,15 +21,9 @@ function ParksList() {
         
     }, []);
 
-  /** Triggered by search form submit; reloads companies. */
-//   async function search(name) {
-//     let companies = await JoblyApi.getCompanies(name);
-//     setCompanies(companies);
-//   }
 
     return (
-        <div className="card-container">
-            {/* <SearchForm searchFor={search} /> */}
+        <div className="card-container"> 
             {parks.map(park => (
                 <ParkCard 
                 key={park.id}
@@ -45,18 +39,3 @@ function ParksList() {
 
 export default ParksList;
 
-
-
-
-
-// import "./ParksList.css"
-
-// const ParksList = () =>{
-//     return(
-//         <div className="parkslist">
-//             <h1 className="parkslist-header">This is the Find A Park placeholder page!</h1>
-//         </div>
-//     )
-// }
-
-// export default ParksList;

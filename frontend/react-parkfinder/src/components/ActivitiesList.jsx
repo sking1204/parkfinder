@@ -1,8 +1,6 @@
-//7/18
 
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-// import { Card, CardContent, Checkbox, Button, Typography, Grid, FormControlLabel, Box } from '@mui/material';
+import { Link } from "react-router-dom"; 
 import { Card, CardContent, Checkbox, Button, Typography, Grid, FormControlLabel, Box, CardActions } from '@mui/material';
 import './ActivitiesList.css';
 import ParkfinderApi from '../services/ParkfinderApi';

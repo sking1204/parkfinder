@@ -1,5 +1,5 @@
 import React from 'react';
-import FavoritedParks from './FavoritedParks';
+import FavoritedParks from '../components/FavoritedParks';
 import { useLocation } from 'react-router-dom';
 
 const FavoritedParksWrapper = () => {

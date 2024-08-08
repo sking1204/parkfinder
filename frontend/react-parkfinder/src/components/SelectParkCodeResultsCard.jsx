@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, CardActionArea } from '@mui/material';
-// import './SelectParkCodeResultsCard.css';
+
 
 function SelectParkCodeResultsCard({ park, onClick }) {
     return (
@@ -17,13 +17,7 @@ function SelectParkCodeResultsCard({ park, onClick }) {
                backgroundColor:'#f0f0f0',
             },
             }} 
-        // <Card  sx={{
-        //     maxWidth: 750, // Set the desired width in pixels
-        //     margin: 'auto', // Center the card
-        //     marginTop: 4,
-        //     boxShadow: 3, // Add subtle shadow for depth
-        //     borderRadius: 2, // Round the corners
-        //              }} 
+       
                      onClick={() => onClick(park.parkCode)}>
             <CardActionArea>
                 <CardMedia
@@ -46,9 +40,7 @@ function SelectParkCodeResultsCard({ park, onClick }) {
                     component="div"
                     sx={{
                         color: '#3B403C',
-                        fontWeight: '600',
-                        // color: '#616161',
-                        // fontWeight: 'bold',
+                        fontWeight: '600',                        
                      }} 
                     >
                         {park.fullName}
@@ -58,8 +50,7 @@ function SelectParkCodeResultsCard({ park, onClick }) {
                     variant="body2" 
                     color="text.secondary"
                     sx={{ 
-                        mb: 3, // Add bottom margin
-                        // color: '#33691E',
+                        mb: 3, // Add bottom margin                         
                         color:'#3B403C',
                         fontWeight: '500',
                         fontSize: '14px',
@@ -74,8 +65,7 @@ function SelectParkCodeResultsCard({ park, onClick }) {
                     sx={{     
                         mb: 5, // Add bottom margin                     
                         color: '#616161',
-                        textAlign:'left',
-                        // fontWeight: 'bold',
+                        textAlign:'left',                         
 
                     }}                    
                     >
@@ -88,6 +78,8 @@ function SelectParkCodeResultsCard({ park, onClick }) {
 }
 
 export default SelectParkCodeResultsCard;
+
+//OLD CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // function SelectParkCodeResultsCard({ park, onClick }) {
 //     return (

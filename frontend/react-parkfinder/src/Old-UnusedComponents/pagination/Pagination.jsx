@@ -1,4 +1,4 @@
-import {range} from '../utils';
+import {range} from '../../utils';
 
 const Pagination = ({total, limit, currentPage, selectPage}) =>{
     const pagesCount = Math.ceil(total/limit);

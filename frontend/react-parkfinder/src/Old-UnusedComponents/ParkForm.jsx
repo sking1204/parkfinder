@@ -1,4 +1,4 @@
-// ParkForm.js
+
 import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -41,16 +41,7 @@ const ParkForm = ({ selectedName, selectedCode }) => {
           InputProps={{
             readOnly: true,
           }}
-        />
-        {/* <TextField
-          fullWidth
-          margin="normal"
-          label="Park Description"
-          value={selectedPark.description}
-          InputProps={{
-            readOnly: true
-          }}
-          /> */}
+        />      
             
         <Button type="submit" variant="contained" color="primary" sx={{ marginTop: 2 }}>
           Submit

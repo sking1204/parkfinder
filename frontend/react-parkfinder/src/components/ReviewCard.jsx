@@ -1,7 +1,6 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import { Card, CardContent, CardMedia,Typography, List, ListItem, ListItemText, Grid } from '@mui/material';
-// import "./ReviewCard.css";
+import React from 'react'; 
+import { Card, CardContent, Typography,ListItem, ListItemText, Grid } from '@mui/material';
+
 
 function ReviewCard({ id,park_code,title,description,created_at, rating, username }) {
 
@@ -46,6 +45,11 @@ function ReviewCard({ id,park_code,title,description,created_at, rating, usernam
 };
 
 export default ReviewCard;
+
+
+
+
+/* OLD CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     // return (
     //     <Card variant="outlined"
     //     sx={{

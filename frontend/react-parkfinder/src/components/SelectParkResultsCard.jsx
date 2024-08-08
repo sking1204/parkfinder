@@ -42,9 +42,7 @@ function SelectParkResultsCard({ park, onClick }) {
                     component="div"
                     sx={{
                         color: '#3B403C',
-                        fontWeight: '600',
-                        // color: '#616161',
-                        // fontWeight: 'bold',
+                        fontWeight: '600',                        
                      }} 
                     >
                         {park.fullName}
@@ -54,8 +52,7 @@ function SelectParkResultsCard({ park, onClick }) {
                     variant="body2" 
                     color="text.secondary"
                     sx={{ 
-                        mb: 3, // Add bottom margin
-                        // color: '#33691E',
+                        mb: 3, // Add bottom margin                         
                         color:'#3B403C',
                         fontWeight: '500',
                         fontSize: '14px',
@@ -70,9 +67,7 @@ function SelectParkResultsCard({ park, onClick }) {
                     sx={{     
                         mb: 5, // Add bottom margin                     
                         color: '#616161',
-                        textAlign:'left',
-                        // fontWeight: 'bold',
-
+                        textAlign:'left',                        
                     }}                    
                     >
                         {park.description}
@@ -84,6 +79,8 @@ function SelectParkResultsCard({ park, onClick }) {
 }
 
 export default SelectParkResultsCard;
+
+//OLD CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 // import React from 'react';

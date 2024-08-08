@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardMedia,Typography,  Grid, Select, MenuItem, Button, CircularProgress } from '@mui/material';
+import { Card, CardContent,Typography,  Grid, Select, MenuItem, Button, CircularProgress } from '@mui/material';
 import ParkfinderApi from "../services/ParkfinderApi";
 import stripHtmlTags from "../helper/stripHtmlTags";
 
@@ -8,8 +8,7 @@ import "./ParkEvents.css";
 const ParkEvents = ({ parkCode, park, user }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [fetchedParks, setFetchedParks] = useState([]);  
-  // const [savedEvents, setSavedEvents] = useState([]);
+  const [fetchedParks, setFetchedParks] = useState([]);    
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [submittedEvents, setSubmittedEvents] = useState({}); // Track submission status for each event
@@ -34,8 +33,7 @@ const ParkEvents = ({ parkCode, park, user }) => {
     fetchEventsByParkCode();
   }, [parkCode]);
 
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error loading park details: {error.message}</p>;
+ 
 
   if (loading) {
     return (
@@ -51,17 +49,7 @@ const ParkEvents = ({ parkCode, park, user }) => {
     return <p>Error loading park details: {error.message}</p>;
   }
 
-  // const handleSaveEvent = async (event) => {
-  //   setSavedEvents([...savedEvents, event]);
-  //   console.log("Event saved:", event);
-
-  //   try {
-  //     await ParkfinderApi.saveEvents(username, parkCode, { event_ids});
-  //     console.log("Event saved to database:", event);
-  //   } catch (err) {
-  //     console.error("Error saving event to database:", err);
-  //   }
-  // };
+ 
   const handleSaveEvent = async (event) => {
 
         // Clear any previous messages
@@ -82,25 +70,15 @@ const ParkEvents = ({ parkCode, park, user }) => {
       description: stripHtmlTags(event.description),
       park_code: parkCode,
       date: selectedDates[event.id] // Adding selected date to eventData      
-      // cost: event.cost
-      // date: event.selectedDate // **Nice to have...need to find a way to capture and pass the selected date 
+      
     };
   
     try {
       await ParkfinderApi.saveEvents(user, parkCode, eventData);
       console.log("Event saved to database:", eventData);
       setSuccessMessage('Event successfully saved!');
-      setSubmittedEvents({ ...submittedEvents, [event.id]: true });
-      // setSavedEvents([...savedEvents, event]);
-      setTimeout(() => setSuccessMessage(''), 3000); // Clear success message after 3 seconds
-      // setSubmittedEvents({
-      //   ...submittedEvents,
-      //   [event.id]: { status: true, message: 'Event successfuly saved!' }
-      // });
-      // setTimeout(() => setSubmittedEvents((prev) => ({
-      //   ...prev,
-      //   [event.id]: { ...prev[event.id], message: '' }
-      // })), 2000); // Clear error message after 2 seconds
+      setSubmittedEvents({ ...submittedEvents, [event.id]: true });       
+      setTimeout(() => setSuccessMessage(''), 3000); // Clear success message after 3 seconds       
     
     } catch (err) {
       console.error("Error saving event to database:", err);
@@ -118,11 +96,7 @@ const ParkEvents = ({ parkCode, park, user }) => {
     });
   };
 
-  //newer
 
-//   
-
-//8/3
   return (
     <Card sx={{ padding: 2,
      margin: 2,
@@ -132,9 +106,7 @@ const ParkEvents = ({ parkCode, park, user }) => {
 
        }}>
       <CardContent>
-        <Typography
-          // variant="h4"
-          // component="div"
+        <Typography 
           gutterBottom
           sx={{
             fontWeight: 'bold',
@@ -152,8 +124,7 @@ const ParkEvents = ({ parkCode, park, user }) => {
         {successMessage && <Typography className="success-message" marginBottom="20px">{successMessage}</Typography>}
         {errorMessage && <Typography className="error-message" marginBottom="20px">{errorMessage}</Typography>}
         
-        {fetchedParks.length > 0 ? (
-          // <Grid container spacing={2} >
+        {fetchedParks.length > 0 ? ( 
           <Grid container spacing={2} sx={{ justifyContent: fetchedParks.length > 0 && fetchedParks.length < 4 ? 'center' : 'flex-start' }}>
             {fetchedParks.map((event, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
@@ -206,8 +177,7 @@ const ParkEvents = ({ parkCode, park, user }) => {
           </Grid>
         ) : (
           <Card variant="outlined" sx={{ marginTop: 2 }}>
-            <CardContent>
-          {/* <Typography variant="body2" color="textSecondary"> */}
+            <CardContent>           
           <Typography >
             {park.fullName} has no listed events.
           </Typography>
@@ -220,6 +190,11 @@ const ParkEvents = ({ parkCode, park, user }) => {
 };
 
 export default ParkEvents;
+
+
+
+
+//OLD CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
   //grid for cards

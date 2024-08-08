@@ -2,12 +2,11 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import NativeSelect from '@mui/material/NativeSelect';
-// import "./ParksByState.css"
+import NativeSelect from '@mui/material/NativeSelect'; 
 import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import ParkfinderApi from '../services/ParkfinderApi';
-import ParkReviewForm from './ParkReview';
+
 
 
 export default function ParksByName({onParkSelect}) {
@@ -27,8 +26,7 @@ export default function ParksByName({onParkSelect}) {
 
         // Ensure fetched data is in expected format
         if (Array.isArray(fetchedParks.parks.parkNames) && Array.isArray(fetchedParks.parks.parkCodes)) {
-          setParkNames(fetchedParks.parks.parkNames);
-          // console.log("Fetched Parks All",fetchedParks.parks.parkNames )
+          setParkNames(fetchedParks.parks.parkNames);           
           setParkCodes(fetchedParks.parks.parkCodes);
           setParks(fetchedParks.parks);
           
@@ -52,7 +50,7 @@ export default function ParksByName({onParkSelect}) {
     console.log("Selected name:", selectedName)
     console.log("Selected code:", selectedCode)
     onParkSelect(selectedName, selectedCode)
-    // navigate(`/reviews`)
+    
   }
 
   return (
@@ -81,7 +79,7 @@ export default function ParksByName({onParkSelect}) {
         </FormControl>
       </Box>
 
-      {/* <ParkReviewForm selectedName={selectedName} selectedCode={selectedCode}  /> */}
+     
     </>
   );
 }

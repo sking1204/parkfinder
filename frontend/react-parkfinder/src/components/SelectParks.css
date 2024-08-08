@@ -19,18 +19,13 @@
 
   .select-state-header{
     font-size: 35px;
-    color:#3B403C;
-    /* font-weight: bold; */
+    color:#3B403C;     
     font-weight:600;
-    margin: 15px;
-
+    margin: 15px; 
   }
 
   .select-state-details{
     margin:20px;
-    color:#3B403C;
-    /* color:#616161; */
-    /* color:#3B403C; */
-    font-style:italic;
-    /* font-weight:500; */
+    color:#3B403C;     
+    font-style:italic;     
   }

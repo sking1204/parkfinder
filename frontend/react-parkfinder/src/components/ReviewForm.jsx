@@ -3,8 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import ParkfinderApi from '../services/ParkfinderApi';
-import UserContext from '../contexts/UserContext';
+import ParkfinderApi from '../services/ParkfinderApi'; 
 import "./ReviewForm.css"
 
 const ReviewForm = ({ user,selectedName }) => {
@@ -17,11 +16,9 @@ const ReviewForm = ({ user,selectedName }) => {
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false); // New state for submission status
+  const [isSubmitted, setIsSubmitted] = useState(false); 
   const navigate = useNavigate();
-  const { parkCode } = useParams(); // Assuming username is in the URL parameters
-  // const { user } = useContext(UserContext);
-
+  const { parkCode } = useParams();    
   // Debugging: check the extracted parkCode
   console.log('Extracted parkCode:', parkCode);
 
@@ -61,8 +58,7 @@ const ReviewForm = ({ user,selectedName }) => {
       console.log('Response from leaving review:', review);
 
     } catch (err) {
-      console.error('Error during leaving review:', err);
-      // alert("Failed review");
+      console.error('Error during leaving review:', err);        
       setErrorMessage("Failed to save review. Please try again.")
       const  failureTimeout = setTimeout(() =>{
         setErrorMessage('');
@@ -88,27 +84,16 @@ const ReviewForm = ({ user,selectedName }) => {
   };
 
   return (
-    <>
-    {/* <div>
-    <h3>Please leave a review!</h3>
-    </div> */}
-
-      {/* <div>
-        <h3>Leave a review for: {selectedName}</h3>         
-        <h3>Park Code: {parkCode}</h3>
-        {user && <h3>Review by: {user.username}</h3>} {/* Displaying current user */}
-      {/* </div> */}
-      <div>
-      {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
-      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}
-      {/* {isSubmitted && <p className="review-success">Your review has been submitted successfully! Redirecting to the home page...</p>} Success message */}
-      </div>
+    <>     
       <Box
         component="form"
         className="form-style"
        data-testid="form-component"
         onSubmit={handleSubmit}
       >
+      {successMessage && <p className="success-message">{successMessage}</p>} {/* Conditionally render success message */}
+      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Conditionally render error message */}
+
         <TextField
           label="Review Title"
           variant="outlined"
@@ -175,7 +160,7 @@ export default ReviewForm;
 
 
 
-
+//OLD CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //7/9
 // import React, { useState, useContext } from 'react';
 // import { useNavigate, useParams } from 'react-router-dom';

@@ -1,15 +1,10 @@
 
-
-
-
-
 import { useEffect, useState } from "react";
 import { Card, CardContent, Typography, Button, Grid, Box } from '@mui/material';
-import ParkfinderApi from "../services/ParkfinderApi";
-import stripHtmlTags from "../helper/stripHtmlTags";
+import ParkfinderApi from "../services/ParkfinderApi"; 
 import "./ThingsToDo.css"
 
-//new 8/5
+
 const ThingsToDo = ({ parkCode, park, user }) => {
   const [fetchedParks, setFetchedParks] = useState([]);
   const [savedTodos, setSavedTodos] = useState({});
@@ -43,8 +38,7 @@ const ThingsToDo = ({ parkCode, park, user }) => {
       todo_id: todo.id,
       title: todo.title,
       short_description: todo.shortDescription,
-      location_description: todo.locationDescription
-      // date: event.selectedDate // Assuming you capture and pass the selected date
+      location_description: todo.locationDescription       
     };
 
     try {
@@ -156,6 +150,9 @@ const ThingsToDo = ({ parkCode, park, user }) => {
 
 export default ThingsToDo;
 
+
+
+//OLD CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //old 8/4
 
 // const ThingsToDo =({ parkCode, park, user }) => {

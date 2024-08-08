@@ -15,7 +15,7 @@
   
   .form-style .formField label,
   .form-style .formField input {
-    color: black !important; /* Ensure text color is black */
+    color: black !important; 
   }
   
   .form-style .submitButton {

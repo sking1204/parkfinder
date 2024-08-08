@@ -4,7 +4,7 @@ import { Card, CardContent, Checkbox, Button, Typography, Grid, FormControlLabel
 import ParkfinderApi from '../services/ParkfinderApi';
 import './ParkFees.css';
 
-//new
+
 const ParkFees = ({ park, user }) => {
   const [checkedFees, setCheckedFees] = useState(new Set());
   const [successMessage, setSuccessMessage] = useState('');

@@ -5,26 +5,16 @@
 .card-div{
   justify-content: center;
 }
-/* .button-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px; /* optional: space between buttons */
-  /* } */
 
-  .park-description-container{ 
-    /* border: 5px solid #eee; */
-    /* border: 3px solid rgb(163, 89, 19);  */
+
+  .park-description-container{      
     border: 3px solid #353535;
     padding: 20px;
     border-radius: 5px;
   }
 
   .park-detail-headers{
-    background: #DDDDDD;
-    /* padding: 10px; */
+    background: #DDDDDD;     
     padding: 10px;
     border-radius: 5px;
     margin-top: 10px;
@@ -40,7 +30,4 @@
     
   }
 
-  /* 
-  
-  style={{ border: '1px solid white', padding: '10px' 
-  */
+ 

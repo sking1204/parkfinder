@@ -1,24 +1,13 @@
-import * as React from 'react';
-// import Box from '@mui/material/Box';
-// import InputLabel from '@mui/material/InputLabel';
-// import FormControl from '@mui/material/FormControl';
-// import NativeSelect from '@mui/material/NativeSelect';
-// import CircularProgress from '@mui/material/CircularProgress';
+import * as React from 'react'; 
 import{Box, InputLabel, FormControl, NativeSelect, CircularProgress} from '@mui/material'
 import "./ParksByState.css"
 import {useState, useEffect} from 'react';
 import ParkfinderApi from '../services/ParkfinderApi';
-import SelectParks from './SelectParks';
-import ParksByParkCode from './ParksByParkCode';
+import SelectParks from './SelectParks'; 
 
 
-
-
-
-//7-26 OLD Working
 export default function ParksByState({ selectedState, setSelectedState }) {
-  const [stateCodes, setStateCodes] = useState([]);
-  // const [selectedState, setSelectedState] = useState("");
+  const [stateCodes, setStateCodes] = useState([]);   
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

@@ -41,7 +41,7 @@ export default SavedEvents;
 
 
 
-
+//OLD CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // import stripHtmlTags from "../helper/stripHtmlTags";
 
 // const SavedEvents = ({ savedEvents }) => {

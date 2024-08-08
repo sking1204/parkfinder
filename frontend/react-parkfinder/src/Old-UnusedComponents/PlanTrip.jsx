@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import ParksByName from '../components/ParksByName';
-import ParkForm from '../components/ParkForm';
+import ParkForm from './ParkForm';
 import SavedEvents from '../components/SavedEvents';
 import UserContext from '../contexts/UserContext';
 

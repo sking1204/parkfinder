@@ -1,21 +1,14 @@
-.navbar-nav {
-    /* background-color: #353535; */
+.navbar-nav {     
     background-color:#3B403C;
     color: #fff;
     display: flex; 
-    justify-content: space-between; 
-    /* padding: 10px 20px; */
+    justify-content: space-between;      
     padding: 5px 10px;
     align-items: center;
     border-radius: 5px;
   }
   
-  .nav-link {
-    /* ORIGINAL COLOR */
-    /* color: #fff; */
-    /* old */
-    /* color: #F9F8E9; */
-    /* changed 7/31 */
+  .nav-link {     
     color: white;
     text-decoration: none;
     padding: 10px 15px;
@@ -27,8 +20,7 @@
     height: 100%;
   }
 
-  /* CHECK THIS, I think its getting overriden in index.css 7/31 */
-  
+    
   .nav-link:hover {
     background-color: #555;
   } 
@@ -58,12 +50,7 @@
   }
 
   .parkfinder-link {
-    font-size: 25px; /* Adjust the size as needed */
-    /* color: rgb(197, 150, 88); */
-    /* color:#d0d3e7; */
-    /* color:#638868; */
-    /* color: 	#D1E1D4; */
-    /* color:	#CDDC39; */
+    font-size: 25px;     
     color:	#8BC34A;
     
   }

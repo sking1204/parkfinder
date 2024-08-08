@@ -1,7 +1,6 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import { Card, CardContent, CardMedia,Typography, List, ListItem, ListItemText } from '@mui/material';
-// import "./FavoriteCard.css";
+import React from 'react'; 
+import { Card, CardContent, CardMedia,Typography } from '@mui/material';
+
 
 function FavoriteCard({ id, park_code, description, park_name, created_at, username, image }) {
     return (
@@ -12,10 +11,7 @@ function FavoriteCard({ id, park_code, description, park_name, created_at, usern
           image={image}
           alt={park_name}
         />
-        <CardContent>
-          {/* <Typography variant="h6" component="div">
-            {username}'s Favorites
-          </Typography> */}
+        <CardContent>          
           <Typography variant="h5"
            component="div"
            sx={{
@@ -30,8 +26,7 @@ function FavoriteCard({ id, park_code, description, park_name, created_at, usern
             textAlign: 'left',
             marginTop:'5px',
            }}
-           >
-            {/* Description: {description} */}
+           >             
             {description}
           </Typography>            
 
@@ -62,6 +57,9 @@ function FavoriteCard({ id, park_code, description, park_name, created_at, usern
   
   export default FavoriteCard;
 
+
+
+//old CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // function FavoriteCard({ id, park_code, description, park_name, created_at, username, image }) {
 //     return (

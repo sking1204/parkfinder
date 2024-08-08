@@ -1,19 +1,13 @@
-import { useContext } from "react";
-
 
 import ParksByState from "./ParksByState";
 import ParksByParkCode from "./ParksByParkCode";
-import { useState } from "react";
-
-import TokenContext from "../contexts/TokenContext";
-import UserContext from "../contexts/UserContext";
+import { useState } from "react";  
 import "./FindParks.css";
 
 
 const FindParks = ({user}) =>{  
     const [selectedState,setSelectedState] = useState("");
-    const [selectedCode,setSelectedCode] = useState("");
-    const [showParksByState, setShowParksByState] = useState(false);
+    const [selectedCode,setSelectedCode] = useState("");    
     
     
     return(
@@ -41,6 +35,10 @@ const FindParks = ({user}) =>{
 };
 
 export default FindParks;
+
+
+
+//OLD CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //old
 // const FindParks = ({ user }) => {

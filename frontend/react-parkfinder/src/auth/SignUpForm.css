@@ -34,8 +34,7 @@
   
   .form-style .formField label
    {
-    color: grey;
-    /* color: black !important;  */
+    color: grey;     
   }
   
   .form-style .submitButton {

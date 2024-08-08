@@ -1,8 +1,5 @@
-.review-success{
-    /* display:inline-block; */
-    color: green;
-    /* background-color: rgba(241, 227, 21, 0.815);
-    border-radius: 5px; */
+.review-success{     
+    color: green;    
     background-color: #f0fff0;
     border: 1px solid green;
     font-weight: bold;

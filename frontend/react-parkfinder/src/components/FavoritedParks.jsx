@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react"; 
 import { useLocation } from 'react-router-dom';
 import ParkfinderApi from "../services/ParkfinderApi";
-import './SavedItems.css';
+import './FavoritedParks.css';
 
 const FavoritedParks = () => {
   const location = useLocation();
-  const { user, park, parkCode } = location.state || {}; // Destructure the state
+  // Destructure the state
+  const { user, park, parkCode } = location.state || {}; 
   const [savedFavorites, setSavedFavorites] = useState(null);
   const [error, setError] = useState(null);
 
@@ -72,6 +73,8 @@ export default FavoritedParks;
 
 
 
+
+//OLD CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //MOSTLY WORKING
 // import { useEffect, useState } from "react";

@@ -13,9 +13,7 @@ export default function SelectParks({ selectedState }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchParks() {
-      //removed 7/31 too cluttered
-      // if (selectedState) {
+    async function fetchParks() {       
         try {
           const fetchedParks = await ParkfinderApi.getParksByState(selectedState);
           console.log("Fetched parks data for selected state:", fetchedParks);
@@ -30,18 +28,12 @@ export default function SelectParks({ selectedState }) {
           console.error("Error fetching parks:", err);
 
         }
-      }
-    // }
+      }  
 
     fetchParks();
   }, [selectedState]);
 
-  //removed 7/31 too cluttered
-  // if (!selectedState) {
-  //   return <p className='select-state'>Please select a state to view parks.</p>;
-  // }
-
-  //onclick renders ParkDetail component
+  
   const handleParkClick = (parkCode) =>{
     setSelectedPark(parkCode); // Set the selected park
     navigate(`/parks/parkCode/${parkCode}`);
@@ -51,9 +43,7 @@ export default function SelectParks({ selectedState }) {
     <>
      
     <div>
-      {/* <div className='select-state-header'>Parks in {selectedState}:</div>
-      <div className="select-state-details">Select park to view more details!</div> */}
-
+      
       <div className="park-list">
           {parks.map((park) => (
             <SelectParkResultsCard key={park.id} park={park} parks={parks}onClick={handleParkClick} />
@@ -63,21 +53,3 @@ export default function SelectParks({ selectedState }) {
     </>
   );
 }
-//       {/* <ul>
-//         {parks.map((park) => (
-//           <SelectParkResultsCard
-//           key={parks.id} parks={parks} />
-          
-//           // <li key={park.id} onClick={() =>handleParkClick(park.parkCode)}>
-//           //   {park.fullName} - {`ParkCode: ${park.parkCode}`}</li> 
-        
-//         ))} 
-//       </ul>
-    
-
-     
-//     </div>
-//     {/* <ParkImageGallery parks ={parks}/>     */}
-//     </>
-//   );
-// } */}

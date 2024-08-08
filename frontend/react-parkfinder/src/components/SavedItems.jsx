@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import ParkfinderApi from "../services/ParkfinderApi";
-// import { Card, CardContent, Typography, List, ListItem, ListItemText } from '@mui/material';
-import { Card, CardContent, Typography, Grid, FormControlLabel, Box, CardActions, List, ListItem,ListItemText} from '@mui/material';
+import ParkfinderApi from "../services/ParkfinderApi"; 
+import { Card, CardContent, Typography, Grid, ListItem,ListItemText} from '@mui/material';
 
-// import './SavedItems.css';
+
 
 const SavedItems = ({ user }) => {
   const [savedItems, setSavedItems] = useState(null);
@@ -221,6 +220,9 @@ const SavedItems = ({ user }) => {
 };
 
 export default SavedItems;
+
+
+//OLD CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   //new 7/29
 
