@@ -463,8 +463,9 @@ router.get("/:username/all-saved-events", async function (req, res, next) {
 //   }  
 // });
 
-//7/17 NEW ADDED LOGIC TO UPDATE USERNAME:
-router.patch("/:username", async function (req, res, next) {
+//8/7 WORKING ON FIXING THE AUTH MIDDLEWARE FOR THE PATCH ROUTE
+
+router.patch("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try{
     const validator = jsonschema.validate(req.body, userUpdateSchema);
     if(!validator.valid){
@@ -482,6 +483,29 @@ router.patch("/:username", async function (req, res, next) {
     return next(err);
   }  
 });
+
+
+
+//7/17 NEW ADDED LOGIC TO UPDATE USERNAME:
+//ORIG VERSION SAVED AND USED IN SITE ON RENDER
+// router.patch("/:username", async function (req, res, next) {
+//   try{
+//     const validator = jsonschema.validate(req.body, userUpdateSchema);
+//     if(!validator.valid){
+//       const errs = validator.errors.map(e => e.stack);
+//       throw new BadRequestError(errs)
+//     }
+ 
+//     const oldUsername = req.params.username;
+//     const data = req.body; // Extract data from the request body
+
+//     const updatedUser = await User.update(oldUsername, data);
+
+//     return res.json({ user: updatedUser }); // Match the front end response handling
+//   } catch (err) {
+//     return next(err);
+//   }  
+// });
 
 
 
