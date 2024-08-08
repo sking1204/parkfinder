@@ -121,7 +121,7 @@ const SignUpForm = ({setToken, setUser}) => {
             onSubmit={handleSubmit}
             className="form-style"  // Apply the CSS class
         >
-         {errorMessage && <Typography color="error">{errorMessage}</Typography>}
+         {errorMessage && <Typography className="error-message">{errorMessage}</Typography>}
             <TextField
                 label="Username"
                 variant="outlined"

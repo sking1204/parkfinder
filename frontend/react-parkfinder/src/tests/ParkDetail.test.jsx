@@ -1,9 +1,10 @@
-import { render, screen } from '@testing-library/react' 
+import { render, screen, fireEvent, waitFor } from '@testing-library/react' 
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import ParkDetail from '../components/ParkDetail';
 // import { describe, it, expect } from 'vitest'
 import matchers from '@testing-library/jest-dom'
-import { expect, it } from 'vitest'
+import { expect, it, beforeEavh, vi } from 'vitest'
+import ParkfinderApi from '../services/ParkfinderApi';
 // expect.extend(matchers)
 
 describe('ParksByName', () => {
@@ -18,3 +19,4 @@ describe('ParksByName', () => {
   })
 
 })
+

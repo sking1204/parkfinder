@@ -1,6 +1,8 @@
 .error-message {
-    color: red;
-    margin-bottom: 16px;
+  color: red;
+  background-color: #fff0f0;
+  border: 1px solid red;
+  border-radius: 5px;
 }
 
 .submitButton.submitted {
