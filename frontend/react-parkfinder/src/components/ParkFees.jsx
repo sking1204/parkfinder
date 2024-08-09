@@ -75,7 +75,8 @@ const ParkFees = ({ park, user }) => {
   return (
     <Card sx={{ padding: 2, margin: 2, backgroundColor: '#DCEDC8', width:"1216px" }}>
       <CardContent>
-        <Typography           
+        <Typography 
+        gutterBottom          
           sx={{
             fontWeight: 'bold',
             fontSize: '25px',
@@ -84,11 +85,13 @@ const ParkFees = ({ park, user }) => {
         >
           Entrance Fees
         </Typography>
-        <Typography variant="subtitle1" marginBottom>
+        <Typography variant="subtitle1" gutterBottom>
           Select fees/passes to add to your saved items!
         </Typography>
-        {successMessage && <Typography className="success-message">{successMessage}</Typography>}
-        {errorMessage && <Typography className="error-message">{errorMessage}</Typography>}
+        {successMessage && <Typography className="success-message" 
+        sx={{marginBottom: '20px'}}>{successMessage}</Typography>}
+        {errorMessage && <Typography className="error-message"
+        sx={{marginBottom: '20px'}}>{errorMessage}</Typography>}
 
         {park.entranceFees.length > 0 ? (
           <form onSubmit={handleSubmit}>
@@ -143,6 +146,19 @@ const ParkFees = ({ park, user }) => {
                   }
                   label="This park is free"
                 />
+
+              <Box sx={{ marginTop: 2 }}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitted}
+                onClick={handleSubmit}
+              >
+                Save
+              </Button>
+            </Box>
+                
               </form>
             </CardContent>
           </Card>
@@ -150,7 +166,7 @@ const ParkFees = ({ park, user }) => {
       </CardContent>
       <CardActions>
         <Grid container direction="column" alignItems="center" sx={{ width: '100%' }}>
-          <Grid item>
+          {/* <Grid item>
             <Box sx={{ marginTop: 2 }}>
               <Button
                 type="submit"
@@ -162,7 +178,7 @@ const ParkFees = ({ park, user }) => {
                 Save
               </Button>
             </Box>
-          </Grid>
+          </Grid> */}
           <Grid item>
             <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 2 }}>
               <Button
