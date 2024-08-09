@@ -20,6 +20,7 @@ import SavedItems from "./SavedItems";
 import FavoritedParks from "./FavoritedParks" 
 import FavoritesList from "./FavoritesList"
 import ParksByParkCode from "./ParksByParkCode";
+import ErrorPage from "./ErrorPage";
 import PageNotFound from "./PageNotFound";
 
 
@@ -71,7 +72,9 @@ const ParkfinderRoutes = () => {
           <Route path="/reviews" element={<ReviewsList />} />         
           <Route path="/users/:username/favorites" element={<FavoritesList user={user} />} />         
           <Route path="/signup" element={<SignUpForm setToken={setToken} setUser={setUser} />} />
-          <Route path="/users/:username/profile" element={<UserProfile user={user} setUser={setUser} setToken={setToken} />} />
+          <Route path="/users/:username/profile" element={<UserProfile user={user} setUser={setUser} token={token} setToken={setToken} />} />
+          {/* 8/10 */}
+          <Route path="/error" element={<ErrorPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         </UserContext.Provider>

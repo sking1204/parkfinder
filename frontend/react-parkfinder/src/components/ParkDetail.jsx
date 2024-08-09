@@ -64,9 +64,22 @@ function ParkDetail({ user }) {
     }
   }, [park]);
 
-  
+  if (loading) {
+    return (
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: '100vh' 
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
-  if (loading) return <p>Loading...</p>;
+  // if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading park details: {error.message}</p>;
 
   // Combine the conditions to hide the card
@@ -196,7 +209,7 @@ function ParkDetail({ user }) {
 <div>
 <Button
               component={Link}
-              to={`/users/${user.username}/favorites`}
+              onClick={handleNavigate}
               sx={{
                 mt: 0,
                 marginBottom: '20px',

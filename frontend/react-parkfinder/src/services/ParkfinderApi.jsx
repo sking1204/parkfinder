@@ -6,7 +6,7 @@ class ParkfinderApi {
     // the token for interactive with the API will be stored here.
     static token;
   
-    static async request(endpoint, data = {}, method = "get") {
+    static async request(endpoint, data = {}, method = "get",) {
       console.debug("API Call:", endpoint, data, method);
   
     //   //there are multiple ways to pass an authorization token, this is how you pass it in the header.
@@ -86,10 +86,11 @@ class ParkfinderApi {
       return res.token;
     }
 
-    static async patchUser(username, data) {
-      let res = await this.request(`users/${username}`, data, "patch");
-      ParkfinderApi.token = res.token;
-      console.log("API RESPONSE", res);
+    static async patchUser(username, data, token) {
+      const headers= {Authorization: `Bearer $token`};
+      let res = await this.request(`users/${username}`, data, "patch", headers);
+      // ParkfinderApi.token = res.token;
+      // console.log("API RESPONSE", res);
       return res;
     }
 

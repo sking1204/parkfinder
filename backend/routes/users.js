@@ -478,6 +478,12 @@ router.patch("/:username", ensureCorrectUserOrAdmin, async function (req, res, n
 
     const updatedUser = await User.update(oldUsername, data);
 
+      // If the password was changed, generate a new token
+      let token;
+      if (data.password) {
+        token = createToken(updatedUser);
+      }
+
     return res.json({ user: updatedUser }); // Match the front end response handling
   } catch (err) {
     return next(err);
