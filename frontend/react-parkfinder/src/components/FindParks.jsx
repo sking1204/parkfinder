@@ -25,7 +25,7 @@ const FindParks = ({user}) =>{
         />
         {selectedState  === "" && selectedCode === "" && (
         <div className="img-container">
-          <img src="../src/assets/background.jpg" alt="" />
+          <img src="assets/background.jpg" alt="" />
         </div>
         )}                     
                        
