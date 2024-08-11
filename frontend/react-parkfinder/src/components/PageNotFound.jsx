@@ -35,9 +35,11 @@ const PageNotFound = () => {
                         </Typography>
                     </CardContent> 
                     </Card>
-                    </div>         
+                    </div> 
+                    <div>        
      
                     <Link className="back" to={`/`} >Back to Parkfinder!</Link>
+                    </div>
     </div>
   );
 }
