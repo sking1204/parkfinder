@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 
 
+
 const PageNotFound = () => {
 
   return (
@@ -11,7 +12,8 @@ const PageNotFound = () => {
                 <Card sx={{ maxWidth: 800,
                             margin: 'auto', 
                             marginTop: 4,
-                            borderRadius: '5px'
+                            borderRadius: '5px',
+                            marginBottom: 3
                             
                            
                              }}>
@@ -23,6 +25,7 @@ const PageNotFound = () => {
                         sx={{                             
                             borderRadius: '2px', 
                             boxSizing:'border-box',
+                            
                         }}
                     />
                      <CardContent>
@@ -38,7 +41,8 @@ const PageNotFound = () => {
                     </div> 
                     <div>        
      
-                    <Link className="back" to={`/`} >Back to Parkfinder!</Link>
+                    <Link className="back" to={`/`}
+                     >Back to Parkfinder!</Link>
                     </div>
     </div>
   );
