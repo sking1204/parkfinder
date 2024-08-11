@@ -5,89 +5,9 @@ const axios = require('axios');
 class Park {
     constructor(id){
         this.id = id;
-    }
+    }   
 
-//     async getMapByParkLocation(){
-//         var map = L.map('map').setView([25.97079602, -81.08120629], 10);
-
-// L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     maxZoom: 19,
-    
-//     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-// }).addTo(map);
-//     }
-
-//WILL NEED TO UPDATE THIS TO INCLUDE ALL PARKS IN US
-//LIMITING TO FL FOR NOW FOR RATE LIMITING PURPOSES
-
-    static async getAllFLParks(){
-        const apiKey = key;
-        try{
-            let res = await axios.get(`https://developer.nps.gov/api/v1/parks?stateCode=FL`,
-            {headers:{
-                'X-Api-Key': apiKey
-            }
-        });
-        // console.log(res);
-        return res.data;
-
-        }catch(error){
-        console.error('Error fetching data:', error);
-        }
-    }
-
-    //WORKING VERSION
-    // static async getAllParks() {
-    //     const apiKey = key  
-    //     const baseUrl = 'https://developer.nps.gov/api/v1/parks';
-    //     const limit = 50;  // Maximum allowed limit per request
-    //     let start = 0;
-    //     let allParks = [];
-        
-    
-    //     try {
-    //       // Initial request to get the total number of results and the first set of data
-    //       let res = await axios.get(baseUrl, {
-    //         headers: {
-    //           'X-Api-Key': apiKey
-    //         },
-    //         params: {
-    //           limit: limit,
-    //           start: start
-    //         }
-    //       });
-    
-    //       // Extract data from the initial response
-    //       let data = res.data;
-    //       let totalResults = data.total;
-    //       allParks = data.data;
-    
-    //       // Loop to get all pages
-    //       while (allParks.length < totalResults) {
-    //         start += limit;
-    //         res = await axios.get(baseUrl, {
-    //           headers: {
-    //             'X-Api-Key': apiKey
-    //           },
-    //           params: {
-    //             limit: limit,
-    //             start: start
-    //           }
-    //         });
-    
-    //         // Add the results from this request to the allParks array
-    //         allParks = allParks.concat(res.data.data);
-    //       }
-    
-    //       return allParks;
-    
-    //     } catch (error) {
-    //       console.error('Error fetching data:', error);
-    //     //   throw error;  // Optionally re-throw the error to be handled by the caller
-    //     }
-    //   }
-
-    //NEW VERSION:
+   
     static async getAllParks() {
         const apiKey = key  
         const baseUrl = 'https://developer.nps.gov/api/v1/parks';
@@ -144,8 +64,7 @@ class Park {
           }
     
         } catch (error) {
-          console.error('Error fetching data:', error);
-        //   throw error;  // Optionally re-throw the error to be handled by the caller
+          console.error('Error fetching data:', error);         
         }
       }
     

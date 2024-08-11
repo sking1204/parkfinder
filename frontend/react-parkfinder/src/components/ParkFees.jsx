@@ -69,7 +69,7 @@ const ParkFees = ({ park, user }) => {
   };
 
   const handleBackClick = () => {
-    setShowActivities(false);
+    setShowFees(false);
   };
 
   return (

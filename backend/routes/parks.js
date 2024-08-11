@@ -60,21 +60,7 @@ router.get("/parkNames", async function(req,res,next){
     } catch(err){
         return next (err);
     }
-});
-
-
-
-//NOT USED////////////////////
-// router.get("/allParkCodes", async function(req,res,next){
-//     try{
-        
-//         const parkCodes = await Park.getAllParkCodesList();
-//         return res.json({parkCodes});
-//     } catch(err){
-//         return next (err);
-//     }
-// });
-
+}); 
 
 
 router.get("/stateCode/:stateCode", async function(req,res,next){
@@ -248,15 +234,7 @@ router.get("/images/:parkCode", async function(req,res,next){
     }
 });
 
-// router.get("/images/:parkCode", async function(req,res,next){
-//     try{  
-//         const parkCode = req.params.parkCode;     
-//         const images = await Park.getImagesByParkCode(parkCode);
-//         return res.json({images});
-//     }catch(err){
-//         return next(err);
-//     }
-// });
+
 
 router.get("/news-releases/:parkCode", async function(req,res,next){
     try{  
@@ -268,7 +246,7 @@ router.get("/news-releases/:parkCode", async function(req,res,next){
     }
 });
 
-//FIND A WAY TO MAYBE FILTER RESULTS ON THE FRONT END??
+
 
 router.get("/things-to-do/:parkCode", async function(req,res,next){     
     try{ 
@@ -280,7 +258,7 @@ router.get("/things-to-do/:parkCode", async function(req,res,next){
     }
 });
 
-//FIND A WAY TO MAYBE FILTER RESULTS ON THE FRONT END??
+
 
 router.get("/park-tours", async function(req,res,next){
     try{        
