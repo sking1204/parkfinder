@@ -18,7 +18,7 @@ const PageNotFound = () => {
                     <CardMedia
                         component="img"
                         height="450"
-                        image="/assets/errorimage.jpg" 
+                        image="assets/errorimage.jpg" 
                         alt="Park image"
                         sx={{                             
                             borderRadius: '2px', 

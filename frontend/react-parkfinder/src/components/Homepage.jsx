@@ -27,7 +27,7 @@ const Homepage = ({ user }) => {
                     <CardMedia
                         component="img"
                         height="450"
-                        image="/assets/background.jpg" 
+                        image="./assets/background.jpg" 
                         alt="Park image"
                         sx={{                             
                             borderRadius: '2px', 
@@ -63,7 +63,7 @@ const Homepage = ({ user }) => {
                     <CardMedia
                         component="img"
                         height="450"
-                        image="/assets/background.jpg" 
+                        image="./assets/background.jpg" 
                         alt="Park image"
                         sx={{                             
                             borderRadius: '2px', 
