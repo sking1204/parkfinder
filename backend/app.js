@@ -1,6 +1,7 @@
 "use strict";
 
 /** Express app for parkfinder. */
+const path = require("path"); // Import the path module
 
 const express = require("express");
 const cors = require("cors");
@@ -28,6 +29,15 @@ app.use(authenticateJWT) // this is applied globally for all routes
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/parks", parkRoutes);
+
+// Serve static files from the React app - 8/12
+app.use(express.static(path.join(__dirname, "client/build")));
+
+// For any request that doesn't match one above, send back index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
+
 
 
 
