@@ -1,0 +1,11 @@
+.home-link {
+    display: inline-block; /* Ensure the link respects the margin */
+    margin: 5px; /* Adjust the margin values as needed */
+    font-size: 20px;
+    color:#33691E;
+}
+
+.home-link:hover{ 
+    color:#747bff; 
+    text-decoration: underline; 
+}

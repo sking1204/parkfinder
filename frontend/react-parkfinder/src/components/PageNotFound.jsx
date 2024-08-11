@@ -41,7 +41,7 @@ const PageNotFound = () => {
                     </div> 
                     <div>        
      
-                    <Link className="back" to={`/`}
+                    <Link className="home-link" to={`/`}                     
                      >Back to Parkfinder!</Link>
                     </div>
     </div>
