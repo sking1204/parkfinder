@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import './PageNotFound.css'
 
 
 
